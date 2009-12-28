@@ -1,0 +1,38 @@
+{% extends "layout.html" %}
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+{% block title %}请登录{% endblock %}
+
+{% block left %}
+{% endblock %}
+
+{% block body %}
+
+<form action="{{ app_path }}" method="post" id="login-form"><input type="hidden" name="this_is_the_login_form" value="1" />
+  <table width="98%" >
+  <col width="100"/>
+  <col width="*"/>
+  <tbody>
+    <tr>
+      <td class="left"><a name="title"><b>请登录</b></a></td>
+    </tr>
+{% if error_message %}
+    <tr>
+      <td colspan="2" ><p class="error-content">{{ error_message }}</p></td>
+    </tr>
+{% endif %}
+    <tr>
+      <td><label for="id_login_id">登录ID:</label></td>
+      <td><input type="text" name="login_id" id="id_login_id" /></td>
+    </tr>
+    <tr>
+      <td><label for="id_password">密码:</label></td>
+      <td><input type="password" name="password" id="id_password" /></td>
+    </tr>
+    <tr>
+      <td colspan="2" ><label>&nbsp;</label><input type="submit" value="Log in" /></td>
+    </tr>
+  </tbody>
+  </table>
+</form>
+{% endblock %}
+

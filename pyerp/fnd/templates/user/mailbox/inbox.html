@@ -1,0 +1,36 @@
+{% extends "user/mailbox/base.html" %}
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+{% block title %}收件箱{% endblock %}
+
+{% block body %}
+<table width="98%">
+  <tr>
+    <td class="left"><a name="title"><b>收件箱</b></a></td>
+  </tr>
+</table>
+    <table class="messages">
+        <thead>
+          <tr>
+              <th>Sender</th>
+              <th>Subject</th>
+              <th>Received</th>
+              <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+    {% for message in message_list %} 
+        <tr>
+            <td>{{ message.sender.login_id }}</td>
+            <td>
+                {% if message.new %}<strong>{% endif %}
+                {% if message.replied %}<em>{% endif %}
+                <a href="{{ fnd_user_site_prefix }}mailbox/view/{{ message.id }}/">{{ message.subject }}</a>
+                {% if message.replied %}</em>{% endif %}
+                {% if message.new %}</strong>{% endif %}</td>
+            <td>{{ message.sent_at }}</td>
+            <td><a href="{{ fnd_user_site_prefix }}mailbox/delete/{{ message.id }}/?next={{ fnd_user_site_prefix }}mailbox/inbox/">delete</a></td>
+        </tr>
+    {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

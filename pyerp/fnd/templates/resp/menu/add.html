@@ -1,0 +1,551 @@
+{% extends "layout.html" %}
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+
+{% block title %}菜单{% endblock %}
+{% block js %}
+<script type="text/javascript" src="{{ fnd_media_prefix }}js/suggest.js"></script>
+<script type="text/javascript" src="{{ fnd_media_prefix }}js/floateditor.js"></script>
+
+<script type="text/javascript">
+
+
+
+addstyle(".menugrid_div","width: 100%;border:0px solid #817F82; float:left;");
+addstyle(".menugrid_div table","font-size: 12px; width:100%; background:#fff; cursor:default");
+addstyle(".menugrid_div table td .caption","font-size: 12px;font-weight: bold;");
+addstyle(".menugrid_div table th","font-weight: bold;text-align: center;background-color: #6694e3;color: white;border-left: 1px solid #cccccc; border-right: 1px solid #cccccc;padding: 0.22em 0.4em;");
+addstyle(".menugrid_header","font-size: 12px;width: 100%;text-align: left;margin: 5px auto;border: 0;border-collapse: collapse;");
+addstyle(".menugrid_header td", "white-space: nowrap;border: 1px solid #cccccc;padding: 0.15em 0.5em;");
+addstyle(".menugrid_detail_grid", "font-size: 12px; table-layout: fixed; width: 100%; text-align: left; margin: 5px auto; border: 0; border-collapse: collapse;");
+addstyle(".menugrid_detail_grid thead", "font-weight: bold; text-align: center; background: #6694e3 no-repeat right center; color: white; border-left: 1px solid #cccccc; border-right: 1px solid #cccccc; padding: 0.22em 0.4em;");
+addstyle(".menugrid_detail_grid thead tr th", "white-space: nowrap;");
+addstyle(".menugrid_detail_grid thead th.sort-asc", "background: #6694e3 no-repeat right center url('{{ fnd_media_prefix }}images/up_order.png');");
+addstyle(".menugrid_detail_grid thead th.sort-desc", "background: #6694e3 no-repeat right center url('{{ fnd_media_prefix }}images/down_order.png');");
+addstyle(".menugrid_detail_grid tbody tr.odd", "background-color: #fefefe;");
+addstyle(".menugrid_detail_grid tbody tr.no_data", "background-color: #fefefe;");
+addstyle(".menugrid_detail_grid tbody tr.odd", "background-color: #fefefe;");
+addstyle(".menugrid_detail_grid tbody tr.even", "background-color: #efefef;"); 
+addstyle(".menugrid_detail_grid tbody tr td", "overflow: hidden; white-space: nowrap; border: 1px solid #cccccc; padding: 0.15em 0.5em;");
+addstyle(".menugrid_detail_grid tbody tr td.editing", "background: #6694e3;padding: 0em 0em 0em 0em;");
+addstyle(".menugrid_detail_grid tbody tr td.error", "background:no-repeat url({{ fnd_media_prefix }}images/fnd/dirty.gif);");
+addstyle(".menugrid_detail_grid tfoot tr td", "overflow: hidden; white-space: nowrap; text-align: right; text-decoration: underline; padding: 0.15em 0.5em;");
+addstyle(".input_error", "border-bottom-color:red;");
+
+
+
+
+/**
+ * options : {'media_path': '{{ fnd_media_prefix }}', 
+ *            'resp_path': '{{ fnd_resp_site_prefix }}{{ fnd_resp_path }}'
+ *           }
+ *
+ */
+MenuGrid = Class.create({
+  initialize: function(options) {
+    var pointer = this;
+    // 表格的容器
+    this.div = new Element("div", {"class": "menugrid_div"});
+    this.div.id = this.uid();
+    this.opeions = options;
+    var _main_table = new Element("table");
+    var _main_table_tbody = new Element("tbody"); _main_table.appendChild(_main_table_tbody);
+    var _main_menu = new Element("tr"); _main_table_tbody.appendChild(_main_menu);
+    var _main_menu_cell0 = new Element("td", {"style": "vertical-align:top;width: 100%"}); _main_menu.appendChild(_main_menu_cell0);
+    var _menu_fieldset = new Element("fieldset", {"style": "width: 50%"}); _main_menu_cell0.appendChild(_menu_fieldset);
+    _menu_fieldset.appendChild(new Element("legend", {"style": "font-size: 14px;font-weight: bold;"}).update("菜单"));
+    var _menu_table = new Element("table");_menu_fieldset.appendChild(_menu_table);
+    var _menu_table_tbody = new Element("tbody", {"id": "menu"}); _menu_table.appendChild(_menu_table_tbody);
+    this.menu = new Object();
+    // menuitems table=======================================
+    var _main_menuitems = new Element("tr"); _main_table_tbody.appendChild(_main_menuitems);
+    var _main_menuitems_cell0 = new Element("td", {"style": "vertical-align:top;width: 100%"}); _main_menuitems.appendChild(_main_menuitems_cell0);
+    var _menuitems_fieldset = new Element("fieldset"); _main_menuitems_cell0.appendChild(_menuitems_fieldset);
+    _menuitems_fieldset.appendChild(new Element("legend", {"style": "font-size: 14px;font-weight: bold;"}).update("菜单项"));
+    var _menuitems_table = new Element("table", {"class": "menugrid_detail_grid"}); _menuitems_fieldset.appendChild(_menuitems_table);
+    var _menuitems_table_thead = new Element("thead"); _menuitems_table.appendChild(_menuitems_table_thead);
+    this.menuitems_table_tbody = new Element("tbody", {"id": "menuitems"}); _menuitems_table.appendChild(this.menuitems_table_tbody);
+    this.menuitems_table_tbody.remove_no_data = function() { var no_data_rows = pointer.menuitems_table_tbody.select("tr[class~=no_data]"); if (no_data_rows && no_data_rows.first()) no_data_rows.first().remove(); };
+    this.menuitems_table_tbody.check_no_data = function() {
+        var child_elements = pointer.menuitems_table_tbody.childElements().findAll(function(item){ return item.status!='delete' });
+        if (child_elements.length==0) {
+          var _no_data_menuitems_row = new Element("tr", {"class": "no_data"}); this.appendChild(_no_data_menuitems_row);
+          var _no_data_menuitems_cell = new Element("td", {"colspan": "6"}).update("没有数据."); _no_data_menuitems_row.appendChild(_no_data_menuitems_cell);
+        }
+    };
+    this.menuitems_table_tbody.check_no_data();
+    this.menuitems_table_tbody.create_row = function(data) { return pointer.menuitems_create_row(data) }; 
+
+    var _menu_id_input = new Element("input", {"type": "hidden"});
+    this.menu.id = _menu_id_input;
+
+    var _menu_row0 = new Element("tr"); _menu_table_tbody.appendChild(_menu_row0);
+    var _menu_row0_cell0 = new Element("td", {"class": "caption"}); _menu_row0.appendChild(_menu_row0_cell0);
+    _menu_row0_cell0.update("菜单名");
+    var _menu_row0_cell1 = new Element("td", {"style": "vertical-align:top;width: 30%"}); _menu_row0.appendChild(_menu_row0_cell1);
+    var _menu_name_input = new Element("input", {"style": "width: 100%"});
+    new FloatEditor(_menu_name_input, {
+      ondecid: function(next) {
+        if (next==1) {
+          pointer.menu.description.focus(); pointer.menu.description.select();
+        } else if (next==-1) {
+        }
+      }
+    });
+    _menu_row0_cell1.appendChild(_menu_name_input);
+    this.menu.name = _menu_name_input;
+
+    var _menu_row1 = new Element("tr"); _menu_table_tbody.appendChild(_menu_row1);
+    var _menu_row1_cell0 = new Element("td", {"class": "caption"}); _menu_row1.appendChild(_menu_row1_cell0);
+    _menu_row1_cell0.update("描述");
+    var _menu_row1_cell1 = new Element("td", {"style": "vertical-align:top;width: 70%"}); _menu_row1.appendChild(_menu_row1_cell1);
+    var _menu_description_input = new Element("input", {"style": "width: 100%"});
+    new FloatEditor(_menu_description_input, {
+      ondecid: function(next) {
+        if (next==1) {
+          pointer.menuitems_table_tbody.remove_no_data();
+          var child_elements = pointer.menuitems_table_tbody.childElements().findAll(function(item){ return item.status!='delete' });
+          if (child_elements.length==0) {
+            pointer.menuitems_table_tbody.remove_no_data();
+            var _c_row = pointer.menuitems_create_row();
+            _c_row.down(0).next().showeditor();
+          } else {
+            child_elements.first().down(0).next().showeditor();
+          }
+        } else if (next==-1) {
+          pointer.menu.name.focus(); pointer.menu.name.select();
+        }
+      }
+    });
+    _menu_row1_cell1.appendChild(_menu_description_input);
+    this.menu.description = _menu_description_input;
+
+    var _menuitems_header_row = new Element("tr", {"style":"height: auto;"}); _menuitems_table_thead.appendChild(_menuitems_header_row);
+    var _menuitems_header_row_cell1 = new Element("th", {"style": "width: 4%;"}); 
+    var _menuitems_add_new_link = new Element("img",{"src": this.opeions.media_path + "images/add.png", "style": "cursor:pointer", "border": "0", "title": "追加"}); _menuitems_header_row_cell1.appendChild(_menuitems_add_new_link);
+    Event.observe(_menuitems_add_new_link, 'click', function(e) { pointer.menuitems_table_tbody.remove_no_data(); var _c_row = pointer.menuitems_create_row(null); _c_row.down(0).next().showeditor(); });
+    _menuitems_header_row.appendChild(_menuitems_header_row_cell1);
+    _menuitems_header_row.appendChild(new Element("th", {"style": "width: 6%;"}).update("显示顺序"));
+    _menuitems_header_row.appendChild(new Element("th", {"style": "width: 20%;"}).update("提示"));
+    _menuitems_header_row.appendChild(new Element("th", {"style": "width: 20%;"}).update("子菜单"));
+    _menuitems_header_row.appendChild(new Element("th", {"style": "width: 20%;"}).update("功能部件"));
+    _menuitems_header_row.appendChild(new Element("th", {"style": "width: 30%;"}).update("描述"));
+
+    this.div.appendChild(_main_table);
+  },
+
+  menuitems_create_row: function(record) {
+    var pointer = this;
+    var child_elements = pointer.menuitems_table_tbody.childElements().findAll(function(item){ return item.status!='delete' });
+    var odd_or_even = (child_elements.length+1)%2==0 ? "even" : "odd";
+    var _row_status = !record ? "new" : (!record.status ? "query" : record.status);
+    var _menuitems_row = new Element("tr", {"class": odd_or_even}); pointer.menuitems_table_tbody.appendChild(_menuitems_row);
+    if (_row_status=="delete") _menuitems_row.hide();
+    _menuitems_row.status = _row_status;
+    _menuitems_row.childs = new Object();
+
+    var _menuitems_row_cell1 = new Element("td", {"style": "text-align: center;"});
+    var del_link = new Element("img",{"src": this.opeions.media_path + "images/remove.png", "style": "cursor:pointer", "border": "0", "title": "删除"}); _menuitems_row_cell1.appendChild(del_link);
+    Event.observe(del_link, 'click', function(e) {
+      // reflect row color
+      var _after_rows = _menuitems_row.nextSiblings();
+      _after_rows.each(function(t_row, idx) {
+        t_row.className = t_row.className=="odd" ? "even" : "odd";
+      });
+      // remove or hide row
+      if (_menuitems_row.status=="new" || _menuitems_row.status=="insert" ) {
+        _menuitems_row.remove();
+      } else if (_menuitems_row.status=="query" || _menuitems_row.status=="update") {
+        _menuitems_row.status = "delete";
+        _menuitems_row.hide();
+      }
+      pointer.menuitems_table_tbody.check_no_data();
+      // 重新计算合计
+      // pointer.menuitems_summary(this.menuitems_table_tbody);
+    });
+    _menuitems_row.appendChild(_menuitems_row_cell1);
+    _menuitems_row.childs.seq = new Element("td");
+    _menuitems_row.appendChild(_menuitems_row.childs.seq);
+    _menuitems_row.childs.prompt = new Element("td");
+    _menuitems_row.appendChild(_menuitems_row.childs.prompt);
+    _menuitems_row.childs.submenu = new Element("td");
+    _menuitems_row.appendChild(_menuitems_row.childs.submenu);
+    _menuitems_row.childs.func = new Element("td");
+    _menuitems_row.appendChild(_menuitems_row.childs.func);
+    _menuitems_row.childs.description = new Element("td");
+    _menuitems_row.appendChild(_menuitems_row.childs.description);
+
+
+    _menuitems_row.childs.seq.showeditor = function(e){
+      if (!_menuitems_row.childs.seq.readAttribute("active")) {
+        var editor = new Element("input", {"style": "font-size:12px;border: 0px;width: 100%;"});
+        editor.value = _menuitems_row.childs.seq.innerHTML;
+        _menuitems_row.childs.seq.innerHTML = "";
+        _menuitems_row.childs.seq.writeAttribute("active", "true");
+        _menuitems_row.childs.seq.appendChild(editor);
+        _menuitems_row.childs.seq.addClassName("editing");
+        new FloatEditor(editor, {
+          ondecid: function(next) {
+            editor.remove();
+            if (editor.oldvalue!=editor.value) {
+              _menuitems_row.status = (_menuitems_row.status=="new" ? "insert" : (_menuitems_row.status=="query" ? "change" : _menuitems_row.status));
+              _menuitems_row.childs.seq.value = editor.value;
+            }
+            _menuitems_row.childs.seq.update(editor.value);
+            _menuitems_row.childs.seq.writeAttribute("title", editor.value);
+            _menuitems_row.childs.seq.writeAttribute("active", "");
+            _menuitems_row.childs.seq.removeClassName("editing");
+            if (next==1) {
+              _menuitems_row.childs.prompt.showeditor();
+            } else if (next==-1) {
+              var _previous_menuitems_row = _menuitems_row.previousSiblings().findAll(function(item){ return item.status!='delete' }).first();
+              if (_previous_menuitems_row) {
+                _previous_menuitems_row.down(0).siblings().last().showeditor();
+              } else {
+                pointer.menu.description.focus(); pointer.menu.description.select();
+              }
+            }
+          }
+        });
+        editor.focus(); editor.select();
+      }
+      return false;
+    };
+
+    _menuitems_row.childs.prompt.showeditor = function(e){
+      if (!_menuitems_row.childs.prompt.readAttribute("active")) {
+        var editor = new Element("input", {"style": "font-size:12px;border: 0px;width: 100%;"});
+        editor.value = _menuitems_row.childs.prompt.innerHTML;
+        _menuitems_row.childs.prompt.innerHTML = "";
+        _menuitems_row.childs.prompt.writeAttribute("active", "true");
+        _menuitems_row.childs.prompt.appendChild(editor);
+        _menuitems_row.childs.prompt.addClassName("editing");
+        new FloatEditor(editor, {
+          ondecid: function(next) {
+            editor.remove();
+            if (editor.oldvalue!=editor.value) {
+              _menuitems_row.status = (_menuitems_row.status=="new" ? "insert" : (_menuitems_row.status=="query" ? "change" : _menuitems_row.status));
+              _menuitems_row.childs.prompt.value = editor.value;
+            }
+            _menuitems_row.childs.prompt.update(editor.value);
+            _menuitems_row.childs.prompt.writeAttribute("title", editor.value);
+            _menuitems_row.childs.prompt.writeAttribute("active", "");
+            _menuitems_row.childs.prompt.removeClassName("editing");
+            if (next==1) {
+              _menuitems_row.childs.submenu.showeditor();
+            } else if (next==-1) {
+              _menuitems_row.childs.seq.showeditor(); 
+            }
+          }
+        });
+        editor.focus(); editor.select();
+      }
+      return false;
+    };
+
+    _menuitems_row.childs.submenu.showeditor = function(e){
+      if (!_menuitems_row.childs.submenu.readAttribute("active")) {
+        var editor = new Element("input", {"style": "font-size:12px;border: 0px;width: 100%;"});
+        editor.value = _menuitems_row.childs.submenu.innerHTML;
+        _menuitems_row.childs.submenu.innerHTML = "";
+        _menuitems_row.childs.submenu.writeAttribute("active", "true");
+        _menuitems_row.childs.submenu.appendChild(editor);
+        _menuitems_row.childs.submenu.addClassName("editing");
+        if (editor.addEventListener) {    // IE与FF中执行顺序不同,期待新版的Prototype会解决这个问题
+           new Suggest(editor, '{{ fnd_resp_site_prefix }}{{ fnd_resp_path }}submenu_sug/' + (pointer.menu.id ? pointer.menu.id.value + "/" : ""), function(data){});
+        }
+        new FloatEditor(editor, {
+          ondecid: function(next) {
+            editor.remove();
+            if (editor.oldvalue!=editor.value) {
+              _menuitems_row.status = (_menuitems_row.status=="new" ? "insert" : (_menuitems_row.status=="query" ? "change" : _menuitems_row.status));
+              _menuitems_row.childs.submenu.value = editor.value;
+            }
+            _menuitems_row.childs.submenu.update(editor.value);
+            _menuitems_row.childs.submenu.writeAttribute("title", editor.value);
+            _menuitems_row.childs.submenu.writeAttribute("active", "");
+            _menuitems_row.childs.submenu.removeClassName("editing");
+            if (next==1) {
+              _menuitems_row.childs.func.showeditor();
+            } else if (next==-1) {
+              _menuitems_row.childs.prompt.showeditor(); 
+            }
+          }
+        });
+        editor.focus(); editor.select();
+        if (!editor.addEventListener) {    // IE与FF中执行顺序不同,期待新版的Prototype会解决这个问题
+          new Suggest(editor, '{{ fnd_resp_site_prefix }}{{ fnd_resp_path }}submenu_sug/' + (pointer.menu.id ? pointer.menu.id.value + "/" : ""), function(data){});
+        }
+      }
+      return false;
+    };
+
+    _menuitems_row.childs.func.showeditor = function(e){
+      if (!_menuitems_row.childs.func.readAttribute("active")) {
+        var editor = new Element("input", {"style": "font-size:12px;border: 0px;width: 100%;"});
+        editor.value = _menuitems_row.childs.func.innerHTML;
+        _menuitems_row.childs.func.innerHTML = "";
+        _menuitems_row.childs.func.writeAttribute("active", "true");
+        _menuitems_row.childs.func.appendChild(editor);
+        _menuitems_row.childs.func.addClassName("editing");
+        if (editor.addEventListener) {    // IE与FF中执行顺序不同,期待新版的Prototype会解决这个问题
+          new Suggest(editor, '{{ fnd_resp_site_prefix }}{{ fnd_resp_path }}func_sug/', function(data){});
+        }
+        new FloatEditor(editor, {
+          ondecid: function(next) {
+            editor.remove();
+            if (editor.oldvalue!=editor.value) {
+              _menuitems_row.status = (_menuitems_row.status=="new" ? "insert" : (_menuitems_row.status=="query" ? "change" : _menuitems_row.status));
+              _menuitems_row.childs.func.value = editor.value;
+            }
+            _menuitems_row.childs.func.update(editor.value);
+            _menuitems_row.childs.func.writeAttribute("title", editor.value);
+            _menuitems_row.childs.func.writeAttribute("active", "");
+            _menuitems_row.childs.func.removeClassName("editing");
+            if (next==1) {
+              _menuitems_row.childs.description.showeditor();
+            } else if (next==-1) {
+              _menuitems_row.childs.submenu.showeditor(); 
+            }
+          }
+        });
+        editor.focus(); editor.select();
+        if (!editor.addEventListener) {    // IE与FF中执行顺序不同,期待新版的Prototype会解决这个问题
+          new Suggest(editor, '{{ fnd_resp_site_prefix }}{{ fnd_resp_path }}func_sug/', function(data){});
+        }
+      }
+      return false;
+    };
+
+    _menuitems_row.childs.description.showeditor = function(e){
+      if (!_menuitems_row.childs.description.readAttribute("active")) {
+        var editor = new Element("input", {"style": "font-size:12px;border: 0px;width: 100%;"});
+        editor.value = _menuitems_row.childs.description.innerHTML;
+        _menuitems_row.childs.description.innerHTML = "";
+        _menuitems_row.childs.description.writeAttribute("active", "true");
+        _menuitems_row.childs.description.appendChild(editor);
+        _menuitems_row.childs.description.addClassName("editing");
+        new FloatEditor(editor, {
+          ondecid: function(next) {
+            editor.remove();
+            if (editor.oldvalue!=editor.value) {
+              _menuitems_row.status = (_menuitems_row.status=="new" ? "insert" : (_menuitems_row.status=="query" ? "change" : _menuitems_row.status));
+              _menuitems_row.childs.description.value = editor.value;
+            }
+            _menuitems_row.childs.description.update(editor.value);
+            _menuitems_row.childs.description.writeAttribute("title", editor.value);
+            _menuitems_row.childs.description.writeAttribute("active", "");
+            _menuitems_row.childs.description.removeClassName("editing");
+            if (next==1) {
+              var _next_menuitems_row = _menuitems_row.nextSiblings().findAll(function(item){ return item.status!='delete' }).first();
+              if (_next_menuitems_row) {
+                _next_menuitems_row.down(0).next().showeditor();
+              } else {
+                var _c_row = pointer.menuitems_create_row();
+                _c_row.down(0).next().showeditor();
+              }
+            } else if (next==-1) {
+              _menuitems_row.childs.func.showeditor(); 
+            }
+          }
+        });
+        editor.focus(); editor.select();
+      }
+      return false;
+    };
+
+
+    _menuitems_row.childs.seq.observe('click', _menuitems_row.childs.seq.showeditor);
+    _menuitems_row.childs.prompt.observe('click', _menuitems_row.childs.prompt.showeditor);
+    _menuitems_row.childs.submenu.observe('click', _menuitems_row.childs.submenu.showeditor);
+    _menuitems_row.childs.func.observe('click', _menuitems_row.childs.func.showeditor);
+    _menuitems_row.childs.description.observe('click', _menuitems_row.childs.description.showeditor);
+
+    _menuitems_row.childs.id = new Object();
+    _menuitems_row.childs.id.value = (record ? record.data.id : null);
+    _menuitems_row.childs.seq.value = (record ? record.data.seq : null);
+    _menuitems_row.childs.seq.update(record ? record.data.seq : null).writeAttribute("title", record ? record.data.seq : null);
+    _menuitems_row.childs.prompt.value = (record ? record.data.prompt : null);
+    _menuitems_row.childs.prompt.update(record ? record.data.prompt : null).writeAttribute("title", record ? record.data.prompt : null);
+    _menuitems_row.childs.submenu.value = (record ? record.data.submenu : null);
+    _menuitems_row.childs.submenu.update(record ? record.data.submenu : null).writeAttribute("title", record ? record.data.submenu : null);
+    _menuitems_row.childs.func.value = (record ? record.data.func : null);
+    _menuitems_row.childs.func.update(record ? record.data.func : null).writeAttribute("title", record ? record.data.func : null);
+    _menuitems_row.childs.description.value = (record ? record.data.description : null);
+    _menuitems_row.childs.description.update(record ? record.data.description : null).writeAttribute("title", record ? record.data.description : null);
+
+    return _menuitems_row; 
+  }, 
+
+  header_put : function(header_obj, header_hash) {
+    header_obj.status = header_hash.status;
+    $H(header_hash.data).each(function(pair) {
+      var _prop = header_obj[pair.key];
+      if (Object.isUndefined(_prop)) {
+        _prop = new Object();
+        header_obj[pair.key] = _prop;
+      }
+      _prop.value = pair.value;
+    });
+  },
+  header_msg_put : function(header_obj, header_msg_arr) {
+    var e_msg_src_arr = header_msg_arr.pluck('src');
+    for (var property in header_obj) {
+      var _prop = header_obj[property];
+      if (Object.isElement(_prop)) {
+        var e_msg_idx = e_msg_src_arr.indexOf(property);
+        if (e_msg_idx!=-1) {
+          header_obj[property].addClassName("input_error");
+          header_obj[property].writeAttribute("title", header_msg_arr[e_msg_idx].content);
+        } else {
+          header_obj[property].removeClassName("input_error");
+          header_obj[property].writeAttribute("title", "");
+        }
+      }
+    }
+  },
+  detail_put : function(detail_tbody, detail_array) {
+    detail_tbody.update()
+    for (var i = 0; i< detail_array.length;i++) {
+      detail_tbody.create_row(detail_array[i]);
+    }
+    detail_tbody.check_no_data()
+  },
+  detail_msg_put : function(detail_tbody, detail_msg_arr) {
+    var child_elements = detail_tbody.childElements().findAll(function(item){ return item.status });
+    for (var i=0;i<child_elements.length;i++) {
+      var row = child_elements[i];
+      var row_msgs = detail_msg_arr[i];
+      for (var i0=0;i0<row_msgs.length;i0++) {
+        var row_msg = row_msgs[i0];
+        row.childs[row_msg.src].addClassName("error");
+        row.childs[row_msg.src].writeAttribute("title", row_msg.content);
+      }
+    }
+  },
+  load : function(t_data) {
+    this.header_put(this.menu, t_data.body.menu);
+    this.header_msg_put(this.menu, t_data.head.message.menu);
+    this.detail_put(this.menuitems_table_tbody, t_data.body.menuitems);
+    this.detail_msg_put(this.menuitems_table_tbody, t_data.head.message.menuitems);
+  },
+
+  header_hash : function(header_obj) {
+    var results = new Object();
+    results.status = null;
+    results.data = new Object();
+    for (var property in header_obj) {
+      if (property=='status') {
+        results.status = header_obj[property];
+      } else {
+        var value = header_obj[property].value;
+        if (!Object.isUndefined(value))
+          results.data[property] = header_obj[property].value;
+      }
+    }
+    return results;
+  },
+  detail_array : function(detail_tbody) {
+    var child_elements = detail_tbody.childElements().findAll(function(item){ return item.status });
+    var results = [];
+    child_elements.each(function(t_row, index) {
+        var record_data = new Object();
+        for (var property in t_row.childs) {
+          var value = t_row.childs[property].value;
+          if (!Object.isUndefined(value))
+            record_data[property] = value;
+        }
+        results.push({"status" : t_row.status, "data" : record_data});
+    });
+    return results;
+  },
+  jsondata : function() {
+    var ret = new Object();
+    ret.head = new Object();
+    ret.body = new Object();
+    ret.body.menu = this.header_hash(this.menu);
+    ret.body.menuitems = this.detail_array(this.menuitems_table_tbody);
+    return Object.toJSON(ret);
+  },
+
+  uid: function(){
+    if (!this._ui_seed) this._ui_seed=(new Date()).valueOf();
+    return this._ui_seed++;
+  }
+
+});
+
+
+
+</script>
+{% endblock %}
+{% block left %}
+<div class="menuheader">
+  <a title="菜单">菜单</a>
+</div>
+<menu compact="true">
+  <li><a title="mailto" href="{{ fnd_resp_site_prefix }}{{ fnd_resp_path }}">查询</a></li>
+  <li><a title="mailto" href="{{ fnd_resp_site_prefix }}{{ fnd_resp_path }}add/">添加</a></li>
+</menu>
+{% endblock %}
+
+
+{% block body %}
+<div>
+  <input style="border-style:outset; border-width:1px;" onclick="javascript:do_save();" type="button" value="保存">
+  <input style="border-style:outset; border-width:1px;" onclick="javascript:do_load();" type="button" value="刷新">
+</div>
+<div id="ed1">
+</div>
+
+<div id="debug_1" style="border:1px solid #817F82;">
+debug:<br/>
+</div>
+<script type="text/javascript">
+
+  function debug(str) {
+    $('debug_1').innerHTML = $('debug_1').innerHTML + str + '<br/>';
+  }
+
+  // new SmartInput('input_1', {type:'num'});
+  //new SmartInput('input_2', {type:'str'});
+  // $('input_1').focus();
+  var jg = new MenuGrid({'media_path': '{{ fnd_media_prefix }}',  'resp_path': '{{ fnd_resp_site_prefix }}{{ fnd_resp_path }}'});
+  //document.body.appendChild(jg.div);
+  $('ed1').appendChild(jg.div);
+
+  function do_save() {
+      new Ajax.Request('{{ fnd_resp_site_prefix }}{{ fnd_resp_path }}save/',
+          {method: "post",
+           requestHeaders: {RequestType: "ajax"},
+           postBody: jg.jsondata(),
+           asynchronous: false,
+           onCreate:function(){},
+           onSuccess:function(r){
+               var json_data = r.responseJSON;
+               jg.load(json_data);
+               // alert(Object.toJSON(json_data));
+          },
+          onFailure:function(){}
+         });
+  }
+  
+  function do_load(menu_id) {
+    new Ajax.Request('{{ fnd_resp_site_prefix }}{{ fnd_resp_path }}' + menu_id + '/',
+            {method: "post",
+             requestHeaders: {RequestType: "ajax"},
+             asynchronous: false,
+             onCreate:function(){},
+             onSuccess:function(r){
+                 var json_data = r.responseJSON;
+                 jg.load(json_data);
+            },
+            onFailure:function(){}
+           });
+  }
+  
+{% if f_id %}
+  do_load({{ f_id }});
+{% endif %}
+  
+</script>
+{% endblock %}

@@ -1,0 +1,139 @@
+{% extends "layout.html" %}
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+{% block title %}导航菜单{% endblock %}
+
+{% block main %}
+{% load fndtag %}
+<form name="DefaultFormName" style="margin:0px" method="POST" action="/OA_HTML/OA.jsp?&">
+  <table border="0" cellspacing="0" cellpadding="0"  width="100%">
+    <tr>
+      <td valign="top" width="66%">
+        <table width="100%" border="0" cellspacing="0" cellpadding="0">
+          <tr>
+            <td align="left" valign="top">
+              <table cellpadding="0" cellspacing="0" border="0" width="100%">
+                <tr>
+                  <td width="100%"><h1 class="stitle">通知列表</h1></td>
+                </tr>
+                <tr>
+                  <td class="stitleline"></td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+          <tr>
+            <td align="right">
+              <a href="{{ fnd_user_site_prefix }}mailbox/"><img src="{{ fnd_media_prefix }}images/notify_list.gif" alt="查看全部通知" border="0" align="absmiddle" width="91" height="19"></a>
+            </td>
+          </tr>
+          <tr>
+            <td><img src="{{ fnd_media_prefix }}images/t.gif" width="4"></td>
+          </tr>
+          <tr>
+            <td>
+              <table cellpadding="1" cellspacing="0" border="0" width="100%">
+                <tr>
+                  <th scope="col" class="mlistheader"><span class="x24">发送人</span></th>
+                  <th scope="col" class="mlistheader"><span class="x23">主题</span></th>
+                  <th scope="col" class="mlistheader"><span class="x23">发送</span></th>
+                  <th scope="col" class="mlistheader"><span class="x24">状态</span></th>
+                </tr>
+                <tr>
+                  <td class="x1l x4x">暂时没有收到的通知。</td>
+                  <td class="x1l x4x"><br></td>
+                  <td class="x1l x4x" nowrap><br></td>
+                  <td class="x1l x4x"><br></td>
+                </tr>
+              </table>
+              <table border="0" cellspacing="0" cellpadding="0">
+                <tr>
+                  <td width="5%"></td>
+                  <td valign="top"></td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+          <tr>
+            <td><img src="{{ fnd_media_prefix }}images/t.gif" width="4"></td>
+          </tr>
+          <tr>
+            <td>
+              <table cellpadding="0" cellspacing="0" border="0" width="100%">
+                <tr>
+                  <td width="100%"><h1 class="stitle">导航菜单</h1></td>
+                </tr>
+                <tr>
+                  <td class="stitleline"></td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+          <tr>
+            <td align="right">
+              <a href="OA.jsp"><img src="{{ fnd_media_prefix }}images/customappsnav.gif" alt="编辑导航菜单" border="0" align="absmiddle" width="133" height="19"></a>
+            </td>
+          </tr>
+          <tr>
+            <td><img src="{{ fnd_media_prefix }}images/t.gif" width="4"></td>
+          </tr>
+          <tr>
+            <td>
+              <table width="100%" border="1" cellspacing="0" cellpadding="0">
+                <tr valign="top">
+                  <td width="40%">
+{% fnd_show_resp resp_id %}
+                  </td>
+                  <td width="60%">
+{% fnd_show_resp_menu resp_id %}
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+        </table>
+      </td>
+      <td></td>
+      <td valign="top" width="34%">
+        <table cellpadding="0" cellspacing="0" border="0" width="100%">
+          <tr>
+            <td width="100%"><h1 class="stitle">收藏夹</h1></td>
+          </tr>
+          <tr>
+            <td class="stitleline"></td>
+          </tr>
+        </table>
+        <table width="100%" border="0" cellspacing="0" cellpadding="0">
+          <tr>
+            <td align="right"><a href="OA.jsp" id="CustomLink"><img src="{{ fnd_media_prefix }}images/func_favorite.gif" alt="编辑收藏夹" border="0" align="absmiddle" width="133" height="19"></a></td>
+          </tr>
+          <tr>
+            <td><img src="{{ fnd_media_prefix }}images/t.gif" width="4"></td>
+          </tr>
+          <tr>
+            <td>
+              <table border="0" cellspacing="0" cellpadding="0">
+                <tr>
+                  <td><img src="{{ fnd_media_prefix }}images/t.gif" width="4"></td>
+                  <td valign="top"><a href="javascrip"><img src="{{ fnd_media_prefix }}images/func_item.gif" width="16" height="16" border="0"></a></td>
+                  <td><img src="{{ fnd_media_prefix }}images/t.gif" width="4"></td>
+                  <td width="100%"><a href="javascri" class="mlink">XXX187 个人信息调整(北京)</a></td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+        </table>
+        <table border="0" cellspacing="0" cellpadding="0">
+          <tr>
+            <td width="5%"></td>
+            <td valign="top"></td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+    <tr>
+      <td><img src="{{ fnd_media_prefix }}images/t.gif" width="4"></td>
+    </tr>
+  </table>
+</form>
+{% endblock %}
+

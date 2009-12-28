@@ -1,0 +1,23 @@
+{% extends "layout.html" %}
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+
+{% block title %}用户{% endblock %}
+
+{% block left %}
+<div class="menuheader">
+  <font color="blue">用户</font>
+</div>
+<menu compact="true">
+  <li><a title="mailto" href="">查询</a></li>
+  <li><a title="mailto" href="">添加</a></li>
+</menu>
+{% endblock %}
+
+
+{% block body %}
+<h2><!-- img alt="" src="" --><a name="welcome">用户</a></h2>
+<div class="section-content">
+<img src="{{ fnd_media_prefix }}images/fnd/screenshots/fnd_user_screen_en.jpg" align="left" border="0"/>
+<img src="{{ fnd_media_prefix }}images/fnd/screenshots/fnd_user_screen_jp.jpg" align="left" border="0"/>
+</div>
+{% endblock %}

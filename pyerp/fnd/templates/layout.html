@@ -1,0 +1,165 @@
+{% load fndtag %}
+{% load fnd_global_tag %}
+
+<html>
+<head>
+<title>{% block title %}pyerp{% endblock %}</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta content="pyerp" name="author"/>
+{% block css %}<link href="{{ fnd_media_prefix }}style/style.css" type="text/css" rel="stylesheet"/>{% endblock %}
+<script type="text/javascript" src="{{ fnd_media_prefix }}js/prototype.js"></script>
+<script type="text/javascript" src="{{ fnd_media_prefix }}js/common.js"></script>
+{% block js %}
+<script type="text/javascript">
+<!--
+  function menu_click(idstr) {
+    var menuElement = $(idstr);
+    menuElement.style.display = (menuElement.style.display=="none") ? "" : "none";
+  }
+  
+-->
+</script>{% endblock %}
+</head>
+<body>
+<!-- start Header -->
+{% block header %}
+<table cellspacing="0" width="100%" border="0">
+  <tbody>
+  <tr><!-- site banner and project image -->
+    <td valign="top" align="left">
+      <a href="{{ fnd_user_site_prefix }}main/"><img src="{{ fnd_media_prefix }}images/logo.png" align="left" border="0"/></a>
+    </td>
+    <td valign="top" align="right">
+    {% if fnd_global.user.is_authenticated %}
+      <span class="x2m">登录ID: {{ fnd_global.user.login_id }}
+      {% if last_login %}
+        上次登录时间:{{ last_login }}
+      {% endif %}
+      <a title="首页" href="{{ fnd_pub_site_prefix }}">首页</a>
+      <a title="导航菜单" href="{{ fnd_user_site_prefix }}main/">导航菜单</a>
+      <a title="退出" href="{{ fnd_pub_site_prefix }}logout/">退出</a></span>
+    {% else %}<span class="x2m">
+      <a title="login" href="{{ fnd_pub_site_prefix }}login/">登录</a></span>
+    {% endif %}
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2">
+      <hr noshade="true" size="1"/>
+    </td>
+  </tr>
+  </tbody>
+</table>
+{% endblock %}
+<!-- end Header -->
+
+{% block main %}
+<table cellspacing="4" width="100%" border="0">
+  <tbody>
+  <tr><!-- left side navigation -->
+    <td class="navleft" valign="top" nowrap="true" width="14%">
+      <!-- start Left -->
+      {% block left %}
+<div class="menuheader">
+  <font color="blue">建设中......</font>
+</div>
+<menu compact="true">
+  <li><a title="mailto" href="mailto:yuhere@gmail.com">点击这里,写信给我</a></li>
+</menu>
+      {% endblock %}
+      <!-- end Left -->
+    </td>
+    <!-- content -->
+    <td id="content_body" class="content" valign="top" align="left" width="70%">
+      <!-- start Body -->
+      {% block body %}
+<h2><!-- img alt="" src="" --><a name="welcome">Building!</a></h2>
+<div class="section-content">
+<p><font color="blue">建设中!</font><br/>
+<a href="mailto:yuhere@gmail.com">点击这里,写信给我</a><br/>
+</p>
+</div>
+      {% endblock %}
+      <!-- end Body -->
+    </td>
+  </tr>
+</tbody>
+</table>
+{% endblock %}
+
+
+<table cellspacing="0" width="100%" border="0">
+<tbody>
+  <tr>
+    <td>
+      <hr noshade="true" size="1"/>
+    </td>
+  </tr>
+
+  <tr>
+    <td>
+<table cellpadding="0" cellspacing="0" border="0" width="100%" align="center">
+  <tr>
+    <td width="100%">
+      <table cellpadding="0" cellspacing="0" border="0" align="center">
+        <tr>
+          <td><a title="诊断" href="javascript:void(0);" class="x2v" onclick="javascript:$('debug_sql').toggle();">诊断</a></td>
+          <td class="x4" >&nbsp;|&nbsp;</td>
+{% if fnd_global.user.is_authenticated %}
+          <td><a title="修改密码" href="{{ fnd_user_site_prefix }}changepwd/" class="x2v">修改密码</a></td>
+          <td class="x4" >&nbsp;|&nbsp;</td>
+          <td><a title="工作环境" href="{{ fnd_user_site_prefix }}env/" class="x2v">工作环境</a></td>
+          <td class="x4">&nbsp;|&nbsp;</td>
+          <td><a target="_blank" title="帮助" href="{{ fnd_user_site_prefix }}help/" class="x2v">帮助</a></td>
+          <td class="x4">&nbsp;|&nbsp;</td>
+          <td><a target="_blank" title="反馈" href="{{ fnd_user_site_prefix }}feedback/{{ fnd_global.function.id }}/" class="x2v">反馈</a></td>
+          <td class="x4">&nbsp;|&nbsp;</td>
+{% endif %}
+          <td><a title="页面信息" href="javascript:void(0);" onclick="javascript:$('page_info').toggle();" class="x2v">页面信息</a></td>
+          <td class="x4">&nbsp;|&nbsp;</td>
+          <td><a title="个人信息保护策略" href="{{ fnd_user_site_prefix }}xxx/" class="x2v">个人信息保护策略</a></td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+</table>
+    </td>
+  </tr>
+  <tr id="debug_sql" style="display:none">
+    <td>
+{% if sql_queries %}
+<h3>SQL excute in this Request</h3>
+{% for query in sql_queries %}<h3>Excute times: {{query.time}}</h3>
+<p>
+<code>
+{{query.sql}}
+</code>
+</p>
+{% endfor %}
+{% endif %}
+    </td>
+  </tr>
+  <tr id="page_info" style="display:none">
+    <td>
+{% if fnd_global.function %}
+<h3>Function Info</h3>
+<pre>
+{{ fnd_global.function.name }}
+{{ fnd_global.function.version }}
+</pre>
+{% endif %}
+    </td>
+  </tr>
+  <tr>
+    <td class="footer">
+    <!-- start footer -->
+      {% block footer %}
+Copyright © Pyerp Technologies Inc, 2009 
+      {% endblock %}
+    <!-- end footer -->
+    </td>
+  </tr>
+  </tbody>
+</table>
+</body>
+</html>

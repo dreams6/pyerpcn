@@ -1,0 +1,19 @@
+{% extends "layout.html" %}
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+{% block title %}站内信/通知{% endblock %}
+
+{% block left %}
+<div class="menuheader">
+  <a title="站内信">站内信/通知</a>
+</div>
+<menu compact="true">
+  <li><a title="收件箱" href="{{ fnd_user_site_prefix }}mailbox/inbox/">收件箱({{ inbox_count }})</a></li>
+  <li><a title="发件箱" href="{{ fnd_user_site_prefix }}mailbox/outbox/">发件箱</a></li>
+  <li><a title="通知" href="{{ fnd_user_site_prefix }}notices/">通知</a></li>
+  <li><a title="垃圾箱" href="{{ fnd_user_site_prefix }}mailbox/trash/">垃圾箱</a></li>
+  <li><a title="发送邮件" href="{{ fnd_user_site_prefix }}mailbox/compose/">发送邮件</a></li>
+</menu>
+{% endblock %}
+
+{% block body %}
+{% endblock %}
