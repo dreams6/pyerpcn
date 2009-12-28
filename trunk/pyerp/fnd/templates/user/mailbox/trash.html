@@ -1,0 +1,32 @@
+{% extends "user/mailbox/base.html" %}
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+{% block title %}垃圾箱{% endblock %}
+
+{% block body %}
+<table width="98%">
+  <tr>
+    <td class="left"><a name="title"><b>垃圾箱</b></a></td>
+  </tr>
+</table>
+
+<table class="messages">
+    <thead>
+        <tr><th>Sender</th><th>Subject</th><th>Date</th><th>Action</th></tr>
+    </thead>
+    <tbody>
+{% for message in message_list %} 
+    <tr>
+        <td>{{ message.sender.login_id }}</td>
+        <td> 
+        {{ message.subject }}
+        </td>
+        <td>{{ message.sent_at|date:_("DATETIME_FORMAT") }}</td>
+        <td><a href="{{ fnd_user_site_prefix }}mailbox/undelete/{{ message.id }}/?next={{ fnd_user_site_prefix }}mailbox/trash/">undelete</a></td>
+    </tr>
+{% endfor %}
+    </tbody>
+</table>
+<br />
+<p>Deleted Messages are removed from the trash at unregular intervals, don't rely on this feature for long-time storage.</p>
+
+{% endblock %}

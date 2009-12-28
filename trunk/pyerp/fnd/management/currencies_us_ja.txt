@@ -1,0 +1,468 @@
+RON	JA	新規のルーマニア・レイ	新規のルーマニア・レイ
+TRY	JA	新トルコ/リラ	新トルコ/リラ
+BYR	JA	ベラルース/ルーブル	ベラルース/ルーブル
+MXV	JA	Mexican Unidad de Inversion (UDI)	Mexican Unidad de Inversion (UDI)
+GEL	JA	ラーリ	ラーリ
+ERN	JA	ナクファ	ナクファ
+AOA	JA	クワンザ	クワンザ
+BAM	JA	兌換マルク	兌換マルク
+BGN	JA	ブルガリア/レフ	ブルガリア/レフ
+RUB	JA	ロシア/ルーブル	ロシア/ルーブル
+UAH	JA	グリブナ	グリブナ
+TJS	JA	ソム(1)	ソム(1)
+ADP	JA	アンドラ/ペセタ	アンドラ/ペセタ
+AED	JA	UAE/ディルハム	UAE/ディルハム
+AFA	JA	アフガニ	アフガニ
+ALL	JA	レク	レク
+AMD	JA	アルメニア/ドラム	アルメニア/ドラム
+AOK	JA	クワンザ(廃止)	クワンザ(廃止)
+AON	JA	ニュー・クワンザ	ニュー・クワンザ
+ARA	JA	アウストラル	アウストラル
+ARS	JA	アルゼンチン/ペソ	アルゼンチン/ペソ
+ATS	JA	シリング	シリング
+AWG	JA	アルーバ/ギルダー	アルーバ/ギルダー
+AZM	JA	アゼルバイジャン/マナート	アゼルバイジャン/マナート
+BBD	JA	バルバドス/ドル	バルバドス/ドル
+BDT	JA	タカ	タカ
+BEF	JA	ベルギー/フラン	ベルギー/フラン
+BGL	JA	レフ	レフ
+BIF	JA	ブルンジ/フラン	ブルンジ/フラン
+BMD	JA	バミューダ/ドル	バミューダ/ドル
+BND	JA	ブルネイ/ドル	ブルネイ/ドル
+BOB	JA	ボリビアノ	ボリビアノ
+BOV	JA	MVDol	MVDol
+BRC	JA	クルザード	クルザード
+BRL	JA	ブラジル/レアル	ブラジル/レアル
+BSD	JA	バハマ/ドル	バハマ/ドル
+BTN	JA	ニュルタム	ニュルタム
+BUK	JA	キャット (廃止)	キャット
+BWP	JA	プラ	プラ
+BYB	JA	ベラルース/ルーブル(廃止)	ベラルース/ルーブル(廃止)
+BZD	JA	ベリーズ/ドル	ベリーズ/ドル
+CAD	JA	カナダ/ドル	カナダ/ドル
+CHF	JA	スイス/フラン	スイス/フラン
+CLF	JA	ウニダデ・ド・フォルメント	ウニダデ・ド・フォルメント
+CLP	JA	チリ/ペソ	チリ/ペソ
+CNY	JA	中国/元	中国/元
+COP	JA	コロンビア/ペソ	コロンビア/ペソ
+CRC	JA	コスタリカ/コロン	コスタリカ/コロン
+CSK	JA	コルナ	コルナ
+CUP	JA	キューバ/ペソ	キューバ/ペソ
+CYP	JA	キプロス/ポンド	キプロス/ポンド
+CZK	JA	チェコ/ナルーナ	チェコ/ナルーナ
+DEM	JA	ドイツ/マルク	ドイツ/マルク
+DJF	JA	ジブティ/フラン	ジブティ/フラン
+DOP	JA	ドミニカ/ペソ	ドミニカ/ペソ
+DZD	JA	アルジェリア/ディナール	アルジェリア/ディナール
+ECS	JA	スクレ	スクレ
+ECV	JA	ウニダッド・ド・バロール・コンスタント (UVC)	ウニダッド・ド・バロール・コンスタント (UVC)
+EEK	JA	クルーン	クルーン
+EGP	JA	エジプト/ポンド	エジプト/ポンド
+ESB	JA	交換可能ペセタ計算	交換可能ペセタ計算
+ETB	JA	エチオピア/ビル	エチオピア/ビル
+EUR	JA	ユーロ	汎ヨーロッパ通貨
+FIM	JA	マルッカ	マルッカ
+FJD	JA	フィジー/ドル	フィジー/ドル
+FKP	JA	フォークランド諸島/ポンド	フォークランド諸島/ポンド
+FRF	JA	フランス/フラン	フランス/フラン
+GBP	JA	英国/ポンド	英国/ポンド
+GEK	JA	ジョージア/クーポン	ジョージア/クーポン
+GHC	JA	ガーナ/セディ	ガーナ/セディ
+GIP	JA	ジブラルタル/ポンド	ジブラルタル/ポンド
+GMD	JA	ダラシ	ダラシ
+GNF	JA	ギニア/フラン	ギニア/フラン
+GRD	JA	ギリシャ/ドラクマ	ギリシャ/ドラクマ
+GTQ	JA	グアテマラ/ケッツァール	グアテマラ/ケッツァール
+GWP	JA	ギニアビサウ/ペソ	ギニアビサウ/ペソ
+GYD	JA	ガイアナ/ドル	ガイアナ/ドル
+HKD	JA	香港ドル	香港ドル
+HNL	JA	レンピラ	レンピラ
+HRD	JA	クロアチア/ディナール	クロアチア/ディナール
+HRK	JA	クロアチア/クナ	クロアチア/クナ
+IDR	JA	ルピーア	ルピーア
+IEP	JA	アイルランド/ポンド	アイルランド/ポンド
+INR	JA	インド/ルピー	インド/ルピー
+IQD	JA	イラク/ディナール	イラク/ディナール
+ISK	JA	アイスランド/クローナ	アイスランド/クローナ
+ITL	JA	イタリア/リラ	イタリア/リラ
+JMD	JA	ジャマイカ/ドル	ジャマイカ/ドル
+JOD	JA	ヨルダン/ディナール	ヨルダン/ディナール
+JPY	JA	円	日本円
+KES	JA	ケニア/シリング	ケニア/シリング
+KGS	JA	ソム	ソム
+KHR	JA	リエル	リエル
+KMF	JA	コモロ/フラン	コモロ/フラン
+KPW	JA	北朝鮮/ウォン	北朝鮮/ウォン
+RSD	JA	セルビア/ディナール	セルビア/ディナール
+RSD	US	Serbian Dinar	Serbian Dinar
+RON	US	New Romanian Leu	New Romanian Leu
+TRY	US	New Turkish Lira	New Turkish Lira
+KWD	JA	クウェート/ディナール	クウェート/ディナール
+KYD	JA	ケイマン諸島/ドル	ケイマン諸島/ドル
+KZT	JA	テンゲ	テンゲ
+LAK	JA	キップ	キップ
+LKR	JA	スリランカ/ルピー	スリランカ/ルピー
+LRD	JA	リベリア/ドル	リベリア/ドル
+LSL	JA	ロティ	ロティ
+LTL	JA	リトアニア/リタ	リトアニア/リタ
+LUC	JA	交換可能フラン	交換可能フラン
+LUL	JA	会計フラン	会計フラン
+LVL	JA	ラトビア/ラッツ	ラトビア/ラッツ
+LVR	JA	ラトビア/ルーブル	ラトビア/ルーブル
+LYD	JA	リビア/ディナール	リビア/ディナール
+MAD	JA	モロッコ/ディルハム	モロッコ/ディルハム
+MDL	JA	モルドバ/レウ	モルドバ/レウ
+MKD	JA	ディナール	ディナール
+MMK	JA	キャット	キャット
+MNT	JA	トゥグリク	トゥグリク
+MOP	JA	パタカ	パタカ
+MRO	JA	ウギア	ウギア
+MTL	JA	マルタ/リラ	マルタ/リラ
+MUR	JA	モーリシャス/ルピー	モーリシャス/ルピー
+MVR	JA	ルフィヤ	ルフィヤ
+MWK	JA	カワチャ	カワチャ
+MXN	JA	メキシコ/ペソ	メキシコ/ペソ
+MXP	JA	メキシコ/ペソ(廃止)	メキシコ/ペソ(廃止)
+MYR	JA	マレーシア/リンギット	マレーシア/リンギット
+MZM	JA	メティカル	メティカル
+NAD	JA	ナミビア/ドル	ナミビア/ドル
+NGN	JA	ナイラ	ナイラ
+NIC	JA	コルドバ	コルドバ
+NIO	JA	コルドバ/オロ	コルドバ/オロ
+NLG	JA	オランダ/ギルダー	オランダ/ギルダー
+NOK	JA	ノルウェー/クローネ	ノルウェー/クローネ
+NPR	JA	ネパール/ルピー	ネパール/ルピー
+NZD	JA	ニュージーランド/ドル	ニュージーランド/ドル
+OMR	JA	オマーン/リアル	オマーン/リアル
+PEN	JA	新ソル	新ソル
+PGK	JA	キナ	キナ
+PHP	JA	フィリピン/ペソ	フィリピン/ペソ
+PKR	JA	パキスタン/ルピー	パキスタン/ルピー
+PLN	JA	ポーランド/ズロチ	ポーランド/ズロチ
+PTE	JA	ポルトガル/エスクード	ポルトガル/エスクード
+PYG	JA	グアラニー	グアラニー
+QAR	JA	カタール/リアル	カタール/リアル
+ROL	JA	レウ	レウ
+RUR	JA	ロシア/ルーブル(旧)	ロシア/ルーブル(旧)
+RWF	JA	ルワンダ/フラン	ルワンダ/フラン
+SAR	JA	サウジ/リヤル	サウジ/リヤル
+SBD	JA	ソロモン諸島/ドル	ソロモン諸島/ドル
+SCR	JA	セーシェル/ルピー	セーシェル/ルピー
+SDP	JA	スーダン/ポンド	スーダン/ポンド
+SEK	JA	スウェーデン/クローナ	スウェーデン/クローナ
+SGD	JA	シンガポール/ドル	シンガポール/ドル
+SHP	JA	セント・ヘレナ/ポンド	セント・ヘレナ/ポンド
+SIT	JA	トラール	トラール
+SKK	JA	スロバク/コルーナ	スロバク/コルーナ
+SLL	JA	レオーネ	レオーネ
+SOS	JA	ソマリア/シリング	ソマリア/シリング
+SRG	JA	スリナム/ギルダー	スリナム/ギルダー
+STAT	JA	統計	統計
+STD	JA	ドブラ	ドブラ
+SUR	JA	ルーブル	ルーブル
+SVC	JA	エル・サルバドル/コロン	エル・サルバドル/コロン
+SYP	JA	シリア/ポンド	シリア/ポンド
+SZL	JA	リランジェニ	リランジェニ
+THB	JA	バーツ	バーツ
+TJR	JA	タジック/ルーブル	タジック/ルーブル
+TMM	JA	マナト	マナト
+TND	JA	チュニジア/ディナール	チュニジア/ディナール
+TOP	JA	パーアンガ	パーアンガ
+TPE	JA	チモール/エスクード	チモール/エスクード
+TRL	JA	トルコ/リラ	トルコ/リラ
+TTD	JA	トリニダードトバゴ/ドル	トリニダードトバゴ/ドル
+TWD	JA	ニュー台湾ドル	ニュー台湾ドル
+TZS	JA	タンザニア/シリング	タンザニア/シリング
+UAK	JA	カルボバネート	カルボバネート
+UGS	JA	ウガンダ/シリング (廃止)	ウガンダ/シリング (廃止)
+UGX	JA	ウガンダ/シリング	ウガンダ/シリング
+USD	JA	USドル	USドル
+USN	JA	USドル (翌日)	USドル (翌日)
+USS	JA	USドル (当日)	USドル (当日)
+UYP	JA	ウルグアイ/ペソ	ウルグアイ/ペソ
+UYU	JA	ペソ・ウルグアヨ	ペソ・ウルグアヨ
+VEB	JA	ボリバル	ボリバル
+VND	JA	ドン	ドン
+VUV	JA	バツ	バツ
+WST	JA	ターラー	ターラー
+XAF	JA	CFAフランBEAC	責任当局: Banque des Etats de l'Afrique Centrale
+XAG	JA	銀	銀
+XAU	JA	金	金
+XBA	JA	ボンド/マーケット単位 - 欧州共同体 (EURCO)	ボンド/マーケット単位 - 欧州共同体 (EURCO)
+XBB	JA	ボンド/マーケット単位 - 欧州通貨単位 (E.M.U.-6)	E.M.U.-6は、欧州通貨単位として知られている場合があります。欧州通貨協力基金 (E.M.C.F.)と混同しないようにしてください。
+XBC	JA	ボンド/マーケット単位 - 欧州通貨単位9 (E.U.A.-9)	ボンド/マーケット単位 - 欧州通貨単位9 (E.U.A.-9)
+XBD	JA	ボンド/マーケット単位 - 欧州通貨単位17 (E.U.A.-17)	ボンド/マーケット単位 - 欧州通貨単位17 (E.U.A.-17)
+XCD	JA	東カリブ/ドル	東カリブ/ドル
+XDR	JA	SDR	国際通貨基金 (I.M.F.)
+XEU	JA	欧州通貨単位 (E.C.U.)	欧州通貨協力基金 (E.M.C.F.)
+XFO	JA	特別決済通貨 - 金フラン	特別決済通貨 - 金フラン
+XFU	JA	特別決済通貨 - UICフラン	特別決済通貨 - UICフラン
+XOF	JA	CFAフランBCEAO	責任当局: Banque Centrale des Etats de l'Afrique de l'Ouest
+XPD	JA	パラジウム	パラジウム
+XPF	JA	CFPフラン	CFPフラン
+XPT	JA	プラチナ	プラチナ
+XTS	JA	テスト	特にテスト用に予約されたコード
+XXX	JA	通貨なし	通貨の無い取引に割当てるコード
+YDD	JA	イエメン/ディナール	イエメン/ディナール
+YER	JA	イエメン/リアル	イエメン/リアル
+YUD	JA	ニュー・ユーゴスラビア/ディナール	ニュー・ユーゴスラビア/ディナール
+YUN	JA	ユーゴスラビア/ディナール(廃止)	ユーゴスラビア/ディナール(廃止)
+ZAL	JA	会計ランド	会計ランド
+ZAR	JA	ランド	ランド
+ZMK	JA	クワチャ	クワチャ
+ZRN	JA	新ザイール	新ザイール
+ZRZ	JA	ザイール	ザイール
+ZWD	JA	ジンバブエ/ドル	ジンバブエ/ドル
+BYR	US	Belarussian Ruble	Belarussian Ruble
+MXV	US	Mexican Unidad de Inversion (UDI)	Mexican Unidad de Inversion (UDI)
+GEL	US	Lari	Lari
+CDF	US	Franc Congolais	Franc Congolais
+ERN	US	Nakfa	Nakfa
+AOA	US	Kwanza	Kwanza
+BAM	US	Convertible Marks	Convertible Marks
+BGN	US	Bulgarian Lev	Bulgarian Lev
+RUB	US	Russian Ruble	Russian Ruble
+UAH	US	Hryvnia	Hryvnia
+YUM	US	Yugoslvian Dinar	Yugoslvian Dinar
+TJS	US	Somoni	Somoni
+XB5	JA	ボンド/マーケット単位 - 欧州通貨単位17 (廃止)	ボンド/マーケット単位 - 欧州通貨単位17 (E.U.A.-17) (廃止)
+ADP	US	Andorran Peseta	Andorran Peseta
+AED	US	UAE Dirham	UAE Dirham
+AFA	US	Afghani	Afghani
+ALL	US	Lek	Lek
+AMD	US	Armenian Dram	Armenian Dram
+ANG	US	Netherlands Antillian Guilder	Netherlands Antillian Guilder
+AOK	US	Kwanza (Obsolete)	Kwanza (Obsolete)
+AON	US	New Kwanza	New Kwanza
+ARA	US	Austral	Austral
+ARS	US	Argentine Peso	Argentine Peso
+ATS	US	Schilling	Schilling
+AUD	US	Australian Dollar	Australian Dollar
+AWG	US	Aruban Guilder	Aruban Guilder
+AZM	US	Azerbaijanian Manat	Azerbaijanian Manat
+BBD	US	Barbados Dollar	Barbados Dollar
+BDT	US	Taka	Taka
+BEF	US	Belgian Franc	Belgian Franc
+BGL	US	Lev	Lev
+BHD	US	Bahraini Dinar	Bahraini Dinar
+BIF	US	Burundi Franc	Burundi Franc
+BMD	US	Bermudian Dollar (Bermuda Dollar)	Bermudian Dollar (Bermuda Dollar)
+BND	US	Brunei Dollar	Brunei Dollar
+BOB	US	Boliviano	Boliviano
+BOV	US	Mvdol	Mvdol
+BRC	US	Cruzado	Cruzado
+BRL	US	Brazilian Real	Brazilian Real
+BSD	US	Bahamian Dollar	Bahamian Dollar
+BTN	US	Ngultrum	Ngultrum
+BUK	US	Kyat (Obsolete)	Kyat
+BWP	US	Pula	Pula
+BYB	US	Belarussian Ruble (Obsolete)	Belarussian Ruble (Obsolete)
+BZD	US	Belize Dollar	Belize Dollar
+CAD	US	Canadian Dollar	Canadian Dollars
+CHF	US	Swiss Franc	Swiss Franc
+CLF	US	Unidades de formento	Unidades de formento
+CLP	US	Chilean Peso	Chilean Peso
+CNY	US	Yuan Renminbi	Yuan Renminbi
+COP	US	Colombian Peso	Colombian Peso
+CRC	US	Costa Rican Colon	Costa Rican Colon
+CSK	US	Koruna	Koruna
+CUP	US	Cuban Peso	Cuban Peso
+CVE	US	Cape Verde Escudo	Cape Verde Escudo
+CYP	US	Cyprus Pound	Cyprus Pound
+CZK	US	Czech Koruna	Czech Koruna
+DEM	US	Deutsche Mark	Deutsche Mark
+DJF	US	Djibouti Franc	Djibouti Franc
+DKK	US	Danish Krone	Danish Krone
+DOP	US	Dominican Peso	Dominican Peso
+DZD	US	Algerian Dinar	Algerian Dinar
+ECS	US	Sucre	Sucre
+ECV	US	Unidad de Valor Constante (UVC)	Unidad de Valor Constante (UVC)
+EEK	US	Kroon	Kroon
+EGP	US	Egyptian Pound	Egyptian Pound
+ESB	US	Convertible Peseta Accounts	Convertible Peseta Accounts
+ESP	US	Spanish Peseta	Spanish Peseta
+ETB	US	Ethiopian Birr	Ethiopian Birr
+EUR	US	Euro	Pan-European Currency
+FIM	US	Markka	Markka
+FJD	US	Fiji Dollar	Fiji Dollar
+FKP	US	Falkland Islands Pound	Falkland Islands Pound
+FRF	US	French Franc	French Franc
+GBP	US	Pound Sterling	Pound Sterling
+GEK	US	Georgian Coupon	Georgian Coupon
+GHC	US	Cedi	Cedi
+GIP	US	Gibraltar Pound	Gibraltar Pound
+GMD	US	Dalasi	Dalasi
+GNF	US	Guinea Franc	Guinea Franc
+GRD	US	Drachma	Drachma
+GTQ	US	Quetzal	Quetzal
+GWP	US	Guinea-Bissau Peso	Guinea-Bissau Peso
+GYD	US	Guyana Dollar	Guyana Dollar
+HKD	US	Hong Kong Dollar	Hong Kong Dollar
+HNL	US	Lempira	Lempira
+HRD	US	Croatian Dinar	Croatian Dinar
+HRK	US	Croatian kuna	Croatian kuna
+HTG	US	Gourde	Gourde
+HUF	US	Forint	Forint
+IDR	US	Rupiah	Rupiah
+IEP	US	Irish Pound	Irish Pound
+ILS	US	New Israeli Sheqel	New Israeli Sheqel
+INR	US	Indian Rupee	Indian Rupee
+IQD	US	Iraqi Dinar	Iraqi Dinar
+IRR	US	Iranian Rial	Iranian Rial
+ISK	US	Iceland Krona	Iceland Krona
+ITL	US	Italian Lira	Italian Lira
+JMD	US	Jamaican Dollar	Jamaican Dollar
+JOD	US	Jordanian Dinar	Jordanian Dinar
+JPY	US	Yen	Japanese yen
+KES	US	Kenyan Shilling	Kenyan Shilling
+KGS	US	Som	Som
+KHR	US	Riel	Riel
+KMF	US	Comoro Franc	Comoro Franc
+KPW	US	North Korean Won	North Korean Won
+KRW	US	Won	Won
+KWD	US	Kuwaiti Dinar	Kuwaiti Dinar
+KYD	US	Cayman Islands Dollar	Cayman Islands Dollar
+KZT	US	Tenge	Tenge
+LAK	US	Kip	Kip
+LBP	US	Lebanese Pound	Lebanese Pound
+LKR	US	Sri Lanka Rupee	Sri Lanka Rupee
+LRD	US	Liberian Dollar	Liberian Dollar
+LSL	US	Loti	Loti
+LTL	US	Lithuanian Litas	Lithuanian Litas
+LUC	US	Convertible Franc	Convertible Franc
+LUF	US	Luxembourg Franc	Luxembourg Franc
+LUL	US	Financial Franc	Financial Franc
+LVL	US	Latvian Lats	Latvian Lats
+LVR	US	Latvian Ruble	Latvian Ruble
+LYD	US	Libyan Dinar	Libyan Dinar
+MAD	US	Moroccan Dirham	Moroccan Dirham
+MDL	US	Moldovan Leu	Moldovan Leu
+MGF	US	Malagasy Franc	Malagasy Franc
+MKD	US	Denar	Denar
+MMK	US	Kyat	Kyat
+MNT	US	Tugrik	Tugrik
+MOP	US	Pataca	Pataca
+MRO	US	Ouguiya	Ouguiya
+MTL	US	Maltese Lira	Maltese Lira
+MUR	US	Mauritius Rupee	Mauritius Rupee
+MVR	US	Rufiyaa	Rufiyaa
+MWK	US	Kawacha	Kawacha
+MXN	US	Mexican Peso	Mexican Peso
+MXP	US	Mexican Peso (Obsolete)	Mexican Peso (Obsolete)
+MYR	US	Malaysian Ringgit	Malaysian Ringgit
+MZM	US	Metical	Metical
+NAD	US	Namibia Dollar	Namibia Dollar
+NGN	US	Naira	Naira
+NIC	US	Cordoba	Cordoba
+NIO	US	Cordoba Oro	Cordoba Oro
+NLG	US	Netherlands Guilder	Netherlands Guilder
+NOK	US	Norwegian Krone	Norwegian Krone
+NPR	US	Nepalese Rupee	Nepalese Rupee
+NZD	US	New Zealand Dollar	New Zealand Dollar
+OMR	US	Rial Omani	Rial Omani
+PAB	US	Balboa	Balboa
+PEI	US	Inti	Inti
+PEN	US	Nuevo Sol	Nuevo Sol
+PGK	US	Kina	Kina
+PHP	US	Philippine Peso	Philippine Peso
+PKR	US	Pakistan Rupee	Pakistan Rupee
+PLN	US	Zloty	Zloty
+PLZ	US	Zloty (Obsolete)	Zloty (Obsolete)
+PTE	US	Portuguese Escudo	Portuguese Escudo
+PYG	US	Guarani	Guarani
+QAR	US	Qatari Rial	Qatari Rial
+ROL	US	Leu	Leu
+RUR	US	Russian Ruble (old)	Russian Ruble (old)
+RWF	US	Rwanda Franc	Rwanda Franc
+SAR	US	Saudi Riyal	Saudi Riyal
+SBD	US	Solomon Islands Dollar	Solomon Islands Dollar
+SCR	US	Seychelles Rupee	Seychelles Rupee
+SDD	US	Sudanese Dinar	Sudanese Dinar
+SDP	US	Sudanese Pound	Sudanese Pound
+SEK	US	Swedish Krona	Swedish Krona
+SGD	US	Singapore Dollar	Singapore Dollar
+SHP	US	Saint Helena Pound	Saint Helena Pound
+SIT	US	Tolar	Tolar
+SKK	US	Slovak Koruna	Slovak Koruna
+SLL	US	Leone	Leone
+SOS	US	Somali Shilling	Somali Shilling
+SRG	US	Suriname Guilder	Suriname Guilder
+STAT	US	Statistical	Statistical
+STD	US	Dobra	Dobra
+SUR	US	Rouble	Rouble
+SVC	US	El Salvador Colon	El Salvador Colon
+SYP	US	Syrian Pound	Syrian Pound
+SZL	US	Lilangeni	Lilangeni
+THB	US	Baht	Baht
+TJR	US	Tajik Ruble	Tajik Ruble
+TMM	US	Manat	Manat
+TND	US	Tunisian Dinar	Tunisian Dinar
+TOP	US	Pa'anga	Pa'anga
+TPE	US	Timor Escudo	Timor Escudo
+TRL	US	Turkish Lira	Turkish Lira
+TTD	US	Trinidad and Tobago Dollar	Trinidad and Tobago Dollar
+TWD	US	New Taiwan Dollar	New Taiwan Dollar
+TZS	US	Tanzanian Shilling	Tanzanian Shilling
+UAK	US	Karbovanet	Karbovanet
+UGS	US	Uganda Shilling (Obsolete)	Uganda Shilling (Obsolete)
+UGX	US	Uganda Shilling	Uganda Shilling
+USD	US	US Dollar	US Dollar
+USN	US	US Dollar (next day)	US Dollar (next day)
+USS	US	US Dollar (same day)	US Dollar (same day)
+UYP	US	Uruguayan Peso	Uruguayan Peso
+UYU	US	Peso Uruguayo	Peso Uruguayo
+UZS	US	Uzbekistan Sum	Uzbekistan Sum
+VEB	US	Bolivar	Bolivar
+VND	US	Dong	Dong
+VUV	US	Vatu	Vatu
+WST	US	Tala	Tala
+XAF	US	CFA Franc BEAC	Responsible authority: Banque des Etats de l'Afrique Centrale
+XAG	US	Silver	Silver
+XAU	US	Gold	Gold
+XB5	US	Bond Markets Units - European Unit of Account 17 (Obsolete)	Bond Markets Units - European Unit of Account 17 (E.U.A.-17) (Obsolete)
+XBA	US	Bond Markets Units - European Composite Unit (EURCO)	Bond Markets Units - European Composite Unit (EURCO)
+XBB	US	Bond Markets Units - European Monetary Unit (E.M.U.-6)	E.M.U.-6 is sometimes known as the European Currency Unit.  Do not confuse with the settlement unit of the European Monetary Cooperation Fund (E.M.C.F.) which has the same name
+XBC	US	Bond Markets Units - European Unit of Account 9 (E.U.A.-9)	Bond Markets Units - European Unit of Account 9 (E.U.A.-9)
+XBD	US	Bond Markets Units - European Unit of Account 17 (E.U.A.-17)	Bond Markets Units - European Unit of Account 17 (E.U.A.-17)
+XCD	US	East Carribbean Dollar	East Carribbean Dollar
+XDR	US	SDR	International Monetary Fund (I.M.F.)
+XEU	US	European Currency Unit (E.C.U.)	European Monetary Cooperation Fund (E.M.C.F.)
+XFO	US	Special settlement currencies - Gold-Franc	Special settlement currencies - Gold-Franc
+XFU	US	Special settlement currencies - UIC-Franc	Special settlement currencies - UIC-Franc
+XOF	US	CFA Franc BCEAO	Responsible authority: Banque Centrale des Etats de l'Afrique de l'Ouest
+XPD	US	Palladium	Palladium
+XPF	US	CFP Franc	CFP Franc
+XPT	US	Platinum	Platinum
+XTS	US	Testing	Code specifically reserved for testing purposes
+XXX	US	No currency	Code assigned for transactions where no currency is involved
+YDD	US	Yemeni Dinar	Yemeni Dinar
+YER	US	Yemeni Rial	Yemeni Rial
+YUD	US	New Yugoslavian Dinar	New Yugoslavian Dinar
+YUN	US	Yugoslvian Dinar (Obsolete)	Yugoslvian Dinar (Obsolete)
+ZAL	US	Financial Rand	Financial Rand
+ZAR	US	Rand	Rand
+ZMK	US	Kwacha	Kwacha
+ZRN	US	New Zaire	New Zaire
+ZRZ	US	Zaire	Zaire
+ZWD	US	Zimbabwe Dollar	Zimbabwe Dollar
+PAB	JA	バルボア	バルボア
+PEI	JA	インティ	インティ
+PLZ	JA	ポーランド/ズロチ(廃止)	ポーランド/ズロチ(廃止)
+KRW	JA	韓国/ウォン	韓国/ウォン
+LBP	JA	レバノン/ポンド	レバノン/ポンド
+LUF	JA	ルクセンブルク/フラン	ルクセンブルク/フラン
+MGF	JA	マダガスカル/フラン	マダガスカル/フラン
+HTG	JA	グールド	グールド
+HUF	JA	フォリント	フォリント
+ILS	JA	新イスラエル/シェケル	新イスラエル/シェケル
+IRR	JA	イラン/リアル	イラン/リアル
+CDF	JA	コンゴ民主共和国/フラン	コンゴ民主共和国/フラン
+CVE	JA	カボベルデ/エスクード	カボベルデ/エスクード
+DKK	JA	デンマーク/クローネ	デンマーク/クローネ
+ESP	JA	スペイン/ペセタ	スペイン/ペセタ
+ANG	JA	オランダ・アンチル/ギルダー	オランダ・アンチル/ギルダー
+AUD	JA	オーストラリア/ドル	オーストラリア/ドル
+BHD	JA	バーレーン/ディナール	バーレーン/ディナール
+SDD	JA	スーダン/ディナール	スーダン/ディナール
+UZS	JA	ウズベキスタン/スム	ウズベキスタン/スム
+YUM	JA	ユーゴスラビア/ディナール	ユーゴスラビア/ディナール

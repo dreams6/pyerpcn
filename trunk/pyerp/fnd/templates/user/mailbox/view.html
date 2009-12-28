@@ -1,0 +1,25 @@
+{% extends "user/mailbox/base.html" %}
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+{% block title %}收件箱{% endblock %}
+
+{% block body %}
+
+
+<dl class="message-headers">
+    <dt>Subject</dt>
+    <dd><strong>{{ message.subject }}</strong></dd>
+    <dt>Sender</dt>
+    <dd>{{ message.sender.login_id }}</dd>
+    <dt>Date</dt>
+    <dd>{{ message.sent_at|date:_("DATETIME_FORMAT")}}</dd>
+    <dt>Recipient</dt>
+    <dd>{{ message.recipient.login_id }}</dd>
+</dl>
+{{ message.body|linebreaksbr }}<br /><br />
+
+{% ifequal message.recipient fnd_global.user %}
+<a href="{{ fnd_user_site_prefix }}mailbox/reply/{{ message.id }}/">Reply</a>
+{% endifequal %}
+<a href="{{ fnd_user_site_prefix }}mailbox/delete/{{ message.id }}/?next={{ fnd_user_site_prefix }}mailbox/inbox/">Delete</a>
+
+{% endblock %}

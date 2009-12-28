@@ -1,0 +1,460 @@
+{% extends "layout.html" %}
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+
+{% block title %}执行文件{% endblock %}
+{% block js %}
+<script type="text/javascript" src="{{ fnd_media_prefix }}js/suggest.js"></script>
+<script type="text/javascript" src="{{ fnd_media_prefix }}js/floateditor.js"></script>
+
+<script type="text/javascript">
+addstyle(".executablegrid_div","width: 100%;border:0px solid #817F82; float:left;");
+addstyle(".executablegrid_div table","font-size: 12px; width:100%; background:#fff; cursor:default");
+addstyle(".executablegrid_div table td .caption","font-size: 12px;font-weight: bold;");
+addstyle(".executablegrid_div table th","font-weight: bold;text-align: center;background-color: #6694e3;color: white;border-left: 1px solid #cccccc; border-right: 1px solid #cccccc;padding: 0.22em 0.4em;");
+addstyle(".executablegrid_header","font-size: 12px;width: 100%;text-align: left;margin: 5px auto;border: 0;border-collapse: collapse;");
+addstyle(".executablegrid_header td", "white-space: nowrap;border: 1px solid #cccccc;padding: 0.15em 0.5em;");
+addstyle(".executablegrid_detail_grid", "font-size: 12px; table-layout: fixed; width: 100%; text-align: left; margin: 5px auto; border: 0; border-collapse: collapse;");
+addstyle(".executablegrid_detail_grid thead", "font-weight: bold; text-align: center; background: #6694e3 no-repeat right center; color: white; border-left: 1px solid #cccccc; border-right: 1px solid #cccccc; padding: 0.22em 0.4em;");
+addstyle(".executablegrid_detail_grid thead tr th", "white-space: nowrap;");
+addstyle(".executablegrid_detail_grid thead th.sort-asc", "background: #6694e3 no-repeat right center url('{{ fnd_media_prefix }}images/up_order.png');");
+addstyle(".executablegrid_detail_grid thead th.sort-desc", "background: #6694e3 no-repeat right center url('{{ fnd_media_prefix }}images/down_order.png');");
+addstyle(".executablegrid_detail_grid tbody tr.odd", "background-color: #fefefe;");
+addstyle(".executablegrid_detail_grid tbody tr.no_data", "background-color: #fefefe;");
+addstyle(".executablegrid_detail_grid tbody tr.odd", "background-color: #fefefe;");
+addstyle(".executablegrid_detail_grid tbody tr.even", "background-color: #efefef;"); 
+addstyle(".executablegrid_detail_grid tbody tr td", "overflow: hidden; white-space: nowrap; border: 1px solid #cccccc; padding: 0.15em 0.5em;");
+addstyle(".executablegrid_detail_grid tbody tr td.editing", "background: #6694e3;padding: 0em 0em 0em 0em;");
+addstyle(".executablegrid_detail_grid tbody tr td.error", "background:no-repeat url({{ fnd_media_prefix }}images/fnd/dirty.gif);");
+addstyle(".executablegrid_detail_grid tfoot tr td", "overflow: hidden; white-space: nowrap; text-align: right; text-decoration: underline; padding: 0.15em 0.5em;");
+addstyle(".input_error", "border-bottom-color:red;");
+
+
+
+
+/**
+ * options : {'media_path': '{{ fnd_media_prefix }}', 
+ *            'resp_path': '{{ fnd_resp_site_prefix }}{{ fnd_resp_path }}'
+ *           }
+ *
+ */
+ExecutableGrid = Class.create({
+  initialize: function(options) {
+    var pointer = this;
+    // 表格的容器
+    this.div = new Element("div", {"class": "executablegrid_div"});
+    this.div.id = this.uid();
+    this.opeions = options;
+    var _main_table = new Element("table");
+    var _main_table_tbody = new Element("tbody"); _main_table.appendChild(_main_table_tbody);
+    // executables table=======================================
+    var _main_executables = new Element("tr"); _main_table_tbody.appendChild(_main_executables);
+    var _main_executables_cell0 = new Element("td", {"style": "vertical-align:top;width: 100%"}); _main_executables.appendChild(_main_executables_cell0);
+    var _executables_fieldset = new Element("fieldset"); _main_executables_cell0.appendChild(_executables_fieldset);
+    _executables_fieldset.appendChild(new Element("legend", {"style": "font-size: 14px;font-weight: bold;"}).update("执行文件"));
+    var _executables_table = new Element("table", {"class": "executablegrid_detail_grid"}); _executables_fieldset.appendChild(_executables_table);
+    var _executables_table_thead = new Element("thead"); _executables_table.appendChild(_executables_table_thead);
+    this.executables_table_tbody = new Element("tbody", {"id": "executables"}); _executables_table.appendChild(this.executables_table_tbody);
+    this.executables_table_tbody.remove_no_data = function() { var no_data_rows = pointer.executables_table_tbody.select("tr[class~=no_data]"); if (no_data_rows && no_data_rows.first()) no_data_rows.first().remove(); };
+    this.executables_table_tbody.check_no_data = function() {
+        var child_elements = pointer.executables_table_tbody.childElements().findAll(function(item){ return item.status!='delete' });
+        if (child_elements.length==0) {
+          var _no_data_executables_row = new Element("tr", {"class": "no_data"}); this.appendChild(_no_data_executables_row);
+          var _no_data_executables_cell = new Element("td", {"colspan": "5"}).update("没有数据."); _no_data_executables_row.appendChild(_no_data_executables_cell);
+        }
+    };
+    this.executables_table_tbody.check_no_data();
+    this.executables_table_tbody.create_row = function(data) { return pointer.executables_create_row(data) }; 
+
+    // _executables footer=======================================
+    // _executables body=========================================
+    // _executables header=======================================
+    var _executables_header_row = new Element("tr", {"style":"height: auto;"}); _executables_table_thead.appendChild(_executables_header_row);
+    var _executables_header_row_cell1 = new Element("th", {"style": "width: 4%;"}); 
+    var _executables_add_new_link = new Element("img",{"src": this.opeions.media_path + "images/add.png", "style": "cursor:pointer", "border": "0", "title": "追加"}); _executables_header_row_cell1.appendChild(_executables_add_new_link);
+    Event.observe(_executables_add_new_link, 'click', function(e) { pointer.executables_table_tbody.remove_no_data(); var _c_row = pointer.executables_create_row(null); _c_row.down(0).next().showeditor(); });
+    _executables_header_row.appendChild(_executables_header_row_cell1);
+    _executables_header_row.appendChild(new Element("th", {"style": "width: 20%;"}).update("名称"));
+    _executables_header_row.appendChild(new Element("th", {"style": "width: 20%;"}).update("执行方式"));
+    _executables_header_row.appendChild(new Element("th", {"style": "width: 24%;"}).update("执行文件名"));
+    _executables_header_row.appendChild(new Element("th", {"style": "width: 24%;"}).update("执行路径"));
+
+
+    this.div.appendChild(_main_table);
+  },
+
+  executables_create_row: function(record) {
+    var pointer = this;
+    var child_elements = pointer.executables_table_tbody.childElements().findAll(function(item){ return item.status!='delete' });
+    var odd_or_even = (child_elements.length+1)%2==0 ? "even" : "odd";
+    var _row_status = !record ? "new" : (!record.status ? "query" : record.status);
+    var _executables_row = new Element("tr", {"class": odd_or_even}); pointer.executables_table_tbody.appendChild(_executables_row);
+    if (_row_status=="delete") _menuitems_row.hide();
+    _executables_row.status = _row_status;
+    _executables_row.childs = new Object();
+    var _executables_row_cell1 = new Element("td", {"style": "text-align: center;"});
+    var del_link = new Element("img",{"src": this.opeions.media_path + "images/remove.png", "style": "cursor:pointer", "border": "0", "title": "删除"}); _executables_row_cell1.appendChild(del_link);
+    Event.observe(del_link, 'click', function(e) {
+      // reflect row color
+      var _after_rows = _executables_row.nextSiblings();
+      _after_rows.each(function(t_row, idx) {
+        t_row.className = t_row.className=="odd" ? "even" : "odd";
+      });
+      // remove or hide row
+      if (_executables_row.status=="new" || _executables_row.status=="insert" ) {
+        _executables_row.remove();
+      } else if (_executables_row.status=="query" || _executables_row.status=="update") {
+        _executables_row.status = "delete";
+        _executables_row.hide();
+      }
+      pointer.executables_table_tbody.check_no_data();
+      // 重新计算合计
+      // pointer.executables_summary(this.executables_table_tbody);
+    });
+    _executables_row.appendChild(_executables_row_cell1);
+    _executables_row.childs.name = new Element("td");
+    _executables_row.appendChild(_executables_row.childs.name);
+    _executables_row.childs.method = new Element("td");
+    _executables_row.appendChild(_executables_row.childs.method);
+    _executables_row.childs.file = new Element("td");
+    _executables_row.appendChild(_executables_row.childs.file);
+    _executables_row.childs.execution_path = new Element("td");
+    _executables_row.appendChild(_executables_row.childs.execution_path);
+
+
+    _executables_row.childs.name.showeditor = function(e){
+      if (!_executables_row.childs.name.readAttribute("active")) {
+        var editor = new Element("input", {"style": "font-size:12px;border: 0px;width: 100%;"});
+        editor.value = _executables_row.childs.name.innerHTML;
+        _executables_row.childs.name.innerHTML = "";
+        _executables_row.childs.name.writeAttribute("active", "true");
+        _executables_row.childs.name.appendChild(editor);
+        _executables_row.childs.name.addClassName("editing");
+        // if (editor.addEventListener) {    // IE与FF中执行顺序不同,期待新版的Prototype会解决这个问题
+        //   new Suggest(editor, '{{ fnd_resp_site_prefix }}{{ fnd_resp_path }}je/account/', function(data){});
+        // }
+        new FloatEditor(editor, {
+          ondecid: function(next) {
+            editor.remove();
+            if (editor.oldvalue!=editor.value) {
+              _executables_row.status = (_executables_row.status=="new" ? "insert" : (_executables_row.status=="query" ? "change" : _executables_row.status));
+              _executables_row.childs.name.value = editor.value;
+            }
+            _executables_row.childs.name.update(editor.value);
+            _executables_row.childs.name.writeAttribute("title", editor.value);
+            _executables_row.childs.name.writeAttribute("active", "");
+            _executables_row.childs.name.removeClassName("editing");
+            if (next==1) {
+              _executables_row.childs.method.showeditor();
+            } else if (next==-1) {
+              var _previous_executables_row = _executables_row.previousSiblings().findAll(function(item){ return item.status!='delete' }).first();
+              if (_previous_executables_row) {
+                _previous_executables_row.down(0).siblings().last().showeditor();
+              } else {
+              }
+            }
+          }
+        });
+        editor.focus(); editor.select();
+        // if (!editor.addEventListener) {    // IE与FF中执行顺序不同,期待新版的Prototype会解决这个问题
+        //   new Suggest(editor, '{{ fnd_resp_site_prefix }}{{ fnd_resp_path }}je/account/', function(data){});
+        // }
+      }
+      return false;
+    };
+
+    _executables_row.childs.method.showeditor = function(e){
+      if (!_executables_row.childs.method.readAttribute("active")) {
+        var editor = new Element("input", {"style": "font-size:12px;border: 0px;width: 100%;"});
+        editor.value = _executables_row.childs.method.innerHTML;
+        _executables_row.childs.method.innerHTML = "";
+        _executables_row.childs.method.writeAttribute("active", "true");
+        _executables_row.childs.method.appendChild(editor);
+        _executables_row.childs.method.addClassName("editing");
+        // if (editor.addEventListener) {    // IE与FF中执行顺序不同,期待新版的Prototype会解决这个问题
+        //   new Suggest(editor, '{{ fnd_resp_site_prefix }}{{ fnd_resp_path }}je/account/', function(data){});
+        // }
+        new FloatEditor(editor, {
+          ondecid: function(next) {
+            editor.remove();
+            if (editor.oldvalue!=editor.value) {
+              _executables_row.status = (_executables_row.status=="new" ? "insert" : (_executables_row.status=="query" ? "change" : _executables_row.status));
+              _executables_row.childs.method.value = editor.value;
+            }
+            _executables_row.childs.method.update(editor.value);
+            _executables_row.childs.method.writeAttribute("title", editor.value);
+            _executables_row.childs.method.writeAttribute("active", "");
+            _executables_row.childs.method.removeClassName("editing");
+            if (next==1) {
+              _executables_row.childs.file.showeditor();
+            } else if (next==-1) {
+              _executables_row.childs.name.showeditor(); 
+            }
+          }
+        });
+        editor.focus(); editor.select();
+        // if (!editor.addEventListener) {    // IE与FF中执行顺序不同,期待新版的Prototype会解决这个问题
+        //   new Suggest(editor, '{{ fnd_resp_site_prefix }}{{ fnd_resp_path }}je/account/', function(data){});
+        // }
+      }
+      return false;
+    };
+
+    _executables_row.childs.file.showeditor = function(e){
+      if (!_executables_row.childs.file.readAttribute("active")) {
+        var editor = new Element("input", {"style": "font-size:12px;border: 0px;width: 100%;"});
+        editor.value = _executables_row.childs.file.innerHTML;
+        _executables_row.childs.file.innerHTML = "";
+        _executables_row.childs.file.writeAttribute("active", "true");
+        _executables_row.childs.file.appendChild(editor);
+        _executables_row.childs.file.addClassName("editing");
+        // if (editor.addEventListener) {    // IE与FF中执行顺序不同,期待新版的Prototype会解决这个问题
+        //   new Suggest(editor, '{{ fnd_resp_site_prefix }}{{ fnd_resp_path }}je/account/', function(data){});
+        // }
+        new FloatEditor(editor, {
+          ondecid: function(next) {
+            editor.remove();
+            if (editor.oldvalue!=editor.value) {
+              _executables_row.status = (_executables_row.status=="new" ? "insert" : (_executables_row.status=="query" ? "change" : _executables_row.status));
+              _executables_row.childs.file.value = editor.value;
+            }
+            _executables_row.childs.file.update(editor.value);
+            _executables_row.childs.file.writeAttribute("title", editor.value);
+            _executables_row.childs.file.writeAttribute("active", "");
+            _executables_row.childs.file.removeClassName("editing");
+            if (next==1) {
+              _executables_row.childs.execution_path.showeditor();
+            } else if (next==-1) {
+              _executables_row.childs.method.showeditor(); 
+            }
+          }
+        });
+        editor.focus(); editor.select();
+        // if (!editor.addEventListener) {    // IE与FF中执行顺序不同,期待新版的Prototype会解决这个问题
+        //   new Suggest(editor, '{{ fnd_resp_site_prefix }}{{ fnd_resp_path }}je/account/', function(data){});
+        // }
+      }
+      return false;
+    };
+
+    _executables_row.childs.execution_path.showeditor = function(e){
+      if (!_executables_row.childs.execution_path.readAttribute("active")) {
+        var editor = new Element("input", {"style": "font-size:12px;border: 0px;width: 100%;"});
+        editor.value = _executables_row.childs.execution_path.innerHTML;
+        _executables_row.childs.execution_path.innerHTML = "";
+        _executables_row.childs.execution_path.writeAttribute("active", "true");
+        _executables_row.childs.execution_path.appendChild(editor);
+        _executables_row.childs.execution_path.addClassName("editing");
+        // if (editor.addEventListener) {    // IE与FF中执行顺序不同,期待新版的Prototype会解决这个问题
+        //   new Suggest(editor, '{{ fnd_resp_site_prefix }}{{ fnd_resp_path }}je/account/', function(data){});
+        // }
+        new FloatEditor(editor, {
+          ondecid: function(next) {
+            editor.remove();
+            if (editor.oldvalue!=editor.value) {
+              _executables_row.status = (_executables_row.status=="new" ? "insert" : (_executables_row.status=="query" ? "change" : _executables_row.status));
+              _executables_row.childs.execution_path.value = editor.value;
+            }
+            _executables_row.childs.execution_path.update(editor.value);
+            _executables_row.childs.execution_path.writeAttribute("title", editor.value);
+            _executables_row.childs.execution_path.writeAttribute("active", "");
+            _executables_row.childs.execution_path.removeClassName("editing");
+            if (next==1) {
+              var _next_executables_row = _executables_row.nextSiblings().findAll(function(item){ return item.status!='delete' }).first();
+              if (_next_executables_row) {
+                _next_executables_row.down(0).next().showeditor();
+              } else {
+                var _c_row = pointer.executables_create_row();
+                _c_row.down(0).next().showeditor();
+              }
+            } else if (next==-1) {
+              _executables_row.childs.file.showeditor(); 
+            }
+          }
+        });
+        editor.focus(); editor.select();
+        // if (!editor.addEventListener) {    // IE与FF中执行顺序不同,期待新版的Prototype会解决这个问题
+        //   new Suggest(editor, '{{ fnd_resp_site_prefix }}{{ fnd_resp_path }}je/account/', function(data){});
+        // }
+      }
+      return false;
+    };
+
+
+    _executables_row.childs.name.observe('click', _executables_row.childs.name.showeditor);
+    _executables_row.childs.method.observe('click', _executables_row.childs.method.showeditor);
+    _executables_row.childs.file.observe('click', _executables_row.childs.file.showeditor);
+    _executables_row.childs.execution_path.observe('click', _executables_row.childs.execution_path.showeditor);
+
+    _executables_row.childs.executable_id = new Object();
+    _executables_row.childs.executable_id.value = (record ? record.data.executable_id : null);
+    _executables_row.childs.name.value = (record ? record.data.name : null);
+    _executables_row.childs.name.update(record ? record.data.name : null).writeAttribute("title", record ? record.data.name : null);
+    _executables_row.childs.method.value = (record ? record.data.method : null);
+    _executables_row.childs.method.update(record ? record.data.method : null).writeAttribute("title", record ? record.data.method : null);
+    _executables_row.childs.file.value = (record ? record.data.file : null);
+    _executables_row.childs.file.update(record ? record.data.file : null).writeAttribute("title", record ? record.data.file : null);
+    _executables_row.childs.execution_path.value = (record ? record.data.execution_path : null);
+    _executables_row.childs.execution_path.update(record ? record.data.execution_path : null).writeAttribute("title", record ? record.data.execution_path : null);
+
+    return _executables_row; 
+  }, 
+
+  header_put : function(header_obj, header_hash) {
+    header_obj.status = header_hash.status;
+    $H(header_hash.data).each(function(pair) {
+      var _prop = header_obj[pair.key];
+      if (Object.isUndefined(_prop)) {
+        _prop = new Object();
+        header_obj[pair.key] = _prop;
+      }
+      _prop.value = pair.value;
+    });
+  },
+  header_msg_put : function(header_obj, header_msg_arr) {
+    var e_msg_src_arr = header_msg_arr.pluck('src');
+    for (var property in header_obj) {
+      var _prop = header_obj[property];
+      if (Object.isElement(_prop)) {
+        var e_msg_idx = e_msg_src_arr.indexOf(property);
+        if (e_msg_idx!=-1) {
+          header_obj[property].addClassName("input_error");
+          header_obj[property].writeAttribute("title", header_msg_arr[e_msg_idx].content);
+        } else {
+          header_obj[property].removeClassName("input_error");
+          header_obj[property].writeAttribute("title", "");
+        }
+      }
+    }
+  },
+  detail_put : function(detail_tbody, detail_array) {
+    detail_tbody.update();
+    for (var i = 0; i< detail_array.length;i++) {
+      detail_tbody.create_row(detail_array[i]);
+    }
+    detail_tbody.check_no_data();
+  },
+  detail_msg_put : function(detail_tbody, detail_msg_arr) {
+    var child_elements = detail_tbody.childElements().findAll(function(item){ return item.status });
+    for (var i=0;i<child_elements.length;i++) {
+      var row = child_elements[i];
+      var row_msgs = detail_msg_arr[i];
+      for (var i0=0;i0<row_msgs.length;i0++) {
+        var row_msg = row_msgs[i0];
+        row.childs[row_msg.src].addClassName("error");
+        row.childs[row_msg.src].writeAttribute("title", row_msg.content);
+      }
+    }
+  },
+  load : function(t_data) {
+    this.detail_put(this.executables_table_tbody, t_data.body.executables);
+    this.detail_msg_put(this.executables_table_tbody, t_data.head.message.executables);
+  },
+
+  header_hash : function(header_obj) {
+    var results = new Object();
+    results.status = null;
+    results.data = new Object();
+    for (var property in header_obj) {
+      if (property=='status') {
+        results.status = header_obj[property];
+      } else {
+        var value = header_obj[property].value;
+        if (!Object.isUndefined(value))
+          results.data[property] = header_obj[property].value;
+      }
+    }
+    return results;
+  },
+  detail_array : function(detail_tbody) {
+    var child_elements = detail_tbody.childElements().findAll(function(item){ return item.status });
+    var results = [];
+    child_elements.each(function(t_row, index) {
+        var record_data = new Object();
+        for (var property in t_row.childs) {
+          var value = t_row.childs[property].value;
+          if (!Object.isUndefined(value))
+            record_data[property] = value;
+        }
+        results.push({"status" : t_row.status, "data" : record_data});
+    });
+    return results;
+  },
+  jsondata : function() {
+    var ret = new Object();
+    ret.head = new Object();
+    ret.body = new Object();
+    ret.body.executables = this.detail_array(this.executables_table_tbody);
+    return Object.toJSON(ret);
+  },
+
+  uid: function(){
+    if (!this._ui_seed) this._ui_seed=(new Date()).valueOf();
+    return this._ui_seed++;
+  }
+
+});
+
+
+
+</script>
+{% endblock %}
+
+{% block left %}
+<div class="menuheader">
+  <font color="blue">执行文件</font>
+</div>
+<menu compact="true">
+  <li><a title="mailto" href="">查询</a></li>
+</menu>
+{% endblock %}
+
+
+{% block body %}
+<div>
+  <input style="border-style:outset; border-width:1px;" onclick="javascript:void(0);" type="button" value="保存">
+  <input style="border-style:outset; border-width:1px;" onclick="javascript:void(0);" type="button" value="刷新">
+</div>
+<div id="grid_1">
+</div>
+
+
+<script type="text/javascript">
+  var eg = new ExecutableGrid({'media_path': '{{ fnd_media_prefix }}',  'resp_path': '{{ fnd_resp_site_prefix }}{{ fnd_resp_path }}'});
+  $('grid_1').appendChild(eg.div);
+  function do_save() {
+      new Ajax.Request('{{ fnd_resp_site_prefix }}{{ fnd_resp_path }}save/',
+          {method: "post",
+           requestHeaders: {RequestType: "ajax"},
+           postBody: jg.jsondata(),
+           asynchronous: false,
+           onCreate:function(){},
+           onSuccess:function(r){
+               var json_data = r.responseJSON;
+               jg.load(json_data);
+               // alert(Object.toJSON(json_data));
+          },
+          onFailure:function(){}
+         });
+  }
+  
+  function do_load(menu_id) {
+    new Ajax.Request('{{ fnd_resp_site_prefix }}{{ fnd_resp_path }}load/',
+            {method: "post",
+             requestHeaders: {RequestType: "ajax"},
+             asynchronous: false,
+             onCreate:function(){},
+             onSuccess:function(r){
+                 var json_data = r.responseJSON;
+                 eg.load(json_data);
+            },
+            onFailure:function(){}
+           });
+    // jg.load(t_data);
+  }
+  do_load();
+
+</script>
+
+
+
+{% endblock %}

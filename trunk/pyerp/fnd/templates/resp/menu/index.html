@@ -1,0 +1,60 @@
+{% extends "layout.html" %}
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+
+{% block title %}菜单{% endblock %}
+
+{% block left %}
+<div class="menuheader">
+  <font color="blue">菜单</font>
+</div>
+<menu compact="true">
+  <li><a title="mailto" href="{{ fnd_resp_site_prefix }}{{ fnd_resp_path }}">查询</a></li>
+  <li><a title="mailto" href="{{ fnd_resp_site_prefix }}{{ fnd_resp_path }}add/">添加</a></li>
+</menu>
+{% endblock %}
+
+
+{% block body %}
+
+<table width="98%">
+  <tr>
+    <td class="left"><a name="title"><b>菜单</b></a></td>
+  </tr>
+</table>
+
+<table class="forum" width="98%">
+<col width="450"/>
+<col width="*"/>
+<thead>
+  <tr>
+    <th class="sorted ascending"><a href="?ot=desc&amp;o=name">菜单名</a></th>
+    <th><a href="?ot=asc&amp;o=description">描述</a></th>
+  </tr>
+</thead>
+<tbody>
+{% for record in page.object_list  %}
+<tr class="{% cycle 'even' 'odd' %}">
+  <td><a href="{{ record.id }}/">{{ record.name }}</a></td>
+  <td>{{ record.description }}</td>
+</tr>
+{% endfor %}
+</tbody>
+</table>
+<table width="98%">
+  <tr>
+    <td class="right">
+    <span class="step-links">
+        {% if page.has_previous %}
+            <a href="?page={{ page.previous_page_number }}">前一页</a>
+        {% endif %}
+        第{{ page.number }}页/共{{ page.paginator.num_pages }}页
+        {% if page.has_next %}
+            <a href="?page={{ page.next_page_number }}">后一页</a>
+        {% endif %}
+    </span>
+    
+    
+  </td>
+  </tr>
+</table>
+{% endblock %}

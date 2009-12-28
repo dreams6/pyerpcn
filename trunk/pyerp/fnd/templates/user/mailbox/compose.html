@@ -1,0 +1,36 @@
+{% extends "user/mailbox/base.html" %}
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+{% block title %}发送邮件{% endblock %}
+
+{% block body %}
+            
+            
+            
+    <h1>Compose Message</h1>
+    
+    <form action="" method="post" class="uniForm">
+        <fieldset class="inlineLabels">
+        <div id="div_id_recipient" class="ctrlHolder">
+                    <label for="id_recipient">
+                        Recipient*
+                    </label>
+                <input id="id_recipient" type="text" class="commaseparateduserinput" name="recipient" value="{{ recipient }}"/>
+        </div>
+        <div id="div_id_subject" class="ctrlHolder">
+                    <label for="id_subject">
+                        Subject*
+                    </label>
+                <input id="id_subject" type="text" class="textinput" name="subject" value="{{ subject }}"/>
+        </div>
+        <div id="div_id_body" class="ctrlHolder">
+                    <label for="id_body">
+                        Body*
+                    </label>
+                <textarea id="id_body" rows="12" cols="55" name="body" class="textarea">{{ body }}</textarea>
+        </div>
+            <div class="form_block">
+                <input type="submit" value="Send &raquo;"/>
+            </div>
+    </form>
+
+{% endblock %}

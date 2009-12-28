@@ -1,0 +1,66 @@
+{% extends "layout.html" %}
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+
+{% block title %}添加新功能部件{% endblock %}
+{% block js %}
+<script type="text/javascript" src="{{ fnd_media_prefix }}js/suggest.js"></script>
+
+{% endblock %}
+{% block left %}
+<div class="menuheader">
+  <a title="功能部件">功能部件</a>
+</div>
+<menu compact="true">
+  <li><a title="mailto" href="{{ fnd_resp_site_prefix }}{{ fnd_resp_path }}">查询</a></li>
+  <li><a title="mailto" href="{{ fnd_resp_site_prefix }}{{ fnd_resp_path }}add/">添加</a></li>
+</menu>
+{% endblock %}
+
+
+{% block body %}
+<form id="f2" name="f2" action="" method="post">
+<table width="98%">
+  <tr>
+    <td class="left"><a name="title"><b>添加功能部件</b></a></td>
+  </tr>
+</table>
+
+<table class="forum" width="98%">
+<col width="100"/>
+<col width="*"/>
+<tbody>
+  <tr>
+    <th colspan="2" align="left">功能部件信息</th>
+  </tr>
+  <tr>
+    <td>名称:</td>
+    <td>{{ form.name }}{{ form.id }}</td>
+  </tr>
+  <tr>
+    <td>描述:</td>
+    <td>{{ form.description }}</td>
+  </tr>
+  <tr>
+    <td>程序包:</td>
+    <td>{{ form.package }}</td>
+  </tr>
+  <tr>
+    <td>参数:</td>
+    <td>{{ form.paramters }}</td>
+  </tr>
+</tbody>
+</table>
+<script type="text/javascript">
+
+var xml_auto1 = new Suggest($('id_package'), '{{ fnd_resp_site_prefix }}{{ fnd_resp_path }}func_sug/');
+
+</script>
+
+
+<table width="98%">
+  <tr>
+    <td class="right"><input type="submit" name="_save" value="保存"/> <input type="reset" name="reset" value="充填"/></td>
+  </tr>
+</table>
+</form>
+{% endblock %}
