@@ -249,6 +249,7 @@ class MediaSite(object):
                 contents = open(filepath, 'rb').read()
                 response = HttpResponse(contents, mimetype=mimetype)
                 response["Last-Modified"] = http_date(statobj[stat.ST_MTIME])
+                response['Expires'] = http_date(statobj[stat.ST_MTIME] + (24 * 60 * 60))
                 response["Content-Length"] = len(contents)
                 return response
             except Exception, e:
