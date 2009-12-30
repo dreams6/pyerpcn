@@ -105,16 +105,6 @@ class FndGlobalMiddleware(object):
                         secure=settings.SESSION_COOKIE_SECURE or None)
         # end session=================================
 
-        # ============================== 部缓存页面数据,也可以在apache中设定
-        # Header set Pragma "no-cache"
-        # Header set Cache-Control "no-cache"
-        # Header set Expires "-1"
-
-        response['Pragma'] = 'no-cache'
-        response['Cache-Control'] = 'no-cache'
-        response['Expires'] = '-1'
-
-
         fnd_global.leave_global_management()
 
         return response
