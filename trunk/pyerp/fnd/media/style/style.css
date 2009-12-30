@@ -1,0 +1,302 @@
+
+
+body {
+  font-size: 95%; 
+  color: black; 
+  font-family: arial, geneva, helvetica, sans-serif; 
+  background-color: white
+  
+  
+}
+
+/*
+td {
+  font-size: 95%;
+  color: black;
+  font-family: arial, geneva, helvetica, sans-serif;
+  background-color: white
+}
+
+th {
+  font-size: 95%;
+  color: black;
+  font-family: arial, geneva, helvetica, sans-serif;
+  /*background-color: white*/
+}
+*/
+menu {
+  padding-left: 1em; margin-left: 1em; white-space: nowrap
+}
+
+table.colortable {
+  background-color: #dddddd
+}
+
+h2 {
+  font-weight: bold; font-size: 130%
+}
+
+h3 {
+  font-weight: bold; font-size: 110%
+}
+
+h4 {
+  font-weight: bold; font-size: 100%
+}
+
+.menuheader {
+  font-weight: bold;
+/*white-space: nowrap;
+  word-wrap: normal;
+  word-break: keep-all;
+*/
+}
+
+.navleft {
+  border-right: #cccccc 1px solid; 
+  padding-right: 5px; 
+  border-top: #cccccc 0px solid; 
+  border-left: #cccccc 0px solid; 
+  border-bottom: #cccccc 0px solid
+}
+
+.navright {
+  border-right: #cccccc 0px solid; border-top: #cccccc 0px solid; padding-left: 5px; border-left: #cccccc 1px solid; border-bottom: #cccccc 0px solid
+}
+
+.section-content {
+  padding-right: 1em; 
+  padding-left: 1em;
+  white-space: normal;
+  word-wrap: break-word;
+  word-break: break-all;
+}
+
+.footer {
+  font-size: 80%; text-align: center
+}
+
+.note {
+  border-right: gray 2px solid; padding-right: 1em; border-top: gray 2px solid; padding-left: 1em; padding-bottom: 1em; margin: 1em; border-left: gray 2px solid; padding-top: 1em; border-bottom: gray 2px solid
+}
+
+.source {
+  border-right: #bbbbbb 2px solid; padding-right: 1em; border-top: #bbbbbb 2px solid; padding-left: 1em; padding-bottom: 0em; margin: 0em 1em; border-left: #bbbbbb 2px solid; padding-top: 0em; border-bottom: #bbbbbb 2px solid; white-space: pre
+}
+
+a {
+  color: #023264;
+  text-decoration: none;
+}
+/* 错误消息样式 */
+.error-content {
+  color: red;
+  padding-right: 1em;
+  padding-left: 1em
+}
+
+/* 表格中的描述 */
+p.description {
+  white-space: normal;   
+  word-wrap: break-word;
+  word-break: break-all;
+
+}
+
+
+div.conPager {
+  width: 98%;
+  border: 1px solid #718BD6;
+  margin: -1px auto;
+  padding: 0.2em 0.3em;
+  line-height: 21px;
+  height: 21px;
+  background-color: #718BD6;
+  color: white;
+  position: relative;
+}
+div.conPager a, div.conPager a:active, div.conPager a:visited, div.conPager a:hover {
+  color: white;
+}
+
+.break-word{
+  white-space: normal;
+  word-wrap: break-word;
+  word-break:break-all;
+}
+
+.center {
+  text-align: center;
+}
+.right {
+  text-align: right;
+}
+.left {
+  text-align: left;
+}
+.fleft {
+  float: left;
+}
+.fright {
+  float: right;
+}
+.flimg {
+  float: left;
+  width: 72px; /* IE5 for Mac workaround */
+  margin: 0 0.5em 0 0;
+}
+.clear {
+  lear: both;
+}
+.strong {
+  font-weight: bold;
+}
+.normal {
+  font-weight: normal;
+}
+.red {
+  color: red;
+}
+.green {
+  color: green;
+}
+.gray {
+  color: gray;
+}
+.relative {
+  position: relative;
+}
+
+
+/* ���?�� */
+fieldset.postforum {
+  border: 1px solid #CCCCCC;
+  padding: 0 0.5em 0.5em 0.5em;
+  margin: 0.5em auto 0 auto;
+}
+fieldset.postforum legend {
+  padding: 0.5em;
+  color: black;
+}
+textarea.postforum, input[type="text"].postforum, input[type="password"].postforum {
+  border: 1px solid #808080;
+  padding: 0.1em 0.2em;
+}
+input[type="button"].postforum, input[type="submit"].postforum, input[type="reset"].postforum {
+  padding: 0 0.5em;
+}
+textarea.postforum {
+  width: 40em;
+  height: 20em;
+}
+textarea.shorter {
+  height: 5em;
+}
+
+
+/* forum table style */
+table.forum {
+  text-align: left;
+  margin: 5px auto;
+  border: 0;
+  border-collapse: collapse;
+  display: table;
+}
+table.forum caption {
+  margin: 0 auto;
+  padding: 0.4em 0;
+  font-weight: bold;
+}
+table.forum td {
+  border: 1px solid #CCCCCC;
+  padding: 0.15em 0.5em;
+}
+table.forum tr.odd {
+  background-color: #efefef;
+}
+table.forum tr.even {
+  background-color: fefefe;
+}
+table.forum th {
+  text-align: center;
+  background-color: #6694e3;  /* 6694e3 e0ecfe */
+  color: white;
+  font-weight: normal;
+  border-left: 1px solid #CCCCCC;
+  border-right: 1px solid #CCCCCC;
+  padding: 0.22em 0.4em;
+}
+table.forum col {
+  text-align: left;
+}
+
+
+/* forum table style */
+table.forumview {
+  text-align: left;
+  margin: 5px auto;
+  border: 0;
+  border-collapse: collapse;
+  display: table;
+}
+table.forumview caption {
+  margin: 0 auto;
+  padding: 0.4em 0;
+  font-weight: bold;
+}
+table.forumview td {
+  border: 1px solid #CCCCCC;
+  padding: 0.15em 0.5em;
+}
+table.forumview tr.odd {
+  background-color: #f6f6f6;
+}
+table.forumview tr.even {
+  background-color: white;
+}
+table.forumview th {
+  text-align: right;
+  background-color: #718BD6;
+  font-weight: normal;
+  border-left: 1px solid #CCCCCC;
+  border-right: 1px solid #CCCCCC;
+  padding: 0.22em 0.4em;
+}
+table.forumview col {
+  text-align: left;
+}
+/*=============ora==========================*/
+.x2m {
+    font-size:12px;
+}
+
+
+/* menu page */
+.mlink:link {font-size:12px;color:#663300}
+.mlink:active {font-size:12px;color:#ff6600}
+.mlink:visited {font-size:12px;color:#996633}
+.mlinkselected {font-size:12px;font-weight:bold;background-color:#336699;color:#ffffff;text-decoration:none}
+
+.mtitle {font-size:12px;font-weight:bold;color:#336699}
+
+.stitle {color:#336699;margin-bottom:0px;font-weight:bold;font-size:90%}
+.stitleline {background-color:#d2d8b0}
+.mlistheader {border-color:#f7f7e7;font-size:x-small;font-weight:bold;text-align:left;background-color:#d2d8b0;color:#336699;vertical-align:bottom}
+
+.x1l {font-size:12px;color:#000000;vertical-align:baseline;background-color:#f7f7e7;border-color:#d2d8b0}
+.x4x {border-style:solid;border-width:1px}
+
+
+.x23 {font-size:12px;font-weight:bold;background-color:#d2d8b0;color:#336699;text-decoration:none;vertical-align:bottom}
+.x24 {font-size:12px;font-weight:bold;background-color:#d2d8b0;color:#336699;text-decoration:none}
+
+.x2v {font-size:12px;color:#663300}
+/*=============ora==========================*/
+
+
+table thead th.sorted { background-position:bottom left !important; }
+table thead th.sorted a { padding-right:13px; }
+table thead th.ascending a { background:url(../images/fnd/arrow-down.gif) right .4em no-repeat; }
+table thead th.descending a { background:url(../images/fnd/arrow-up.gif) right .4em no-repeat; }
+
+

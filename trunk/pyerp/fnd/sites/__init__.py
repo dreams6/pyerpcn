@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*- 
 
 import re
-
+import sys, os
 from django import http, template
 from django.template import Context, loader
 from django.http import HttpResponse
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponseNotFound, HttpResponseNotModified
 from django.conf import settings
 from django.core import exceptions, urlresolvers
 
@@ -169,6 +169,94 @@ class ProtectedUserSite(object):
         return callback(request, *callback_args, **callback_kwargs)
 
 usersite = ProtectedUserSite()
+
+# MediaSite
+class MediaSite(object):
+    """
+    公共访问控制器.
+    """
+    def __init__(self):
+        # At compile time, cache the directories to search.
+        fs_encoding = sys.getfilesystemencoding() or sys.getdefaultencoding()
+
+        app_media_dirs = []
+        for app in settings.INSTALLED_APPS:
+            i = app.rfind('.')
+            if i == -1:
+                m, a = app, None
+            else:
+                m, a = app[:i], app[i+1:]
+            try:
+                if a is None:
+                    mod = __import__(m, {}, {}, [])
+                else:
+                    mod = getattr(__import__(m, {}, {}, [a]), a)
+            except ImportError, e:
+                raise ImproperlyConfigured, 'ImportError %s: %s' % (app, e.args[0])
+            media_dir = os.path.join(os.path.dirname(mod.__file__), 'media')
+            if os.path.isdir(media_dir):
+                app_media_dirs.append(media_dir.decode(fs_encoding))
+        # It won't change, so convert it to a tuple to save memory.
+        self.app_media_dirs = tuple(app_media_dirs)
+
+    def get_media_sources(self, template_name, template_dirs=None):
+        """
+        Returns the absolute paths to "template_name", when appended to each
+        directory in "template_dirs". Any paths that don't lie inside one of the
+        template dirs are excluded from the result set, for security reasons.
+        """
+        from django.utils._os import safe_join
+        if not template_dirs:
+            template_dirs = self.app_media_dirs
+        for template_dir in template_dirs:
+            try:
+                yield safe_join(template_dir, template_name)
+            except UnicodeDecodeError:
+                # The template dir name was a bytestring that wasn't valid UTF-8.
+                raise
+            except ValueError:
+                # The joined path was located outside of template_dir.
+                pass
+
+    def was_modified_since(self, header=None, mtime=0, size=0):
+        from email.Utils import parsedate_tz, mktime_tz
+        try:
+            if header is None:
+                raise ValueError
+            matches = re.match(r"^([^;]+)(; length=([0-9]+))?$", header,
+                               re.IGNORECASE)
+            header_mtime = mktime_tz(parsedate_tz(matches.group(1)))
+            header_len = matches.group(3)
+            if header_len and int(header_len) != size:
+                raise ValueError
+            if mtime > header_mtime:
+                raise ValueError
+        except (AttributeError, ValueError):
+            return True
+        return False
+
+    def root(self, request, url):
+        import mimetypes
+        import stat
+        from django.utils.http import http_date
+        for filepath in self.get_media_sources(url):
+            try:
+                statobj = os.stat(filepath)
+                if not self.was_modified_since(request.META.get('HTTP_IF_MODIFIED_SINCE'),
+                                          statobj[stat.ST_MTIME], statobj[stat.ST_SIZE]):
+                    return HttpResponseNotModified()
+                mimetype = mimetypes.guess_type(filepath)[0] or 'application/octet-stream'
+                contents = open(filepath, 'rb').read()
+                response = HttpResponse(contents, mimetype=mimetype)
+                response["Last-Modified"] = http_date(statobj[stat.ST_MTIME])
+                response["Content-Length"] = len(contents)
+                return response
+            except Exception, e:
+                pass
+        return http.HttpResponseNotFound('Media is not found.[' + url + ']')
+
+mediasite = MediaSite()
+
 
 # PublicSite
 class PublicSite(object):
