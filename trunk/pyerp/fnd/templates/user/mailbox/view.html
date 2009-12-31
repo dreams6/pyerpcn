@@ -9,11 +9,11 @@
     <dt>Subject</dt>
     <dd><strong>{{ message.subject }}</strong></dd>
     <dt>Sender</dt>
-    <dd>{{ message.sender.login_id }}</dd>
+    <dd>{{ message.sender.username }}</dd>
     <dt>Date</dt>
     <dd>{{ message.sent_at|date:_("DATETIME_FORMAT")}}</dd>
     <dt>Recipient</dt>
-    <dd>{{ message.recipient.login_id }}</dd>
+    <dd>{{ message.recipient.username }}</dd>
 </dl>
 {{ message.body|linebreaksbr }}<br /><br />
 

@@ -7,7 +7,6 @@ def display_main(request):
     message = ''
     
     if request.POST.has_key('confirm'):
-        login_id = fnd_global.user.login_id
         old_password = request.POST.get('old_password', None)
         new_password = request.POST.get('new_password', None)
         new_password1 = request.POST.get('new_password1', None)

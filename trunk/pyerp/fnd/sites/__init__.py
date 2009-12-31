@@ -8,12 +8,13 @@ from django.http import HttpResponse
 from django.http import HttpResponseRedirect, HttpResponseNotFound, HttpResponseNotModified
 from django.conf import settings
 from django.core import exceptions, urlresolvers
+from django.contrib.auth import authenticate
 
 from pyerp.fnd.shortcuts import fnd_render_to_response
 from pyerp.fnd import function as fnd_fun
 from pyerp.fnd.models import Responsibility, Function
 from pyerp.fnd.gbl import fnd_global
-from pyerp.fnd.auth import authenticate
+#from pyerp.fnd.auth import authenticate
 from pyerp.fnd.auth import login as login_session
 from pyerp.fnd.auth import has_resp
 from pyerp.fnd.auth import fun_in_resp
@@ -49,9 +50,11 @@ def login(request):
         request.session.delete_test_cookie()
 
     # Check the password.
-    login_id = request.POST.get('login_id', None)
+    username = request.POST.get('username', None)
     password = request.POST.get('password', None)
-    user = authenticate(login_id=login_id, password=password)
+    
+    user = authenticate(username=username, password=password)
+    
     if user is None:
         message = "请输入正确的用户名和密码.请注意,用户名/密码是大小写敏感的."
         return display_login_form(request, message)

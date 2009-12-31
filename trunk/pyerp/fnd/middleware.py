@@ -26,7 +26,7 @@ class FndGlobalMiddleware(object):
          3, 初始化fnd_global
         """
         # start auth=================================
-        request.__class__.user = LazyUser()
+        # request.__class__.user = LazyUser()
         # end auth===================================
         fnd_global.enter_global_management(user=request.user, session=request.session)
 

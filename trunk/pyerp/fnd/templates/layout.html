@@ -33,7 +33,7 @@
     </td>
     <td valign="top" align="right">
     {% if fnd_global.user.is_authenticated %}
-      <span class="x2m">登录ID: {{ fnd_global.user.login_id }}
+      <span class="x2m">用户ID: {{ fnd_global.user.username }}
       {% if last_login %}
         上次登录时间:{{ last_login }}
       {% endif %}
