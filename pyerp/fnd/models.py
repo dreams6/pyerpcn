@@ -367,11 +367,8 @@ def get_hexdigest(algorithm, salt, raw_password):
 #
 #
 #
-class User(models.Model):
-    login_id       = models.CharField(max_length=30, unique=True, null=False)
-    password       = models.CharField(null=False, max_length=128)
+class User(dj_auth_models.User):
     description    = models.CharField(max_length=240, blank=False)
-    email          = models.EmailField(null=True)
     fax            = models.CharField(max_length=80, null=True)
     pwd_expiration_type    = models.IntegerField(default=0)   # 0:none 1:days 2:accesses
     pwd_lifespan     = models.IntegerField(default=0)
@@ -390,126 +387,8 @@ class User(models.Model):
     last_updated_by    = models.IntegerField(null=False)
     last_updated_date  = models.DateTimeField(auto_now=True)
     # ========================================================
-    
-    def is_authenticated(self):
-        """Always return True. This is a way to tell if the user has been authenticated in templates.
-        """
-        return True
-
-    def make_random_password(self, length=10, allowed_chars='abcdefghjkmnpqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ23456789'):
-        "Generates a random password with the given length and given allowed_chars"
-        # Note that default value of allowed_chars does not have "I" or letters
-        # that look like it -- just to avoid confusion.
-        from random import choice
-        return ''.join([choice(allowed_chars) for i in range(length)])
-    
-    def reset_random_password(self):
-        new_pwd = self.make_random_password()
-        self.set_password(new_pwd)
-        self.pwd_begin_date = date.today()
-        self.pwd_accesses = 0
-        self.save()
-        return new_pwd
-
-    def reset_password(self, raw_password):
-        self.set_password(raw_password)
-        self.pwd_begin_date = date.today()
-        self.pwd_accesses = 0
-        self.save()
-
-    def set_password(self, raw_password):
-        import random
-        algo = 'sha1'
-        salt = get_hexdigest(algo, str(random.random()), str(random.random()))[:5]
-        hsh = get_hexdigest(algo, salt, raw_password)
-        self.password = '%s$%s$%s' % (algo, salt, hsh)
-
-    def check_password(self, raw_password):
-        """
-        Returns a boolean of whether the raw_password was correct. Handles
-        encryption formats behind the scenes.
-        """
-        # Backwards-compatibility check. Older passwords won't include the
-        # algorithm or salt.
-        if '$' not in self.password:
-            is_correct = (self.password == get_hexdigest('md5', '', raw_password))
-            if is_correct:
-                # Convert the password to the new, more secure format.
-                self.set_password(raw_password)
-                self.save()
-            return is_correct
-
-        algo, salt, hsh = self.password.split('$')
-        return hsh == get_hexdigest(algo, salt, raw_password)
-#
-# 
-#
-class AnonymousUser(object):
-    id = -1
-    login_id = 'Anonymous'
-    is_staff = False
-    is_active = False
-    is_superuser = False
-
-    def __init__(self):
-        pass
-
-    def __unicode__(self):
-        return 'Anonymous'
-
-    def __str__(self):
-        return unicode(self).encode('utf-8')
-
-    def __eq__(self, other):
-        return isinstance(other, self.__class__)
-
-    def __ne__(self, other):
-        return not self.__eq__(other)
-
-    def __hash__(self):
-        return 1 # instances always return the same hash value
-
-    def save(self):
-        raise NotImplementedError
-
-    def delete(self):
-        raise NotImplementedError
-
-    def set_password(self, raw_password):
-        raise NotImplementedError
-
-    def check_password(self, raw_password):
-        raise NotImplementedError
-
-    def has_perm(self, perm):
-        return False
-
-    def has_perms(self, perm_list):
-        return False
-
-    def has_module_perms(self, module):
-        return False
-
-    def get_and_delete_messages(self):
-        return []
-
-    def is_anonymous(self):
-        return True
-
-    def is_authenticated(self):
-        return False
 
 
-#
-# 
-#
-class UserPreferences(models.Model):
-#~ user_name VARCHAR2 (320) Yes Internal name of user who owns this preference setting 
-#~ module_name VARCHAR2 (30) Yes Module that references this preference 
-#~ preference_name VARCHAR2 (30) Yes Preference name 
-#~ preference_value VARCHAR2 (240)  Preference value 
-    pass
-#
 #
 #
 class UserResp(models.Model):

@@ -16,7 +16,7 @@
     <tbody>
 {% for message in message_list %} 
     <tr>
-        <td>{{ message.recipient.login_id }}</td>
+        <td>{{ message.recipient.username }}</td>
         <td>
         <a href="{{ fnd_user_site_prefix }}mailbox/view/{{ message.id }}/">{{ message.subject }}</a>
         </td>

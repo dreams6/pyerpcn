@@ -50,9 +50,11 @@ def get_md5_hexdigest(raw_password):
     raise ValueError("Got unknown password algorithm type in password.")
 
 
-def add(login_id, password, description, email, pwd_expiration_type=0, pwd_lifespan=0, start_date_active=date.today(), end_date_active=None):
+def add(username, password, description, email, pwd_expiration_type=0, pwd_lifespan=0, start_date_active=date.today(), end_date_active=None):
     user = models.User()
-    user.login_id    = login_id
+    user.username    = username
+    user.first_name = "first_name"
+    user.last_name = "last_name"
     user.password    = get_md5_hexdigest(password)         # ????
     user.description = description
     user.email       = email

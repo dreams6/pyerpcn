@@ -126,13 +126,13 @@ def fnd_init():
     u1 = fnd_user.add("u1", "test", "Application Developer User", "u0@localhost.com")
     fnd_user.addresp(u1, resp, "Application Developer Responsibility")
 
-    u2 = fnd_user.add("u2", "test", "Application Developer User", "u0@localhost.com", pwd_expiration_type=1, pwd_lifespan=10)
+    u2 = fnd_user.add("u2", "test", "Application Developer User", "u1@localhost.com", pwd_expiration_type=1, pwd_lifespan=10)
     fnd_user.addresp(u2, resp, "Application Developer Responsibility")
 
-    u3 = fnd_user.add("u3", "test", "Application Developer User", "u0@localhost.com", pwd_expiration_type=2, pwd_lifespan=3)
+    u3 = fnd_user.add("u3", "test", "Application Developer User", "u2@localhost.com", pwd_expiration_type=2, pwd_lifespan=3)
     fnd_user.addresp(u3, resp, "Application Developer Responsibility")
 
-    u4 = fnd_user.add("u4", "test", "Application Developer User", "u0@localhost.com", end_date_active=(date.today()-timedelta(days=1)) )
+    u4 = fnd_user.add("u4", "test", "Application Developer User", "u3@localhost.com", end_date_active=(date.today()-timedelta(days=1)) )
     fnd_user.addresp(u4, resp, "Application Developer Responsibility")
 
     # resp = fnd_resp.add("Application Developer", "Application Developer Responsibility", menu)

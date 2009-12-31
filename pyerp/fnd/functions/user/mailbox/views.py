@@ -92,7 +92,7 @@ def compose(request, recipient=None, template_name='user/mailbox/compose.html', 
 
         msg = MailBox(
             sender = request.user,
-            recipient = User.objects.get(login_id=recipient),
+            recipient = User.objects.get(username=recipient),
             subject = subject,
             body = body,
         )
@@ -133,7 +133,7 @@ def reply(request, message_id, template_name='user/mailbox/compose.html', succes
 
         msg = MailBox(
             sender = request.user,
-            recipient = User.objects.get(login_id=recipient),
+            recipient = User.objects.get(username=recipient),
             subject = subject,
             body = body,
         )
@@ -147,11 +147,11 @@ def reply(request, message_id, template_name='user/mailbox/compose.html', succes
         pass
     return fnd_render_to_response(template_name, {
         'body': "%(sender)s wrote:\n%(body)s" % {
-            'sender': parent.sender.login_id, 
+            'sender': parent.sender.username, 
             'body': parent.body
             }, 
         'subject': "Re: %(subject)s" % {'subject': parent.subject},
-        'recipient': ",".join([parent.sender.login_id,])
+        'recipient': ",".join([parent.sender.username,])
     },request)
 #reply = login_required(reply)
 #

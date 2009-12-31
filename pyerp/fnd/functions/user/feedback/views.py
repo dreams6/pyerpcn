@@ -15,7 +15,7 @@ def display_main(request, func_id=None):
     # 判断用户是否设定了缺省主页
     fun = fnd_models.Function.objects.get(pk=func_id)
 
-    req = urllib.urlencode({"reporter"    : fnd_global.user.login_id,
+    req = urllib.urlencode({"reporter"    : fnd_global.user.username,
           "summary"     : "",
           "type"        : "enhancement",
           "description" : """功能: %s \n

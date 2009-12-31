@@ -15,7 +15,7 @@ from pyerp.fnd.shortcuts import fnd_render_to_response
 
 @basic_auth_required(realm='Notices Feed', callback_func=simple_basic_auth_callback)
 def feed_for_user(request):
-    url = "feed/%s" % request.user.login_id
+    url = "feed/%s" % request.user.username
     return feed(request, url, {
         "feed": NoticeUserFeed,
     })
