@@ -110,4 +110,22 @@ class FndGlobalMiddleware(object):
         return response
 
 
+class FndMediaMiddleware(object):
+
+        
+    def process_view(self, request, view_func, view_args, view_kwargs):
+        # if metch of media's url return the media
+        request_path_info = request.path_info
+        if request_path_info.startswith(settings.FND_MEDIA_PREFIX):
+            from pyerp.fnd.sites import mediasite
+            return mediasite.root(request, request_path_info[len(settings.FND_MEDIA_PREFIX):])
+
+    def process_response(self, request, response):
+        # fix response header when request a media file.
+        request_path_info = request.path_info
+        if request_path_info.startswith(settings.FND_MEDIA_PREFIX):
+            if 'Vary' in response:
+                del response['Vary']
+            pass # fix header
+        return response
 
