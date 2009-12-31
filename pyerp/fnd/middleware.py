@@ -25,11 +25,6 @@ class FndGlobalMiddleware(object):
          2, 处理auth
          3, 初始化fnd_global
         """
-        # start session===============================
-        engine = __import__(settings.SESSION_ENGINE, {}, {}, [''])
-        session_key = request.COOKIES.get(settings.SESSION_COOKIE_NAME, None)
-        request.session = engine.SessionStore(session_key)
-        # end session=================================
         # start auth=================================
         request.__class__.user = LazyUser()
         # end auth===================================
@@ -75,38 +70,7 @@ class FndGlobalMiddleware(object):
         pass
 
     def process_response(self, request, response):
-        # start session===============================
-        """
-        If request.session was modified, or if the configuration is to save the
-        session every time, save the changes and set a session cookie.
-        """
-        try:
-            accessed = request.session.accessed
-            modified = request.session.modified
-        except AttributeError:
-            pass
-        else:
-            if accessed:
-                patch_vary_headers(response, ('Cookie',))
-            if modified or settings.SESSION_SAVE_EVERY_REQUEST:
-                if request.session.get_expire_at_browser_close():
-                    max_age = None
-                    expires = None
-                else:
-                    max_age = request.session.get_expiry_age()
-                    expires_time = time.time() + max_age
-                    expires = cookie_date(expires_time)
-                # Save the session data and refresh the client cookie.
-                request.session.save()
-                response.set_cookie(settings.SESSION_COOKIE_NAME,
-                        request.session.session_key, max_age=max_age,
-                        expires=expires, domain=settings.SESSION_COOKIE_DOMAIN,
-                        path=settings.SESSION_COOKIE_PATH,
-                        secure=settings.SESSION_COOKIE_SECURE or None)
-        # end session=================================
-
         fnd_global.leave_global_management()
-
         return response
 
 
