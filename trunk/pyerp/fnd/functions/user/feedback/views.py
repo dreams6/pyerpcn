@@ -17,11 +17,11 @@ def display_main(request, func_id=None):
     req = urllib.urlencode({"reporter"    : fnd_global.user.username,
           "summary"     : "",
           "type"        : "缺陷",
-          "description" : "功能: %s \n"     \
-                          "功能描述: %s \n" \
-                          "版本: %s \n"     \
-                          "模块: %s \n"     \
-                          "问题描述: \n" % (
+          "description" : "功能: %s \n\n"     \
+                          "功能描述: %s \n\n" \
+                          "版本: %s \n\n"     \
+                          "模块: %s \n\n"     \
+                          "问题描述: \n\n" % (
                            fun.name.encode("utf-8"), 
                            fun.description.encode("utf-8"),
                            fun.version, 
@@ -29,8 +29,8 @@ def display_main(request, func_id=None):
                            ),
 #          "action"      : "create",
 #          "status"      : "new",
-          "priority"    : "major",
-          "milestone"   : "Pilot",
+          "priority"    : "中等优先级",
+          "milestone"   : "01_Pilot",
           "component"   : "fnd",
           "version"     : __import__('pyerp').get_version(),
           "keywords"    : "",
