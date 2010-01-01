@@ -15,12 +15,12 @@ MANAGERS = ADMINS
 #
 # SMTP server settings
 #
-EMAIL_HOST="smtp.mail.yahoo.cn"
+EMAIL_HOST="mail.pyerp.cn"
 EMAIL_PORT="25"
-EMAIL_HOST_USER="pyerp@yahoo.cn"
+EMAIL_HOST_USER="demo@pyerp.cn"
 EMAIL_HOST_PASSWORD="xxxx"
-DEFAULT_FROM_EMAIL="pyerp@yahoo.cn"
-SERVER_EMAIL="pyerp@yahoo.cn"
+DEFAULT_FROM_EMAIL="demo@pyerp.cn"
+SERVER_EMAIL="demo@pyerp.cn"
 
 #
 # Database connection settings
