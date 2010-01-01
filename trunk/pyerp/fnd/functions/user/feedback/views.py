@@ -14,7 +14,8 @@ from pyerp.fnd.profile import fnd_profile
 def display_main(request, func_id=None):
     
     fun = fnd_models.Function.objects.get(pk=func_id)
-    req = urllib.urlencode({"reporter"    : fnd_global.user.username,
+    req = urllib.urlencode({
+          # "reporter"    : fnd_global.user.username,
           "summary"     : "",
           "type"        : "缺陷",
           "description" : "功能: %s \n\n"     \
