@@ -17,7 +17,7 @@ def display_main(request, func_id=None):
 
     req = urllib.urlencode({"reporter"    : fnd_global.user.username,
           "summary"     : "",
-          "type"        : "enhancement",
+          "type"        : "缺陷",
           "description" : """功能: %s \n
 功能描述: %s \n
 版本: %s \n
@@ -29,8 +29,8 @@ def display_main(request, func_id=None):
 #          "action"      : "create",
 #          "status"      : "new",
           "priority"    : "major",
-          "milestone"   : "NW-Django【Pilot】",
-          "component"   : "NW-Django",
+          "milestone"   : "Pilot",
+          "component"   : "fnd",
           "version"     : "1.0",
           "keywords"    : "",
           "cc"          : ""
@@ -39,7 +39,7 @@ def display_main(request, func_id=None):
 #    from pyerp.fnd.api import request as fnd_request
 #    fnd_request.submit_request(1)
     
-    return HttpResponseRedirect("https://ora12.gicp.net/trac/newticket?" + req)
+    return HttpResponseRedirect("http://code.pyerp.cn/newticket?" + req)
     #return fnd_render_to_response('user/feedback/index.html', context, request)
 
 
