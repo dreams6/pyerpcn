@@ -74,7 +74,7 @@ MIDDLEWARE_CLASSES = (
 #
 # FEEDBACK_TRAC_NEWTICKET_URL
 #
-
+FEEDBACK_TRAC_NEWTICKET_URL = 'http://code.pyerp.cn/newticket'
 
 #
 # ...
