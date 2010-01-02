@@ -37,6 +37,7 @@ def display_main(request, func_id=None):
           "keywords"    : "",
           "cc"          : ""
         })
-
-    return HttpResponseRedirect("http://code.pyerp.cn/newticket?" + req)
+    
+    trac_url = settings.FEEDBACK_TRAC_NEWTICKET_URL or 'http://code.pyerp.cn/newticket'
+    return HttpResponseRedirect(trac_url + '?' + req)
 
