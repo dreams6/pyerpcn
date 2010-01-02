@@ -38,6 +38,6 @@ def display_main(request, func_id=None):
           "cc"          : ""
         })
     
-    trac_url = settings.FEEDBACK_TRAC_NEWTICKET_URL or 'http://code.pyerp.cn/newticket'
-    return HttpResponseRedirect(trac_url + '?' + req)
+    trac_ticket_url = hasattr(settings, 'FEEDBACK_TRAC_NEWTICKET_URL') and settings.FEEDBACK_TRAC_NEWTICKET_URL or 'http://code.pyerp.cn/newticket'
+    return HttpResponseRedirect(trac_ticket_url + '?' + req)
 
