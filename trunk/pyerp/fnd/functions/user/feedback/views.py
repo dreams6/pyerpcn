@@ -12,21 +12,24 @@ from pyerp.fnd.profile import fnd_profile
 
 
 def display_main(request, func_id=None):
-    
     fun = fnd_models.Function.objects.get(pk=func_id)
     req = urllib.urlencode({
           # "reporter"    : fnd_global.user.username,
           "summary"     : "",
           "type"        : "缺陷",
-          "description" : "功能: %s \n\n"     \
-                          "功能描述: %s \n\n" \
-                          "版本: %s \n\n"     \
-                          "模块: %s \n\n"     \
+          "description" : "功能: %s \n\n"        \
+                          "功能描述: %s \n\n"    \
+                          "版本: %s \n\n"        \
+                          "模块: %s \n\n"        \
+                          "客户端环境: %s \n\n"  \
+                          "客户端IP: %s \n\n"    \
                           "问题描述: \n\n" % (
                            fun.name.encode("utf-8"), 
                            fun.description.encode("utf-8"),
                            fun.version, 
                            fun.package.encode("utf-8"),
+                           request.META['HTTP_USER_AGENT'],
+                           request.META['REMOTE_ADDR'],
                            ),
 #          "action"      : "create",
 #          "status"      : "new",
