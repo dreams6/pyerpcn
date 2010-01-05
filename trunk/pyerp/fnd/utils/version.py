@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*- 
 
-__svnid__ = '$Id$'
+__svnid__ = ''
 
 import re
 
