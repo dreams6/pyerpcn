@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*- 
 
+import sys
+
 VERSION = (0, 0, 1, 'dev', 0)
 
 def get_version():
@@ -15,3 +17,8 @@ def get_version():
 
     return version
 
+def sss():
+    from pyerp.fnd.utils.version import get_svn_id
+    print get_svn_id(module=sys.modules[__name__])
+    
+    
