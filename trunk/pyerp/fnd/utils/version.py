@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*- 
 
-__svnid__ = '$Id:$'
+__svnid__ = '$Id$'
 
 import re
 
@@ -8,7 +8,7 @@ def get_svn_id(_svnid):
     # bow for the mighty regular expression
     svnidrep = r'^\$Id: (?P<filename>.+) (?P<revision>\d+) (?P<last_changed_date>\d{4}-\d{2}-\d{1,2}) (?P<last_changed_time>\d{2}:\d{2}:\d{2})Z (?P<author>\w+.+) \$$'
     # parse the svn Id
-    return  re.match(svnidrep, _svnid).group('last_changed_date', 'author')
+    return  re.match(svnidrep, _svnid).group('revision', 'last_changed_date', 'author')
 
 def get_svn_revision(path):
     """
@@ -36,3 +36,12 @@ def get_svn_revision(path):
     if rev:
         return 'SVN-%s' % rev
     return 'SVN-unknown'
+
+
+
+if __name__ == '__main__':
+    print get_svn_id(__svnid__)
+
+
+
+
