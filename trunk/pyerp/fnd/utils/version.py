@@ -51,8 +51,8 @@ def get_version(*args):
     version = '%s.%s' % (args[0], args[1]) 
     if args[2]: 
         version = '%s.%s' % (version, args[2]) 
-    if args[3:] == ('alpha', 0): 
-        version = '%s pre-alpha' % version 
+    if args[3:5] == ('alpha', 0): 
+        version = '%s-pre-alpha' % version 
     else: 
         version = '%s-%s' % (version, args[3]) 
         if args[3] != 'final': 
