@@ -129,7 +129,7 @@ def func_list():
                                 continue
                             if hasattr(app_func_mod, 'get_version'):
                                 pass
-                            yield (app, label, app_func_mod.__name__ , app_func_mod.get_version())
+                            yield (app, label, app_func_mod.__name__ , app_func_mod.__version__)
                         except:
                             pass
             except:
