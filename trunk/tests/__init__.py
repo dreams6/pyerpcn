@@ -13,7 +13,7 @@ class FirstTestCase(unittest.TestCase):
 
     def test_first(self):
         import pyerp
-        print pyerp.get_version()
+        print pyerp.__version__
         self.assertEquals('1', '1')
 
 
