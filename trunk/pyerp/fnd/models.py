@@ -244,8 +244,8 @@ class Function(models.Model):
             mod = __import__(self.package, {}, {}, ['get_version'])
         except:
             return 'Invalid package %s.' % self.package
-        if hasattr(mod, 'get_version'):
-            return mod.get_version();
+        if hasattr(mod, '__version__'):
+            return mod.__version__;
         else:
             return 'unknown'
     version = property(get_version)
