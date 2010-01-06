@@ -39,7 +39,7 @@ def display_main(request, func_id=None):
           "priority"    : "中等优先级",
           "milestone"   : "01_Pilot",
           "component"   : "fnd",
-          "version"     : __import__('pyerp').get_version(),
+          "version"     : __import__('pyerp').__version__,
           "keywords"    : "",
           "cc"          : ""
         })
