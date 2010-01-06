@@ -1,79 +1,66 @@
 # -*- coding: utf-8 -*- 
 
-__svnid__ = '$Id$'
-
+import os, sys
 import re
-import os
 
-def get_svn_id(svnid=None, module=None):
-    if module:
-        path = os.path.dirname(module.__file__)
-        root_mod_name = module.__name__
-        src_root = os.path.dirname(path[:0-len(module.__name__)])
-        for dirpath, dirnames, filenames in os.walk(path):
-            # Ignore dirnames that start with '.'
-            for i, dirname in enumerate(dirnames):
-                if dirname.startswith('.'): 
-                    del dirnames[i]
-                else:
-                    if os.path.exists(os.path.join(dirname, '__init__.py')):
-                        del dirnames[i]
-                        # mod = __import__(mod_path, {}, {}, [''])
-                        # mod.get_version()
-
-            for f in filenames:
-                mod_path = None
-                if f.endswith('.py') and '__init__.py' != f:
-                    mod_path = root_mod_name + '.' + dirpath[len(path)+1:].replace(os.path.sep, '.')
-                elif f.endswith('.py'):
-                    mod_path = root_mod_name + '.' + dirpath[len(path)+1:].replace(os.path.sep, '.')
-                    mod_path = mod_path + '.' + f[:-3]
-                if mod_path:
-                    #print mod_path
-                    pass
-                    # mod = __import__(mod_path, {}, {}, [''])
-                    #print mod
-                    #if mod and hasattr(mod, '__svnid__'):
-                        # print mod.get_version()
-    elif svnid:
-        # bow for the mighty regular expression
-        svnidrep = r'^\$Id: (?P<filename>.+) (?P<revision>\d+) (?P<last_changed_date>\d{4}-\d{2}-\d{1,2}) (?P<last_changed_time>\d{2}:\d{2}:\d{2})Z (?P<author>\w+.+) \$$'
-        # parse the svn Id
-        match_obj = re.match(svnidrep, svnid)
-        if match_obj:
-            return match_obj.group('revision', 'last_changed_date', 'author')
-        else:
-            return (None, None, None)
+def _parse_svn_id(_svnid):
+    # bow for the mighty regular expression
+    svnidrep = r'^\$Id: (?P<filename>.+) (?P<revision>\d+) (?P<last_changed_date>\d{4}-\d{2}-\d{1,2}) (?P<last_changed_time>\d{2}:\d{2}:\d{2})Z (?P<author>\w+.+) \$$'
+    # parse the svn Id
+    match_obj = re.match(svnidrep, _svnid)
+    if match_obj:
+        return match_obj.group('revision', 'last_changed_date', 'author')
     else:
         return (None, None, None)
+    
+def get_svn_revision(m__name__):
+    mod = sys.modules[m__name__]
+    m__file__ = mod.__file__
+    svn_ret = (None, None, None)
+    if hasattr(mod, '__svnid__'):
+        svn_ret = _parse_svn_id(mod.__svnid__)
 
-def get_svn_revision(path):
-    """
-    Returns the SVN last commit revision in the form SVN-XXXX,
-    where XXXX is the revision number.
+    if m__file__.endswith('__init__.py') or m__file__.endswith('__init__.pyc'):
+        m__dir__ = os.path.dirname(m__file__)
+        for f in os.listdir(m__dir__):
+            if not f.startswith('.'):
+                sub_name = None
+                if os.path.isfile(os.path.join(m__dir__, f)):
+                    if f.endswith('.py') and f != '__init__.py':
+                        sub_name = m__name__ + '.' + f[:-3]
+                elif os.path.isdir(os.path.join(m__dir__, f)):
+                    
+                    sub_name = m__name__ + '.' + f
+ 
+                if sub_name:
 
-    Returns SVN-unknown if anything goes wrong, such as an unexpected
-    format of internal SVN files.
+                    try:
+                        sub_mod = __import__(sub_name, {}, {}, [''])
+                        svn_sub_mod = (None, None, None)
+                        if hasattr(sub_mod, '__svn__'):
+                            svn_sub_mod = sub_mod.__svn__
+                        svn_ret_rev = svn_ret[0] or 0
+                        svn_sub_mod_rev = svn_sub_mod[0] and int(svn_sub_mod[0]) or 0
+                        if svn_sub_mod_rev > svn_ret_rev:
+                            svn_ret = svn_sub_mod
+                    except:
+                        pass
+    return svn_ret
 
-    If path is provided, it should be a directory whose SVN info you want to
-    inspect. If it's not provided, this will use the root django/ package
-    directory.
-    copy from django.utils.version packages.
-    """
-    import os.path
-    rev = None
-    if path is None:
-        path = __path__[0]
-    entries_path = '%s/.svn/entries' % path
-    if os.path.exists(entries_path):
-        entries = open(entries_path, 'r').readlines()
-        #last_modifed_date entries[9].rstrip()
-        rev = entries[10].rstrip()
-        #author = entries[11].rstrip()
-    if rev:
-        return 'SVN-%s' % rev
-    return 'SVN-unknown'
+def get_version(*args):
+    version = '%s.%s' % (args[0], args[1]) 
+    if args[2]: 
+        version = '%s.%s' % (version, args[2]) 
+    if args[3:] == ('alpha', 0): 
+        version = '%s pre-alpha' % version 
+    else: 
+        version = '%s-%s' % (version, args[3]) 
+        if args[3] != 'final': 
+            version = '%s-%s' % (version, args[4])
 
-if __name__ == '__main__':
-    print get_svn_id(__svnid__)
+    if len(args)>5 and args[5]:
+        version = "%s-SVN-%s" % (version, args[5])
+    return version
 
+__svnid__ = '$Id$'
+__svn__ = get_svn_revision(__name__)

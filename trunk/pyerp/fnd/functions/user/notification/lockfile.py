@@ -1,4 +1,4 @@
-
+# -*- coding: utf-8 -*- 
 """
 lockfile.py - Platform-independent advisory file locks.
 
@@ -67,6 +67,12 @@ try:
     threading.Thread.get_name
 except AttributeError:
     threading.Thread.get_name = threading.Thread.getName
+
+from pyerp.fnd.utils.version import get_svn_revision, get_version
+
+__svnid__ = '$Id$'
+__svn__ = get_svn_revision(__name__)
+
 
 __all__ = ['Error', 'LockError', 'LockTimeout', 'AlreadyLocked',
            'LockFailed', 'UnlockError', 'NotLocked', 'NotMyLock',

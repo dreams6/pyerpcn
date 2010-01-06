@@ -5,9 +5,15 @@ from datetime import datetime, date
 from django.core.exceptions import ImproperlyConfigured
 from django.db.models import Q as Q
 
-from pyerp.fnd import models as fnd_models
 from django.contrib.auth import models as dj_auth_models
 from django.contrib import auth as dj_auth
+
+from pyerp.fnd import models as fnd_models
+from pyerp.fnd.utils.version import get_svn_revision, get_version
+
+__svnid__ = '$Id$'
+__svn__ = get_svn_revision(__name__)
+
 
 BACKEND_SESSION_KEY = '_auth_user_backend'
 

@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*- 
-
 import datetime
 from django.http import Http404, HttpResponseRedirect
 from django.shortcuts import render_to_response, get_object_or_404
@@ -11,6 +10,10 @@ from django.conf import settings
 
 from pyerp.fnd.models import MailBox, User
 from pyerp.fnd.shortcuts import fnd_render_to_response
+from pyerp.fnd.utils.version import get_svn_revision, get_version
+
+__svnid__ = '$Id$'
+__svn__ = get_svn_revision(__name__)
 
 
 #from messages.forms import ComposeForm

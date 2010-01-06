@@ -5,20 +5,24 @@ import time
 from django.conf import settings
 from django.utils.cache import patch_vary_headers
 from django.utils.http import cookie_date
+from pyerp.fnd.utils.version import get_svn_revision, get_version
+
+__svnid__ = '$Id$'
+__svn__ = get_svn_revision(__name__)
 
 #
 # 根据指定的name取得值列表.
 # 
 #
 def list():
-  pass
+    pass
 
 #
 # 验证制定的value是否合法.
 # 
 #
 def validate():
-  pass
+    pass
 
 #=ValueSet维护用==============================================================
 #

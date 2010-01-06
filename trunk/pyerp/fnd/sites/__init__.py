@@ -21,6 +21,10 @@ from pyerp.fnd.auth import fun_in_resp
 from pyerp.fnd.views import display_http_403
 
 from pyerp.fnd.functions.pub.login.views import display_login_form
+from pyerp.fnd.utils.version import get_svn_revision, get_version
+
+__svnid__ = '$Id$'
+__svn__ = get_svn_revision(__name__)
 
 
 LOGIN_FORM_KEY = 'this_is_the_login_form'

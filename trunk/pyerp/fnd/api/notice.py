@@ -23,7 +23,10 @@ from django.utils.translation import ugettext_lazy as _
 from django.utils.translation import ugettext, get_language, activate
 
 from pyerp.fnd.models import *
+from pyerp.fnd.utils.version import get_svn_revision, get_version
 
+__svnid__ = '$Id$'
+__svn__ = get_svn_revision(__name__)
 
 # favour django-mailer but fall back to django.core.mail
 if 'mailer' in settings.INSTALLED_APPS:

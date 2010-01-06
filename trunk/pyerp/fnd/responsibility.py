@@ -15,9 +15,12 @@ or implicit commits or rollbacks.
 """
 
 from pyerp.fnd.gbl import fnd_global
-
-
 from pyerp.fnd.models import Responsibility, MenuItem
+from pyerp.fnd.utils.version import get_svn_revision, get_version
+
+__svnid__ = '$Id$'
+__svn__ = get_svn_revision(__name__)
+
 
 def add(name, description, menu):
     resp = Responsibility()

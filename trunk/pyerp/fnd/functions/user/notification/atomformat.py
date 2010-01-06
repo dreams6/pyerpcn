@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*- 
 # 
 # django-atompub by James Tauber <http://jtauber.com/>
 # http://code.google.com/p/django-atompub/
@@ -30,6 +31,10 @@
 
 from xml.sax.saxutils import XMLGenerator
 from datetime import datetime
+from pyerp.fnd.utils.version import get_svn_revision, get_version
+
+__svnid__ = '$Id$'
+__svn__ = get_svn_revision(__name__)
 
 
 GENERATOR_TEXT = 'django-atompub'
