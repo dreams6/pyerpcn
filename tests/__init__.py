@@ -20,6 +20,8 @@ class FirstTestCase(unittest.TestCase):
 def suite():
     suite = unittest.TestSuite()
     suite.addTest(unittest.makeSuite(FirstTestCase, 'test'))
+    from tests.fnd.utils import version
+    suite.addTest(unittest.makeSuite(version.VersionTestCase, 'test'))
     return suite
 
 if __name__ == '__main__':
