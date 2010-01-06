@@ -241,7 +241,7 @@ class Function(models.Model):
 
     def get_version(self):
         try:
-            mod = __import__(self.package, {}, {}, ['get_version'])
+            mod = __import__(self.package, {}, {}, [''])
         except:
             return 'Invalid package %s.' % self.package
         if hasattr(mod, '__version__'):
@@ -250,6 +250,17 @@ class Function(models.Model):
             return 'unknown'
     version = property(get_version)
 
+    def get_svn_revision(self):
+        try:
+            mod = __import__(self.package, {}, {}, [''])
+        except:
+            return 'Invalid package %s.' % self.package
+        if hasattr(mod, '__svn__'):
+            return mod.__svn__;
+        else:
+            return (None, None, None)
+    svn_revision = property(get_svn_revision)
+    
     def get_urlconf(self):
         """
         TODO 出于性能原因,考虑将 [function.package + '.urls'] 直接作为参数,传入
