@@ -4,6 +4,10 @@ from django.conf import settings
 
 from pyerp.fnd.shortcuts import fnd_render_to_response
 from pyerp.fnd.gbl import fnd_global
+from pyerp.fnd.utils.version import get_svn_revision, get_version
+
+__svnid__ = '$Id$'
+__svn__ = get_svn_revision(__name__)
 
 
 def display_login_form(request, error_message='', app_path=None, extra_context=None):

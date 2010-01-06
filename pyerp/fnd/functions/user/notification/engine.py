@@ -1,4 +1,4 @@
-
+# -*- coding: utf-8 -*- 
 import sys
 import time
 import logging
@@ -16,6 +16,11 @@ from pyerp.fnd.functions.user.notification.lockfile import FileLock, AlreadyLock
 
 from pyerp.fnd import NoticeQueueBatch
 from pyerp.fnd import models as notification
+from pyerp.fnd.utils.version import get_svn_revision, get_version
+
+__svnid__ = '$Id$'
+__svn__ = get_svn_revision(__name__)
+
 
 # lock timeout value. how long to wait for the lock to become available.
 # default behavior is to never wait for the lock to be available.

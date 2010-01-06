@@ -3,19 +3,22 @@
 """
 """
 
-from django.db.models import get_models, signals
-from pyerp.fnd import models as fnd_models
+from datetime import datetime, date, timedelta
 
-from pyerp.fnd.gbl import fnd_global
-from pyerp.fnd.profile import fnd_profile
+from django.db.models import get_models, signals
 
 import pyerp.fnd.lookup as fnd_lookup
 import pyerp.fnd.function as fnd_function
 import pyerp.fnd.menu as fnd_menu
 import pyerp.fnd.responsibility as fnd_resp
 import pyerp.fnd.user as fnd_user
+from pyerp.fnd import models as fnd_models
+from pyerp.fnd.gbl import fnd_global
+from pyerp.fnd.profile import fnd_profile
+from pyerp.fnd.utils.version import get_svn_revision, get_version
 
-from datetime import datetime, date, timedelta
+__svnid__ = '$Id$'
+__svn__ = get_svn_revision(__name__)
 
 #
 #

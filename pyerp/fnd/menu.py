@@ -14,11 +14,12 @@ Managed transactions don't do those commits, but will need some kind of manual
 or implicit commits or rollbacks.
 """
 
+from pyerp.fnd import models
 from pyerp.fnd.gbl import fnd_global
+from pyerp.fnd.utils.version import get_svn_revision, get_version
 
-
-import models
-
+__svnid__ = '$Id$'
+__svn__ = get_svn_revision(__name__)
 
 def add(name, description):
   menu = models.Menu()

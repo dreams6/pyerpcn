@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*- 
 from datetime import datetime
 
 from django.core.urlresolvers import reverse
@@ -9,6 +10,11 @@ from django.utils.translation import ugettext_lazy as _
 
 from pyerp.fnd.models import Notice
 from pyerp.fnd.functions.user.notification.atomformat import Feed
+from pyerp.fnd.utils.version import get_svn_revision, get_version
+
+__svnid__ = '$Id$'
+__svn__ = get_svn_revision(__name__)
+
 
 ITEMS_PER_FEED = getattr(settings, 'ITEMS_PER_FEED', 20)
 

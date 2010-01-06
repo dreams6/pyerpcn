@@ -1,7 +1,13 @@
+# -*- coding: utf-8 -*- 
 from django.utils.translation import ugettext as _
 from django.http import HttpResponse
 from django.contrib.auth import authenticate, login
 from django.conf import settings
+from pyerp.fnd.utils.version import get_svn_revision, get_version
+
+__svnid__ = '$Id$'
+__svn__ = get_svn_revision(__name__)
+
 
 def simple_basic_auth_callback(request, user, *args, **kwargs):
     """
