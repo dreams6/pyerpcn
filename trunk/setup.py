@@ -50,5 +50,9 @@ setup(
         'setuptools>=0.6b1',
 #        'Django>=1.0.2',
     ],
-
+    entry_points = {
+        'distutils.commands': [
+            'pyerpunittest = pyerp.fnd.utils.testrunner:pyerpunittest'
+        ],
+    },
   )
