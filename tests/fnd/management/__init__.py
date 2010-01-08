@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*- 
 from pyerp.fnd.utils.version import get_svn_revision, get_version
-__svnid__ = '$Id: __init__.py 40 2010-01-06 14:04:43Z yuhere $'
+__svnid__ = '$Id$'
 __svn__ = get_svn_revision(__name__)
 
 import unittest
