@@ -22,6 +22,9 @@ def suite():
     suite.addTest(unittest.makeSuite(FirstTestCase, 'test'))
     from tests.fnd.utils import version
     suite.addTest(unittest.makeSuite(version.VersionTestCase, 'test'))
+    from tests.fnd import management
+    suite.addTest(unittest.makeSuite(management.ManagementTestCase, 'test'))
+
     return suite
 
 if __name__ == '__main__':
