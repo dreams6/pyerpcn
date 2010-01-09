@@ -10,7 +10,7 @@ from pyerp.fnd import models as fnd_models
 from pyerp.fnd.profile import fnd_profile
 from pyerp.fnd.utils.version import get_svn_revision, get_version
 
-__svnid__ = '$Id: views.py 47 2010-01-06 14:47:10Z yuhere $'
+__svnid__ = '$Id$'
 __svn__ = get_svn_revision(__name__)
 
 
