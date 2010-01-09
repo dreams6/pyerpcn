@@ -222,6 +222,18 @@ def fnd_init():
     # ==============================
     fm.save()
     
+    fun1 = fnd_function.add("fnd.Help", "帮助", "pyerp.fnd.functions.user.help"   , None)
+    fm = fnd_models.FuncMapping()
+    fm.regex_pattern = '^help/'
+    fm.type = 'user'
+    fm.seq = 6
+    fm.function = fun1
+    # ==============================
+    fm.created_by = fnd_global.user_id
+    fm.last_updated_by = fnd_global.user_id
+    # ==============================
+    fm.save()
+
     
     fun1 = fnd_function.add("fnd.Login", "登录", "pyerp.fnd.functions.pub.login"   , None)
     fm = fnd_models.FuncMapping()

@@ -75,8 +75,9 @@ MIDDLEWARE_CLASSES = (
 #
 # FEEDBACK_TRAC_NEWTICKET_URL
 # using trac's root url for support or feedback.
-#
-FEEDBACK_TRAC_NEWTICKET_URL = 'http://code.pyerp.cn/newticket'
+# FEEDBACK_URL = SUPPORT_SITE_URL + '/newticket'
+# HELP_URL = SUPPORT_SITE_URL + '/wiki/help'
+SUPPORT_SITE_URL = 'http://code.pyerp.cn'
 
 #
 # ...
