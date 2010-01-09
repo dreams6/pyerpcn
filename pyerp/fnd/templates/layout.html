@@ -9,8 +9,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 <meta content="pyerp" name="author"/>
 {% block css %}<link href="{{ fnd_media_prefix }}style/style.css" type="text/css" rel="stylesheet"/>{% endblock %}
-<script type="text/javascript" src="{{ fnd_media_prefix }}js/prototype.js"></script>
-<script type="text/javascript" src="{{ fnd_media_prefix }}js/common.js"></script>
+<script type="text/javascript" src="{{ fnd_media_prefix }}js/jquery.js"></script>
 {% block js %}
 <script type="text/javascript">
 <!--
@@ -117,7 +116,7 @@
           <td><a target="_blank" title="反馈" href="{{ fnd_user_site_prefix }}feedback/{{ fnd_global.function.id }}/" class="x2v">反馈</a></td>
           <td class="x4">&nbsp;|&nbsp;</td>
 {% endif %}
-          <td><a title="页面信息" href="javascript:void(0);" onclick="javascript:$('page_info').toggle();" class="x2v">页面信息</a></td>
+          <td><a title="页面信息" href="javascript:void(0);" onclick="javascript:$('#page_info').toggle();" class="x2v">页面信息</a></td>
           <td class="x4">&nbsp;|&nbsp;</td>
           <td><a title="个人信息保护策略" href="{{ fnd_user_site_prefix }}xxx/" class="x2v">个人信息保护策略</a></td>
         </tr>
