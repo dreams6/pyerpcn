@@ -44,6 +44,6 @@ def display_main(request, func_id=None):
           "cc"          : fun.svn_revision[2]  # SVN's author
         })
     
-    trac_ticket_url = hasattr(settings, 'FEEDBACK_TRAC_NEWTICKET_URL') and settings.FEEDBACK_TRAC_NEWTICKET_URL or 'http://code.pyerp.cn/newticket'
-    return HttpResponseRedirect(trac_ticket_url + '?' + req)
+    support_site_url = hasattr(settings, 'SUPPORT_SITE_URL') and settings.SUPPORT_SITE_URL or 'http://code.pyerp.cn'
+    return HttpResponseRedirect(support_site_url + '/newticket?' + req)
 
