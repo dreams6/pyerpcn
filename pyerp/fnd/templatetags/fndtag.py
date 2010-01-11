@@ -33,11 +33,13 @@ def fnd_show_resp(resp_id):
             l_class = "mlink" 
         menu_html_str = menu_html_str + ("""<tr>
     <td><img src="%simages/t.gif" width="4"></td>
-    <td vAlign="top"><img height="16" src="%simages/resp_folder.gif" width="16" border="0"></td>
+    <td vAlign="top"><a href="%smain/%s/"><img height="16" src="%simages/resp_folder.gif" width="16" border="0"></a></td>
     <td><img src="%simages/t.gif" width="4"></td>
     <td width="100%%"><a class="%s" href="%smain/%s/">%s</a></td>
   </tr>
   """ % (settings.FND_MEDIA_PREFIX, 
+         fnd_global.context_prefix + settings.FND_USER_SITE_PREFIX, 
+         ur.resp.id, 
          settings.FND_MEDIA_PREFIX, 
          settings.FND_MEDIA_PREFIX, 
          l_class, 
