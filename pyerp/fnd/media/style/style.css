@@ -1,29 +1,92 @@
-
-
-body {
-  font-size: 95%; 
-  color: black; 
-  font-family: arial, geneva, helvetica, sans-serif; 
-  background-color: white
-  
-  
+body { 
+  background: #fff; 
+  color: #000; 
+  margin: 10px; 
+  padding: 0; 
+  font-size:12px;
 }
 
-/*
-td {
-  font-size: 95%;
-  color: black;
-  font-family: arial, geneva, helvetica, sans-serif;
-  background-color: white
+/* Link styles */
+:link, :visited {
+ text-decoration: none;
+ color: #b00;
+ border-bottom: 1px dotted #bbb;
 }
+:link:hover, :visited:hover { background-color: #eee; color: #555 }
+h1 :link, h1 :visited ,h2 :link, h2 :visited, h3 :link, h3 :visited,
+h4 :link, h4 :visited, h5 :link, h5 :visited, h6 :link, h6 :visited {
+ color: inherit;
+}
+.rawlink { border-bottom: none }
 
-th {
-  font-size: 95%;
-  color: black;
-  font-family: arial, geneva, helvetica, sans-serif;
-  /*background-color: white*/
+
+/* Forms */
+input, textarea, select { margin: 2px }
+input, select { vertical-align: middle }
+input[type=button], input[type=submit], input[type=reset] { background: #eee; color: #222; border: 1px outset #ccc; padding: .1em .5em;}
+input[type=button]:hover, input[type=submit]:hover, input[type=reset]:hover { background: #ccb;}
+input[type=button][disabled], input[type=submit][disabled],
+input[type=reset][disabled] { background: #f6f6f6; border-style: solid; color: #999;}
+input[type=text], input.textwidget, textarea { border: 1px solid #d7d7d7 }
+input[type=text], input.textwidget { padding: .25em .5em }
+input[type=text]:focus, input.textwidget:focus, textarea:focus { border: 1px solid #886; }
+option { border-bottom: 1px dotted #d7d7d7 }
+fieldset { border: 1px solid #d7d7d7; padding: .5em; margin: 1em 0 }
+form p.hint, form span.hint { color: #666; font-size: 100%; font-style: italic; margin: .5em 0; padding-left: 1em; }
+fieldset.iefix { background: transparent; border: none; padding: 0; margin: 0;}
+* html fieldset.iefix { width: 98% }
+fieldset.iefix p { margin: 0 }
+legend { color: #999; padding: 0 .25em; font-size: 90%; font-weight: bold }
+label.disabled { color: #d7d7d7 }
+.buttons { margin: .5em .5em .5em 0 }
+.buttons form, .buttons form div { display: inline }
+.buttons input { margin: 1em .5em .1em 0 }
+.inlinebuttons input { font-size: 100%; border-width: 1px; border-style: dotted; margin: 0 .1em; padding: 0.1em; background: none;}
+/* Header */
+#header hr { display: none }
+#header h1 { margin: 1.5em 0 -1.5em; }
+#header img { border: none; margin: 0 0 -3em }
+#header :link, #header :visited, #header :link:hover, #header :visited:hover {
+ background: transparent;
+ color: #555;
+ margin-bottom: 2px;
+ border: none;
 }
-*/
+#header h1 :link:hover, #header h1 :visited:hover { color: #000 }
+
+/* Quick search */
+#search {
+ clear: both;
+ font-size: 10px;
+ height: 2.2em;
+ margin: 0 0 1em;
+ text-align: right;
+}
+#search input { font-size: 12px }
+#search label { display: none }
+
+
+/* Navigation */
+.nav h2, .nav hr { display: none }
+.nav ul { 
+  font-size: 12px; 
+  list-style: none; 
+  margin: 0; 
+  text-align: right;
+}
+.nav li {
+  border-right: 1px solid #d7d7d7;
+  display: inline;
+  padding: 0 .75em;
+  white-space: nowrap;
+}
+.nav li.first { border-left: none }
+.nav li.last { border-right: none }
+
+
+
+
+
 menu {
   padding-left: 1em; margin-left: 1em; white-space: nowrap
 }

@@ -5,7 +5,7 @@
 
 <html>
 <head>
-<title>{% block title %}pyerp{% endblock %}</title>
+<title>{% block title %}Pyerp{% endblock %}</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 <meta content="pyerp" name="author"/>
 <link rel="icon" href="{{ fnd_media_prefix }}images/pyerp.ico" type="image/x-icon" />
@@ -25,35 +25,35 @@
 <body>
 <!-- start Header -->
 {% block header %}
-<table cellspacing="0" width="100%" border="0">
-  <tbody>
-  <tr><!-- site banner and project image -->
-    <td valign="top" align="left">
-      <a href="{{ fnd_user_site_prefix }}main/"><img src="{{ fnd_media_prefix }}images/logo.png" align="left" border="0"/></a>
-    </td>
-    <td valign="top" align="right">
+<div id="banner">
+  <div id="header">
+    <a id="logo" href="{{ fnd_user_site_prefix }}main/"><img src="{{ fnd_media_prefix }}images/logo.png" alt="导航菜单"/></a>
+  </div>
+  <div id="metanav" class="nav" style="vertical-align: top;">
+    <ul>
     {% if fnd_global.user.is_authenticated %}
-      <span class="x2m">用户ID: {{ fnd_global.user.username }}
-      {% if last_login %}
-        上次登录时间:{{ last_login }}
-      {% endif %}
-      <a title="首页" href="{{ fnd_pub_site_prefix }}">首页</a>
-      <a title="导航菜单" href="{{ fnd_user_site_prefix }}main/">导航菜单</a>
-      <a title="退出" href="{{ fnd_pub_site_prefix }}logout/">退出</a></span>
-    {% else %}<span class="x2m">
-      <a title="login" href="{{ fnd_pub_site_prefix }}login/">登录</a></span>
+      <li class="first">您好 {{ fnd_global.user.username }}{% if last_login %} 上次登录时间:{{ last_login }}{% endif %}</li>
+      <li><a title="首页" href="{{ fnd_pub_site_prefix }}">首页</a></li>
+      <li><a title="导航菜单" href="{{ fnd_user_site_prefix }}main/">导航菜单</a></li>
+      <li class="last"><a href="{{ fnd_pub_site_prefix }}logout/" title="退出" >退出</a></li>
+    {% else %}
+      <li class="first last"><a title="login" href="{{ fnd_pub_site_prefix }}login/">登录</a></span></li>
     {% endif %}
-    </td>
-  </tr>
-  <tr>
-    <td colspan="2">
-      <hr noshade="true" size="1"/>
-    </td>
-  </tr>
-  </tbody>
-</table>
+    </ul>
+  </div>
+  <form id="search" action="{{ fnd_user_site_prefix }}search/" method="get">
+  {% if fnd_global.user.is_authenticated %}
+    <div>
+      <label for="proj-search">Search:</label>
+      <input type="text" id="proj-search" name="q" size="18" value="" />
+      <input type="submit" value="搜索" />
+    </div>
+  {% endif %}
+  </form>
+</div>
 {% endblock %}
 <!-- end Header -->
+<hr noshade="true" size="1"/>
 
 {% block main %}
 <table cellspacing="4" width="100%" border="0">
@@ -89,15 +89,10 @@
 </table>
 {% endblock %}
 
+<hr noshade="true" size="1"/>
 
 <table cellspacing="0" width="100%" border="0">
 <tbody>
-  <tr>
-    <td>
-      <hr noshade="true" size="1"/>
-    </td>
-  </tr>
-
   <tr>
     <td>
 <table cellpadding="0" cellspacing="0" border="0" width="100%" align="center">
