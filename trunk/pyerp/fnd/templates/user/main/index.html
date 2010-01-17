@@ -28,12 +28,20 @@
                   <th scope="col" class="mlistheader"><span class="x23">发送</span></th>
                   <th scope="col" class="mlistheader"><span class="x24">状态</span></th>
                 </tr>
+{% if not new_messages %}
                 <tr>
-                  <td class="x1l x4x">暂时没有收到的通知。</td>
-                  <td class="x1l x4x"><br></td>
-                  <td class="x1l x4x" nowrap><br></td>
-                  <td class="x1l x4x"><br></td>
+                  <td class="x1l x4x" colspan="4"><em>暂时没有收到的通知。</em></td>
                 </tr>
+{% else %}
+{% for message in new_messages %}
+                <tr>
+                  <td class="x1l x4x">{{message.sender.username}}</td>
+                  <td class="x1l x4x"><a href="{{ fnd_user_site_prefix }}mailbox/view/{{ message.id }}/">{{ message.subject }}</a></td>
+                  <td class="x1l x4x">{{ message.sent_at }}</td>
+                  <td class="x1l x4x"></td>
+                </tr>
+{% endfor %}
+{% endif %}
               </table>
               <table border="0" cellspacing="0" cellpadding="0">
                 <tr>
