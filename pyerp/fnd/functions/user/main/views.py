@@ -6,6 +6,7 @@ from pyerp.fnd.shortcuts import fnd_render_to_response
 from pyerp.fnd.gbl import fnd_global
 from pyerp.fnd.profile import fnd_profile
 from pyerp.fnd.utils.version import get_svn_revision, get_version
+from pyerp.fnd.models import MailBox
 
 __svnid__ = '$Id$'
 __svn__ = get_svn_revision(__name__)
@@ -18,10 +19,15 @@ def display_main(request, resp_id=None):
     if user_home_page:
         return HttpResponseRedirect(fnd_global.context_prefix + settings.FND_USER_SITE_PREFIX + user_home_page)
     
+    new_messages = MailBox.objects.filter(recipient=fnd_global.user, 
+                                       read_at__isnull=True, 
+                                       recipient_deleted_at__isnull=True)[:5]
+
     context = {
         'app_path': request.get_full_path(),
         'resp_id': resp_id,
         'last_login': request.session.pop('last_login', None),  # 取出最后登录时间,显示在画面上
+        'new_messages': new_messages,
     }
     return fnd_render_to_response('user/main/index.html', context, request)
 
