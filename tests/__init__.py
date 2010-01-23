@@ -24,6 +24,8 @@ def suite():
     suite.addTest(unittest.makeSuite(version.VersionTestCase, 'test'))
     from tests.fnd import management
     suite.addTest(unittest.makeSuite(management.ManagementTestCase, 'test'))
+    from tests.fnd.functions.pub import login
+    suite.addTest(unittest.makeSuite(login.LoginTestCase, 'test'))
 
     return suite
 
