@@ -3,23 +3,12 @@
 import time
 
 from django.conf import settings
-from django.utils.cache import patch_vary_headers
-from django.utils.http import cookie_date
 from pyerp.fnd.gbl import fnd_global
 from pyerp.fnd.utils.version import get_svn_revision, get_version
 
 __svnid__ = '$Id$'
 __svn__ = get_svn_revision(__name__)
 
-
-#import gbl as fnd_global                    # TODO:这种引用方法和上边的方法存在着fnd_global(这个程序中设定的值，在其他的地方(sites.py)取得不到)下的变量不同地址的问题，需要找到原因
-
-class LazyUser(object):
-    def __get__(self, request, obj_type=None):
-        if not hasattr(request, '_cached_user'):
-            from auth import get_user
-            request._cached_user = get_user(request)
-        return request._cached_user
 
 class FndGlobalMiddleware(object):
 
