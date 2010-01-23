@@ -56,7 +56,7 @@ class FndGlobalMiddleware(object):
             fnd_global.set_attr("site_prefix", view_kwargs['site_prefix'])
 
         # 处理用户语言
-        if not fnd_global.session.has_key('language'):
+        if not fnd_global.session.has_key('language') and request.META.has_key('HTTP_ACCEPT_LANGUAGE'):
             fnd_global.session['language'] = request.META['HTTP_ACCEPT_LANGUAGE']
 
     def process_exception(self, request, exception):
