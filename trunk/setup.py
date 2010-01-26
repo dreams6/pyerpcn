@@ -19,7 +19,7 @@ def find_pyerp_data():
                 data_files.append(os.path.join(dirpath[len(src_dir)+1:], f))
     return data_files
 
-version = __import__('pyerp').__version__
+version = '0.0.1' #__import__('pyerp').__version__
 
 setup(
     name = 'Pyerp', 
