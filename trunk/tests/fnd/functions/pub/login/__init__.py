@@ -16,7 +16,12 @@ class LoginTestCase(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def test_fnd_init(self):
+    def test_show_login(self):
+        c = Client()
+        response = c.get('/' + settings.FND_PUB_SITE_PREFIX + 'login/')
+        self.assertEquals(200, response.status_code)
+
+    def test_login(self):
         c = Client()
         c.login(username='u0', password='test')
         response = c.get('/' + settings.FND_USER_SITE_PREFIX + 'main/')
