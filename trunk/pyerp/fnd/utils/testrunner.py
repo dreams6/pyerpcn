@@ -31,6 +31,9 @@ class pyerpunittest(b_unittest):
     def finalize_options(self):
         b_unittest.finalize_options(self)
 
+    def _import(self, name, globals=None, locals=None, fromlist=[]):
+        return apply(self.realImport, (name, globals, locals, fromlist))
+
     def run_tests(self):
 
         import os
@@ -46,7 +49,12 @@ class pyerpunittest(b_unittest):
         from django.db import connection
         connection.creation.create_test_db(1, autoclobber=False)
         # execute test suites
+        
+        import __builtin__
+        self.realImport = __builtin__.__import__
+        __builtin__.__import__ = self._import
         b_unittest.run_tests(self)
+        __builtin__.__import__ = self.realImport
 
         connection.creation.destroy_test_db(old_name, 1)
         teardown_test_environment()
