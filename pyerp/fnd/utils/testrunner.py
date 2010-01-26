@@ -3,6 +3,27 @@
 
 from bitten.util.testrunner import unittest as b_unittest
 
+import __builtin__
+import sys
+class RollbackImporter:
+    def __init__(self):
+        "Creates an instance and installs as the global importer"
+        self.previousModules = sys.modules.copy()
+        self.realImport = __builtin__.__import__
+        __builtin__.__import__ = self._import
+        self.newModules = {}
+        
+    def _import(self, name, globals=None, locals=None, fromlist=[]):
+        result = apply(self.realImport, (name, globals, locals, fromlist))
+        self.newModules[name] = 1
+        return result
+        
+    def uninstall(self):
+        for modname in self.newModules.keys():
+            if not self.previousModules.has_key(modname) and modname in sys.modules and modname.startswith('pyerp'):
+                # Force reload when modname next imported
+                del(sys.modules[modname])
+        __builtin__.__import__ = self.realImport
 
 
 class pyerpunittest(b_unittest):
@@ -31,11 +52,9 @@ class pyerpunittest(b_unittest):
     def finalize_options(self):
         b_unittest.finalize_options(self)
 
-    def _import(self, name, globals=None, locals=None, fromlist=[]):
-        return apply(self.realImport, (name, globals, locals, fromlist))
-
     def run_tests(self):
-
+        r_imp = RollbackImporter()
+        
         import os
         os.environ['DJANGO_SETTINGS_MODULE'] = self.django_settings
 
@@ -49,12 +68,8 @@ class pyerpunittest(b_unittest):
         from django.db import connection
         connection.creation.create_test_db(1, autoclobber=False)
         # execute test suites
-        
-        import __builtin__
-        self.realImport = __builtin__.__import__
-        __builtin__.__import__ = self._import
+        r_imp.uninstall()
         b_unittest.run_tests(self)
-        __builtin__.__import__ = self.realImport
 
         connection.creation.destroy_test_db(old_name, 1)
         teardown_test_environment()
