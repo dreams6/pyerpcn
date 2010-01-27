@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*- 
 
-from models import LookUpNode
-from models import MessageResource
+from pyerp.fnd.models import LookUpNode
+from pyerp.fnd.models import MessageResource
 from pyerp.fnd.gbl import fnd_global
 from pyerp.fnd.utils.version import get_svn_revision, get_version
 
@@ -17,10 +17,6 @@ __svn__ = get_svn_revision(__name__)
 #
 def lookupmeaning(**arg):
   u"""\
-    �?、指定されたIDで、node.meaningを取得する�??
-    ②、指定された親IDと名前で、node.meaningを取得する�??
-    ③、指定されたパスで、node.meaningを取得する�??
-    ④、指定されたパスと名前で、node.meaningを取得する�??
     Arguments:
       id     - 
       path - 
