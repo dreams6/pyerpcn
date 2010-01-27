@@ -52,7 +52,7 @@ setup(
     ],
     entry_points = {
         'distutils.commands': [
-            'pyerpunittest = pyerp.fnd.utils.testrunner:pyerpunittest'
+            'pyerpunittest = tests.testrunner:pyerpunittest'
         ],
     },
   )
