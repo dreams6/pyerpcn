@@ -19,11 +19,11 @@ def find_pyerp_data():
                 data_files.append(os.path.join(dirpath[len(src_dir)+1:], f))
     return data_files
 
-version = __import__('pyerp').__version__
+
 
 setup(
     name = 'Pyerp', 
-    version = version, 
+    version = __import__('pyerp').__version__, 
     url = 'http://www.pyerp.cn/', 
     download_url = 'http://www.pyerp.cn/download/',
     author = 'Pyerp Software', 
@@ -35,7 +35,7 @@ setup(
     license = 'GPLv3', 
     classifiers = [ 
         'Environment :: Web Environment', 
-        'Framework :: Pyerp ' + version, 
+        'Framework :: Pyerp ' + __import__('pyerp').__version__, 
         'Intended Audience :: Developers', 
         'License :: OSI Approved ::GPLv3 License', 
         'Operating System :: OS Independent', 
