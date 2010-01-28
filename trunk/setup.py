@@ -19,7 +19,8 @@ def find_pyerp_data():
                 data_files.append(os.path.join(dirpath[len(src_dir)+1:], f))
     return data_files
 
-version = '0.0.1-dev' # __import__('pyerp').__version__
+
+version = (len(sys.argv)>1 and sys.argv[1]!='pyerpunittest' and __import__('pyerp').__version__) or 'internal-test'
 
 setup(
     name = 'Pyerp', 
