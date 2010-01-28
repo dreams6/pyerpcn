@@ -7,7 +7,7 @@ from datetime import datetime, date, timedelta
 
 from django.db.models import get_models, signals
 
-import pyerp.fnd.lookup as fnd_lookup
+import pyerp.fnd.api.lookup as fnd_lookup
 import pyerp.fnd.function as fnd_function
 import pyerp.fnd.menu as fnd_menu
 import pyerp.fnd.responsibility as fnd_resp
@@ -27,24 +27,24 @@ def fnd_init():
     fnd_global.enter_global_management(1)
 
     # LOOKUP=================================
-    fnd_node = fnd_lookup.add("FND", "Message Type")
-    node = fnd_lookup.add("MSG_TYPE", "Message Type", "Message Type" , fnd_node.id)
-    fnd_lookup.add("E"        , "Error"            , "Error."        , node.id)
-    fnd_lookup.add("W"        , "Warning"          , "Warning."      , node.id)
-    fnd_lookup.add("N"        , "Note"             , "Note."         , node.id)
-    fnd_lookup.add("Q"        , "Question"         , "Question."     , node.id)
-    fnd_lookup.add("H"        , "Hint"             , "Hint."         , node.id)
-    fnd_lookup.add("T"        , "Tip"              , "Tip."          , node.id)
-    fnd_lookup.add("P"        , "Prompt"           , "Prompt."       , node.id)
-    fnd_lookup.add("M"        , "Menu"             , "Menu."         , node.id)
-    fnd_lookup.add("O"        , "Other"            , "Other."        , node.id)
-    node = fnd_lookup.add("MSG_CATEGORY", "Message Category", "Message Category" , fnd_node.id)
-    fnd_lookup.add("SYS"      , "System"           , "System."       , node.id)
-    fnd_lookup.add("USR"      , "User"             , "User."         , node.id)
-    fnd_lookup.add("PRO"      , "Product"          , "Product."      , node.id)
-    fnd_lookup.add("ERR"      , "Error"            , "Error."        , node.id)
-    fnd_lookup.add("SEC"      , "Security"         , "Security."     , node.id)
-    fnd_lookup.add("APP"      , "Application"      , "Application."  , node.id)
+    fnd_node = fnd_lookup.addlookupnode("FND", "Message Type")
+    node = fnd_lookup.addlookupnode("MSG_TYPE", "Message Type", "Message Type" , fnd_node.id)
+    fnd_lookup.addlookupnode("E"        , "Error"            , "Error."        , node.id)
+    fnd_lookup.addlookupnode("W"        , "Warning"          , "Warning."      , node.id)
+    fnd_lookup.addlookupnode("N"        , "Note"             , "Note."         , node.id)
+    fnd_lookup.addlookupnode("Q"        , "Question"         , "Question."     , node.id)
+    fnd_lookup.addlookupnode("H"        , "Hint"             , "Hint."         , node.id)
+    fnd_lookup.addlookupnode("T"        , "Tip"              , "Tip."          , node.id)
+    fnd_lookup.addlookupnode("P"        , "Prompt"           , "Prompt."       , node.id)
+    fnd_lookup.addlookupnode("M"        , "Menu"             , "Menu."         , node.id)
+    fnd_lookup.addlookupnode("O"        , "Other"            , "Other."        , node.id)
+    node = fnd_lookup.addlookupnode("MSG_CATEGORY", "Message Category", "Message Category" , fnd_node.id)
+    fnd_lookup.addlookupnode("SYS"      , "System"           , "System."       , node.id)
+    fnd_lookup.addlookupnode("USR"      , "User"             , "User."         , node.id)
+    fnd_lookup.addlookupnode("PRO"      , "Product"          , "Product."      , node.id)
+    fnd_lookup.addlookupnode("ERR"      , "Error"            , "Error."        , node.id)
+    fnd_lookup.addlookupnode("SEC"      , "Security"         , "Security."     , node.id)
+    fnd_lookup.addlookupnode("APP"      , "Application"      , "Application."  , node.id)
 
     # FUNCTION=================================
     fun1 = fnd_function.add("Application", "Applications Form", "pyerp.survey"                     , None)
