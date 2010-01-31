@@ -11,6 +11,16 @@ class VersionTestCase(unittest.TestCase):
     def tearDown(self):
         pass
 
+    def test_parse_svn_id(self):
+        from pyerp.fnd.utils import version
+        _svn = version._parse_svn_id('$Id$')
+        self.assertNotEqual(_svn[0], None)
+        self.assertEqual(len(_svn), 3)
+        
+        _svn = version._parse_svn_id('')
+        self.assertEqual(_svn[0], None)
+        self.assertEqual(len(_svn), 3)
+
     def test_get_version(self):
         from pyerp.fnd.utils import version
         ver = version.get_version(0, 0, 1, 'alpha', ('9', '2010-01-08', 'yu.peng'))
