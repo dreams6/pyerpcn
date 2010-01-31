@@ -25,20 +25,6 @@ __svn__ = get_svn_revision(__name__)
 
 
 
-#
-#
-#
-def validate_login():
-  pass
-
-#
-#
-#
-def change_pwd():
-  pass
-
-
-
 def get_md5_hexdigest(raw_password):
     """
     Returns a string of the hexdigest of the given plaintext password and salt
@@ -85,9 +71,3 @@ def addresp(user, resp, description):
     # ==============================
     userresp.save()
     return userresp
-
-
-
-
-
-
