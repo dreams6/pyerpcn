@@ -14,12 +14,12 @@ class VersionTestCase(unittest.TestCase):
 
     def test_get_version(self):
         from pyerp.fnd.utils import version
-        ver = version.get_version(0, 0, 1, 'alpha', 0)
-        self.assertEquals('0.0.1-pre-alpha', ver)
-        ver = version.get_version(0, 0, 1, 'final', 0)
+        ver = version.get_version(0, 0, 1, 'alpha', ('9', '2010-01-08', 'yu.peng'))
+        self.assertEquals('0.0.1-alpha-r9', ver)
+        ver = version.get_version(0, 0, 1, 'final', ('10', '2010-01-08', 'yu.peng'))
         self.assertEquals('0.0.1-final', ver)
-        ver = version.get_version(0, 0, 1, 'dev', 0)
-        self.assertEquals('0.0.1-dev-0', ver)
+        ver = version.get_version(0, 0, 1, 'release', ('30', '2010-01-08', 'yu.peng'))
+        self.assertEquals('0.0.1-r30', ver)
 
     def test_get_svn_revision(self):
         from pyerp.fnd.utils import version
@@ -27,9 +27,5 @@ class VersionTestCase(unittest.TestCase):
         self.assertEquals(len(_svn_), 3)
         from tests.fnd import utils
         _svn_ = version.get_svn_revision(utils.__name__)
-        print _svn_
         self.assertEquals(len(_svn_), 3)
-        
-        
-
 
