@@ -25,12 +25,26 @@ def suite():
     suite.addTest(unittest.makeSuite(version.VersionTestCase, 'test'))
     from tests.fnd import management
     suite.addTest(unittest.makeSuite(management.ManagementTestCase, 'test'))
+    
     from tests.fnd.functions.pub import login
     suite.addTest(unittest.makeSuite(login.LoginTestCase, 'test'))
     from tests.fnd.functions.pub import index
     suite.addTest(unittest.makeSuite(index.IndexTestCase, 'test'))
+    
     from tests.fnd.functions.user import main
     suite.addTest(unittest.makeSuite(main.MainTestCase, 'test'))
+    from tests.fnd.functions.user import mailbox
+    suite.addTest(unittest.makeSuite(mailbox.MailboxTestCase, 'test'))
+    from tests.fnd.functions.user import changepwd
+    suite.addTest(unittest.makeSuite(changepwd.ChangePwdTestCase, 'test'))
+
+    from tests.fnd.functions.resp import executable
+    suite.addTest(unittest.makeSuite(executable.ExecutableTestCase, 'test'))
+    from tests.fnd.functions.resp import menu
+    suite.addTest(unittest.makeSuite(menu.MenuTestCase, 'test'))
+    from tests.fnd.functions.resp import profile
+    suite.addTest(unittest.makeSuite(profile.ProfileTestCase, 'test'))
+
 
     return suite
 
