@@ -29,6 +29,8 @@ def suite():
     suite.addTest(unittest.makeSuite(login.LoginTestCase, 'test'))
     from tests.fnd.functions.pub import index
     suite.addTest(unittest.makeSuite(index.IndexTestCase, 'test'))
+    from tests.fnd.functions.user import main
+    suite.addTest(unittest.makeSuite(main.MainTestCase, 'test'))
 
     return suite
 
