@@ -13,15 +13,11 @@ __svnid__ = '$Id$'
 __svn__ = get_svn_revision(__name__)
 
 
-def do_logout(request, next_page=None):
+def do_logout(request):
     "Logs out the user and displays 'You are logged out' message."
     from pyerp.fnd.auth import logout
     logout(request)
-    if next_page is None:
-        return HttpResponseRedirect(fnd_global.context_prefix + fnd_global.site_prefix)
-    else:
-        # Redirect to this page until the session has been cleared.
-        return HttpResponseRedirect(next_page)
+    return HttpResponseRedirect(fnd_global.context_prefix + fnd_global.site_prefix)
 
 def logout(request):
     return do_logout(request)
