@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+__svnid__ = '$Id$'
 
 
 from bitten.util.testrunner import unittest as b_unittest

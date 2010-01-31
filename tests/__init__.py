@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+__svnid__ = '$Id$'
 
 import unittest
 
@@ -26,6 +27,8 @@ def suite():
     suite.addTest(unittest.makeSuite(management.ManagementTestCase, 'test'))
     from tests.fnd.functions.pub import login
     suite.addTest(unittest.makeSuite(login.LoginTestCase, 'test'))
+    from tests.fnd.functions.pub import index
+    suite.addTest(unittest.makeSuite(index.IndexTestCase, 'test'))
 
     return suite
 

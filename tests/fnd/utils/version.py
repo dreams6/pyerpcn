@@ -1,8 +1,7 @@
 # -*- coding: utf-8 -*- 
+__svnid__ = '$Id$'
 
 import unittest
-
-__svnid__ = '$Id$'
 
 class VersionTestCase(unittest.TestCase):
 
