@@ -340,47 +340,6 @@ class Responsibility(models.Model):
     last_updated_by    = models.IntegerField(null=False)
     last_updated_date  = models.DateTimeField(auto_now=True)
     # ========================================================
-
-
-
-#
-#
-#
-def get_hexdigest(algorithm, salt, raw_password):
-    """
-    Returns a string of the hexdigest of the given plaintext password and salt
-    using the given algorithm ('md5', 'sha1' or 'crypt').
-    """
-    raw_password, salt = smart_str(raw_password), smart_str(salt)
-    if algorithm == 'crypt':
-        try:
-            import crypt
-        except ImportError:
-            raise ValueError('"crypt" password algorithm not supported in this environment')
-        return crypt.crypt(raw_password, salt)
-    # The rest of the supported algorithms are supported by hashlib, but
-    # hashlib is only available in Python 2.5.
-    try:
-        import hashlib
-    except ImportError:
-        if algorithm == 'md5':
-            import md5
-            return md5.new(salt + raw_password).hexdigest()
-        elif algorithm == 'sha1':
-            import sha
-            return sha.new(salt + raw_password).hexdigest()
-    else:
-        if algorithm == 'md5':
-            return hashlib.md5(salt + raw_password).hexdigest()
-        elif algorithm == 'sha1':
-            return hashlib.sha1(salt + raw_password).hexdigest()
-    raise ValueError("Got unknown password algorithm type in password.")
-
-
-
-
-
-
 #
 #
 #
@@ -404,27 +363,7 @@ class User(dj_auth_models.User):
     last_updated_by    = models.IntegerField(null=False)
     last_updated_date  = models.DateTimeField(auto_now=True)
     # ========================================================
-
-
-#
-#
-class UserResp(models.Model):
-    user               = models.ForeignKey(User, related_name="user")
-    resp               = models.ForeignKey(Responsibility, related_name="resp")
-    description        = models.CharField(max_length=255)  
-    start_date_active  = models.DateField(default=date.today)
-    end_date_active    = models.DateField(null=True)
-    # ========================================================
-    created_by         = models.IntegerField(null=False)
-    creation_date      = models.DateTimeField(auto_now_add=True)
-    last_updated_by    = models.IntegerField(null=False)
-    last_updated_date  = models.DateTimeField(auto_now=True)
-    # ========================================================
-    class Meta:
-        unique_together = (
-                ("user", "resp"),
-                )
-
+    responsibilities   = models.ManyToManyField(Responsibility)
 
 
 #=============================================== concurrent

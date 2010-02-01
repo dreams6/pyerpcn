@@ -69,15 +69,12 @@ def logout(request):
     dj_auth.logout(request)
 
 def has_resp(request, resp):
+    """判断用户是否有指定的职责。
     """
-    判断用户是否有指定的职责。
-    
-    """
-    from pyerp.fnd.models import UserResp
+    from pyerp.fnd.models import Responsibility
     try:
-        UserResp.objects.get(user=request.user, resp=resp)
-        return resp 
-    except UserResp.DoesNotExist:
+        return request.user.responsibilities.get(pk=resp.id)
+    except Responsibility.DoesNotExist:
         return None
 
 def fun_in_resp(func, resp, p_menu=None):

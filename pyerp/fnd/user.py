@@ -61,13 +61,4 @@ def add(username, password, description, email, pwd_expiration_type=0, pwd_lifes
     return user
 
 def addresp(user, resp, description):
-    userresp = models.UserResp()
-    userresp.user               = user
-    userresp.resp               = resp
-    userresp.description        = description
-    # ==============================
-    userresp.created_by = fnd_global.user_id
-    userresp.last_updated_by = fnd_global.user_id
-    # ==============================
-    userresp.save()
-    return userresp
+    user.responsibilities.add(resp)

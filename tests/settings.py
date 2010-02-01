@@ -22,17 +22,21 @@ EMAIL_HOST_PASSWORD="xxxx"
 DEFAULT_FROM_EMAIL="demo@pyerp.cn"
 SERVER_EMAIL="demo@pyerp.cn"
 
-# for server unit testing
-DATABASE_ENGINE = 'sqlite3'      # 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
-TEST_DATABASE_NAME = 'build/pyerp_testing.db' # Or path to database file if using sqlite3.
 
-# for pc unit testing
-#DATABASE_ENGINE = 'mysql'
-#TEST_DATABASE_NAME = 'pyerpcn_testing'
-#DATABASE_USER = 'root'
-#DATABASE_PASSWORD = ''
-#DATABASE_HOST = ''
-#DATABASE_PORT = ''
+import sys
+if sys.platform == 'win32':
+    # for pc unit testing
+    DATABASE_ENGINE = 'mysql'
+    TEST_DATABASE_NAME = 'pyerpcn_testing'
+    DATABASE_USER = 'root'
+    DATABASE_PASSWORD = ''
+    DATABASE_HOST = ''
+    DATABASE_PORT = ''
+else:
+    # for server unit testing
+    DATABASE_ENGINE = 'sqlite3'      # 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
+    TEST_DATABASE_NAME = 'build/pyerp_testing.db' # Or path to database file if using sqlite3.
+
 
 # Strings used to set the character set and collation order for the test
 # database. These values are passed literally to the server, so they are
