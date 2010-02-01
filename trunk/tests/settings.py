@@ -22,11 +22,24 @@ EMAIL_HOST_PASSWORD="xxxx"
 DEFAULT_FROM_EMAIL="demo@pyerp.cn"
 SERVER_EMAIL="demo@pyerp.cn"
 
-#
-# Database connection settings
-#
+# for server unit testing
 DATABASE_ENGINE = 'sqlite3'      # 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
-TEST_DATABASE_NAME = 'build/pyerp.db'     # Or path to database file if using sqlite3.
+TEST_DATABASE_NAME = 'build/pyerp_testing.db' # Or path to database file if using sqlite3.
+
+# for pc unit testing
+#DATABASE_ENGINE = 'mysql'
+#TEST_DATABASE_NAME = 'pyerpcn_testing'
+#DATABASE_USER = 'root'
+#DATABASE_PASSWORD = ''
+#DATABASE_HOST = ''
+#DATABASE_PORT = ''
+
+# Strings used to set the character set and collation order for the test
+# database. These values are passed literally to the server, so they are
+# backend-dependent. If None, no special settings are sent 
+# (system defaults are used)
+TEST_DATABASE_CHARSET = 'utf8'
+# TEST_DATABASE_COLLATION = None
 
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
