@@ -1,5 +1,5 @@
 body { 
-  background-color: white 
+  background-color: white; 
   color: #000; 
   margin: 10px; 
   padding: 0; 
@@ -104,7 +104,11 @@ h4 {
 }
 
 .navright {
-  border-right: #cccccc 0px solid; border-top: #cccccc 0px solid; padding-left: 5px; border-left: #cccccc 1px solid; border-bottom: #cccccc 0px solid
+  border-right: #cccccc 0px solid; 
+  border-top: #cccccc 0px solid; 
+  padding-left: 5px; 
+  border-left: #cccccc 1px solid; 
+  border-bottom: #cccccc 0px solid
 }
 
 .section-content {
