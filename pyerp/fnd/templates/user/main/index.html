@@ -4,112 +4,106 @@
 
 {% block main %}
 {% load fndtag %}
-<form name="DefaultFormName" style="margin:0px" method="POST" action="/OA_HTML/OA.jsp?&">
-  <table border="0" cellspacing="0" cellpadding="0"  width="100%">
-    <tr>
-      <td valign="top" width="66%">
-        <table width="100%" border="0" cellspacing="0" cellpadding="0">
-          <tr>
-            <td class="stitle">
-              通知列表
-            </td>
-          </tr>
-          <tr>
-            <td align="right" class="floatnav">
-              <a href="{{ fnd_user_site_prefix }}mailbox/">查 看 全 部 通 知</a>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <table cellpadding="1" cellspacing="0" border="0" width="100%">
-                <tr>
-                  <th scope="col" class="mlistheader"><span class="x24">发送人</span></th>
-                  <th scope="col" class="mlistheader"><span class="x23">主题</span></th>
-                  <th scope="col" class="mlistheader"><span class="x23">发送</span></th>
-                  <th scope="col" class="mlistheader"><span class="x24">状态</span></th>
-                </tr>
+<table border="0" cellspacing="0" cellpadding="0"  width="100%" id="main">
+  <tr>
+    <td valign="top" width="66%">
+      <table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td class="stitle">通知列表</td>
+        </tr>
+        <tr>
+          <td align="right" class="floatnav">
+            <a href="{{ fnd_user_site_prefix }}mailbox/">查 看 全 部 通 知</a>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <table cellpadding="1" cellspacing="0" border="0" width="100%">
+              <tr>
+                <th scope="col" class="mlistheader"><span class="x24">发送人</span></th>
+                <th scope="col" class="mlistheader"><span class="x23">主题</span></th>
+                <th scope="col" class="mlistheader"><span class="x23">发送</span></th>
+                <th scope="col" class="mlistheader"><span class="x24">状态</span></th>
+              </tr>
 {% if not new_messages %}
-                <tr>
-                  <td class="x1l x4x" colspan="4"><em>暂时没有收到的通知。</em></td>
-                </tr>
+              <tr>
+                <td class="x1l x4x" colspan="4"><em>暂时没有收到的通知。</em></td>
+              </tr>
 {% else %}
 {% for message in new_messages %}
-                <tr>
-                  <td class="x1l x4x">{{message.sender.username}}</td>
-                  <td class="x1l x4x"><a href="{{ fnd_user_site_prefix }}mailbox/view/{{ message.id }}/">{{ message.subject }}</a></td>
-                  <td class="x1l x4x">{{ message.sent_at }}</td>
-                  <td class="x1l x4x"></td>
-                </tr>
+              <tr>
+                <td class="x1l x4x">{{message.sender.username}}</td>
+                <td class="x1l x4x"><a href="{{ fnd_user_site_prefix }}mailbox/view/{{ message.id }}/">{{ message.subject }}</a></td>
+                <td class="x1l x4x">{{ message.sent_at }}</td>
+                <td class="x1l x4x"></td>
+              </tr>
 {% endfor %}
 {% endif %}
-              </table>
-              <table border="0" cellspacing="0" cellpadding="0">
-                <tr>
-                  <td width="5%"></td>
-                  <td valign="top"></td>
-                </tr>
-              </table>
-            </td>
-          </tr>
-          <tr>
-            <td><img src="{{ fnd_media_prefix }}images/t.gif" width="4"></td>
-          </tr>
-          <tr>
-            <td class="stitle">
-              导航菜单
-            </td>
-          </tr>
-          <tr>
-            <td align="right" class="floatnav">
-              <a href="{{ fnd_user_site_prefix }}mailbox/">编 辑 导 航 菜 单</a>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <table width="100%" border="1" cellspacing="0" cellpadding="0">
-                <tr valign="top">
-                  <td width="40%">
+            </table>
+            <table border="0" cellspacing="0" cellpadding="0">
+              <tr>
+                <td width="5%"></td>
+                <td valign="top"></td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+        <tr>
+          <td><img src="{{ fnd_media_prefix }}images/t.gif" width="4"></td>
+        </tr>
+        <tr>
+          <td class="stitle">导航菜单</td>
+        </tr>
+        <tr>
+          <td align="right" class="floatnav">
+            <a href="{{ fnd_user_site_prefix }}mailbox/">编 辑 导 航 菜 单</a>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <table width="100%" border="1" cellspacing="0" cellpadding="0">
+              <tr valign="top">
+                <td width="40%">
 {% fnd_show_resp resp_id %}
-                  </td>
-                  <td width="60%">
+                </td>
+                <td width="60%">
 {% fnd_show_resp_menu resp_id %}
-                  </td>
-                </tr>
-              </table>
-            </td>
-          </tr>
-        </table>
-      </td>
-      <td></td>
-      <td valign="top" width="34%">
-        <table width="100%" border="0" cellspacing="0" cellpadding="0">
-          <tr>
-            <td class="stitle">收藏夹</td>
-          </tr>
-          <tr>
-            <td align="right" class="floatnav">
-              <a href="{{ fnd_user_site_prefix }}mailbox/">编 辑 收 藏 夹</a>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <table border="0" cellspacing="0" cellpadding="0">
-                <tr>
-                  <td><img src="{{ fnd_media_prefix }}images/t.gif" width="4"></td>
-                  <td valign="top"><a href="javascrip"><img src="{{ fnd_media_prefix }}images/func_item.gif" width="16" height="16" border="0"></a></td>
-                  <td><img src="{{ fnd_media_prefix }}images/t.gif" width="4"></td>
-                  <td width="100%"><a href="javascri" class="mlink">XXX187 个人信息调整(北京)</a></td>
-                </tr>
-              </table>
-            </td>
-          </tr>
-        </table>
-      </td>
-    </tr>
-    <tr>
-      <td><img src="{{ fnd_media_prefix }}images/t.gif" width="4"></td>
-    </tr>
-  </table>
-</form>
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td></td>
+    <td valign="top" width="34%">
+      <table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td class="stitle">收藏夹</td>
+        </tr>
+        <tr>
+          <td align="right" class="floatnav">
+            <a href="{{ fnd_user_site_prefix }}mailbox/">编 辑 收 藏 夹</a>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <table border="0" cellspacing="0" cellpadding="0">
+              <tr>
+                <td><img src="{{ fnd_media_prefix }}images/t.gif" width="4"></td>
+                <td valign="top"><a href="javascrip"><img src="{{ fnd_media_prefix }}images/func_item.gif" width="16" height="16" border="0"></a></td>
+                <td><img src="{{ fnd_media_prefix }}images/t.gif" width="4"></td>
+                <td width="100%"><a href="javascri" class="mlink">XXX187 个人信息调整(北京)</a></td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+  <tr>
+    <td><img src="{{ fnd_media_prefix }}images/t.gif" width="4"></td>
+  </tr>
+</table>
 {% endblock %}
 

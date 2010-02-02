@@ -1,8 +1,5 @@
-{% load fndtag %}
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+{% load fndtag %}<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
-
-<html>
 <head>
 <title>{% block title %}Pyerp{% endblock %}</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
@@ -17,7 +14,29 @@
     var menuElement = $(idstr);
     menuElement.style.display = (menuElement.style.display=="none") ? "" : "none";
   }
-  
+
+$(document).ready(function() {
+  if ($('#main')) {
+    var main_height = $('#main').height();
+    var banner_height = $('#banner').height();
+    var footer_height = $('#footer').height();
+    var window_height = $(window).height();
+    var main_new_height = window_height - (banner_height + footer_height) - 35;
+    $('#main').css('height', main_new_height);
+  }
+});
+
+$(window).resize(function() {
+  if ($('#main')) {
+    var main_height = $('#main').height();
+    var banner_height = $('#banner').height();
+    var footer_height = $('#footer').height();
+    var window_height = $(window).height();
+    var main_new_height = window_height - (banner_height + footer_height) - 35;
+    $('#main').css('height', main_new_height);
+  }
+});
+
 -->
 </script>{% endblock %}
 </head>
@@ -65,7 +84,7 @@
 <!-- end Header -->
 
 {% block main %}
-<table cellspacing="4" width="100%" border="0">
+<table cellspacing="4" width="100%" border="0" id="main">
   <tbody>
   <tr><!-- left side navigation -->
     <td class="navleft" valign="top" nowrap="true" width="14%">
@@ -100,7 +119,7 @@
 
 <hr noshade="true" size="1"/>
 
-<table cellspacing="0" width="100%" border="0">
+<table cellspacing="0" width="100%" border="0" id="footer">
 <tbody>
   <tr>
     <td>
