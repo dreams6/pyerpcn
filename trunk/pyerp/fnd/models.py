@@ -233,9 +233,9 @@ class Function(models.Model):
     package            = models.CharField(max_length=255, null=False)
     paramters          = models.CharField(max_length=255, null=True)
     # ========================================================
-    created_by         = models.IntegerField(null=False)
+    created_by         = models.IntegerField(null=False, default=fnd_global.get_user_id)
     creation_date      = models.DateTimeField(auto_now_add=True)
-    last_updated_by    = models.IntegerField(null=False)
+    last_updated_by    = models.IntegerField(null=False, default=fnd_global.get_user_id)
     last_updated_date  = models.DateTimeField(auto_now=True)
     # ========================================================
 
@@ -298,9 +298,9 @@ class Menu(models.Model):
     #type 
     description        = models.CharField(max_length=255)
     # ========================================================
-    created_by         = models.IntegerField(null=False)
+    created_by         = models.IntegerField(null=False, default=fnd_global.get_user_id)
     creation_date      = models.DateTimeField(auto_now_add=True)
-    last_updated_by    = models.IntegerField(null=False)
+    last_updated_by    = models.IntegerField(null=False, default=fnd_global.get_user_id)
     last_updated_date  = models.DateTimeField(auto_now=True)
     # ========================================================
 
@@ -315,9 +315,9 @@ class MenuItem(models.Model):
     function           = models.ForeignKey(Function, null=True, related_name="function")
     description        = models.CharField(max_length=255)  
     # ========================================================
-    created_by         = models.IntegerField(null=False)
+    created_by         = models.IntegerField(null=False, default=fnd_global.get_user_id)
     creation_date      = models.DateTimeField(auto_now_add=True)
-    last_updated_by    = models.IntegerField(null=False)
+    last_updated_by    = models.IntegerField(null=False, default=fnd_global.get_user_id)
     last_updated_date  = models.DateTimeField(auto_now=True)
     # ========================================================
     class Meta:
@@ -335,9 +335,9 @@ class Responsibility(models.Model):
     start_date_active  = models.DateField(default=date.today)
     end_date_active    = models.DateField(null=True)
     # ========================================================
-    created_by         = models.IntegerField(null=False)
+    created_by         = models.IntegerField(null=False, default=fnd_global.get_user_id)
     creation_date      = models.DateTimeField(auto_now_add=True)
-    last_updated_by    = models.IntegerField(null=False)
+    last_updated_by    = models.IntegerField(null=False, default=fnd_global.get_user_id)
     last_updated_date  = models.DateTimeField(auto_now=True)
     # ========================================================
 #
@@ -358,9 +358,9 @@ class User(dj_auth_models.User):
     end_date_active    = models.DateField(null=True)
     last_login         = models.DateTimeField(default=datetime.now)
     # ========================================================
-    created_by         = models.IntegerField(null=False)
+    created_by         = models.IntegerField(null=False, default=fnd_global.get_user_id)
     creation_date      = models.DateTimeField(auto_now_add=True)
-    last_updated_by    = models.IntegerField(null=False)
+    last_updated_by    = models.IntegerField(null=False, default=fnd_global.get_user_id)
     last_updated_date  = models.DateTimeField(auto_now=True)
     # ========================================================
     responsibilities   = models.ManyToManyField(Responsibility)

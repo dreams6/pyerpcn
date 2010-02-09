@@ -11,7 +11,7 @@ import pyerp.fnd.api.lookup as fnd_lookup
 import pyerp.fnd.function as fnd_function
 import pyerp.fnd.menu as fnd_menu
 import pyerp.fnd.responsibility as fnd_resp
-import pyerp.fnd.user as fnd_user
+import pyerp.fnd.api.user as fnd_user
 from pyerp.fnd import models as fnd_models
 from pyerp.fnd.gbl import fnd_global
 from pyerp.fnd.profile import fnd_profile
@@ -121,22 +121,23 @@ def fnd_init():
 
 
     # USER
-    u0 = fnd_user.add("u0", "test", "Application Developer User", "pyerp_u0@yahoo.cn")
-    fnd_user.addresp(u0, resp, "Application Developer Responsibility")
-    fnd_user.addresp(u0, ad_resp, "System Adminstrator Responsibility")
-    fnd_user.addresp(u0, ak_resp, "Applications Common Master Responsibility")
+    u0 = fnd_user.create_user("u0", "test", "Application Developer User", "pyerp_u0@yahoo.cn")
+    u0.responsibilities.add(resp)            # "Application Developer Responsibility"
+    u0.responsibilities.add(ad_resp)         # "System Adminstrator Responsibility"
+    u0.responsibilities.add(ak_resp)         # "Applications Common Master Responsibility"
 
-    u1 = fnd_user.add("u1", "test", "Application Developer User", "u0@localhost.com")
-    fnd_user.addresp(u1, resp, "Application Developer Responsibility")
 
-    u2 = fnd_user.add("u2", "test", "Application Developer User", "u1@localhost.com", pwd_expiration_type=1, pwd_lifespan=10)
-    fnd_user.addresp(u2, resp, "Application Developer Responsibility")
+    u1 = fnd_user.create_user("u1", "test", "Application Developer User", "u1@localhost.com")
+    u1.responsibilities.add(resp)      # "Application Developer Responsibility"
 
-    u3 = fnd_user.add("u3", "test", "Application Developer User", "u2@localhost.com", pwd_expiration_type=2, pwd_lifespan=3)
-    fnd_user.addresp(u3, resp, "Application Developer Responsibility")
+    u2 = fnd_user.create_user("u2", "test", "Application Developer User", "u2@localhost.com", pwd_expiration_type=1, pwd_lifespan=10)
+    u2.responsibilities.add(resp)            # "Application Developer Responsibility"
 
-    u4 = fnd_user.add("u4", "test", "Application Developer User", "u3@localhost.com", end_date_active=(date.today()-timedelta(days=1)) )
-    fnd_user.addresp(u4, resp, "Application Developer Responsibility")
+    u3 = fnd_user.create_user("u3", "test", "Application Developer User", "u3@localhost.com", pwd_expiration_type=2, pwd_lifespan=3)
+    u3.responsibilities.add(resp)            # "Application Developer Responsibility"
+
+    u4 = fnd_user.create_user("u4", "test", "Application Developer User", "u4localhost.com", end_date_active=(date.today()-timedelta(days=1)) )
+    u4.responsibilities.add(resp)            # "Application Developer Responsibility"
 
     # resp = fnd_resp.add("Application Developer", "Application Developer Responsibility", menu)
     fnd_global.set_attr('user_id', u0.id)
@@ -246,11 +247,7 @@ def fnd_init():
     fm.last_updated_by = fnd_global.user_id
     # ==============================
     fm.save()
-    
 
-    
-
-    
 
     fun1 = fnd_function.add("fnd.Lougot", "退出", "pyerp.fnd.functions.pub.logout"   , None)
     fm = fnd_models.FuncMapping()
