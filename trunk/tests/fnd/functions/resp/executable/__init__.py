@@ -53,6 +53,6 @@ class ExecutableTestCase(unittest.TestCase):
     def test_show_index(self):
         c = Client()
         c.login(username='ut_user', password='test')
-        response = c.get('/' + self._resp_path)
+        response = c.get('/' + settings.FND_RESP_SITE_PREFIX + self._resp_path)
         self.assertEquals(200, response.status_code)
 
