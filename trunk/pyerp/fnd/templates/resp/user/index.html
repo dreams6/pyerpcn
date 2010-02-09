@@ -13,11 +13,45 @@
 </menu>
 {% endblock %}
 
-
 {% block body %}
-<h2><!-- img alt="" src="" --><a name="welcome">用户</a></h2>
+<h2><a name="welcome">用户</a></h2>
 <div class="section-content">
-<img src="{{ fnd_media_prefix }}images/fnd/screenshots/fnd_user_screen_en.jpg" align="left" border="0"/>
-<img src="{{ fnd_media_prefix }}images/fnd/screenshots/fnd_user_screen_jp.jpg" align="left" border="0"/>
+    <fieldset>
+        <legend>基本信息</legend>
+        用户ID:<input type="text" name="uid" /><br/>
+        密码:<input type="password" name="password" class="textwidget" /><br/>
+        密码确认:<input type="password" name="repassword" class="textwidget" /><br/>
+        姓:<input type="text" name="last_name" /><br/>
+        名:<input type="text" name="first_name" /><br/>
+        Email:<input type="text" name="email" /><br/>
+        描述:<textarea></textarea><br/>
+    </fieldset>
+
+    <fieldset>
+        <legend>安全选项</legend>
+        有效开始日:<input type="text" name="uid" /><br/>
+        有效结束日:<input type="text" name="uid" /><br/>
+        密码过期方法:<input type="radio" />永远不过期 <input type="radio" />N天后过期 <input type="radio" />登录N次后过期<br/>
+        过期天数:<input type="text" name="repassword" /><br/>
+        过期次数:<input type="text" name="repassword" /><br/>
+    </fieldset>
+
+    <fieldset>
+        <legend>关联信息</legend>
+        雇员ID:<input type="text" name="uid" /><br/>
+        顾客ID:<input type="text" name="uid" /><br/>
+        供应商ID:<input type="text" name="uid" /><br/>
+        合伙人ID:<input type="text" name="uid" /><br/>
+    </fieldset>
+<pre>
+-------------------------------------------------
+职责         
+------------------------------------------------
+系统管理员____
+应用开发者____
+XXXXX_________
+XXXXX_________
+-------------------------------------------------
+</pre>
 </div>
 {% endblock %}
