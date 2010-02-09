@@ -44,8 +44,9 @@ def suite():
     suite.addTest(unittest.makeSuite(menu.MenuTestCase, 'test'))
     from tests.fnd.functions.resp import profile
     suite.addTest(unittest.makeSuite(profile.ProfileTestCase, 'test'))
-
-
+    from tests.fnd import sites
+    suite.addTest(unittest.makeSuite(sites.MediaTestCase, 'test'))
+    
     return suite
 
 if __name__ == '__main__':
