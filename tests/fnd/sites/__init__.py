@@ -19,4 +19,7 @@ class MediaTestCase(unittest.TestCase):
         response = c.get('' + settings.FND_MEDIA_PREFIX + 'images/pyerp.ico')
         self.assertEquals(200, response.status_code)
 
+        response1 = c.get('' + settings.FND_MEDIA_PREFIX + 'images/pyerpxxx.ico')
+        self.assertEquals(404, response1.status_code)
+
 
