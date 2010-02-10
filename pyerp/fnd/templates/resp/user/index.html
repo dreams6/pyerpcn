@@ -16,17 +16,44 @@
 {% block body %}
 <h2><a name="welcome">用户</a></h2>
 <div class="section-content">
-    <fieldset>
+  <table>
+    <tr>
+      <td rowspan="2" style="vertical-align: top">
+      <fieldset>
         <legend>基本信息</legend>
-        用户ID:<input type="text" name="uid" /><br/>
-        密码:<input type="password" name="password" class="textwidget" /><br/>
-        密码确认:<input type="password" name="repassword" class="textwidget" /><br/>
-        姓:<input type="text" name="last_name" /><br/>
-        名:<input type="text" name="first_name" /><br/>
-        Email:<input type="text" name="email" /><br/>
-        描述:<textarea></textarea><br/>
-    </fieldset>
-
+  <table>
+    <tr>
+      <td>用户ID:</td>
+      <td><input type="text" name="uid" /></td>
+    </tr>
+    <tr>
+      <td>密码:</td>
+      <td><input type="password" name="password" class="textwidget" /></td>
+    </tr>
+    <tr>
+      <td>密码确认:</td>
+      <td><input type="password" name="repassword" class="textwidget" /></td>
+    </tr>
+    <tr>
+      <td>姓:</td>
+      <td><input type="text" name="last_name" /></td>
+    </tr>
+    <tr>
+      <td>名:</td>
+      <td><input type="text" name="first_name" /></td>
+    </tr>
+    <tr>
+      <td>Email:</td>
+      <td><input type="text" name="email" /></td>
+    </tr>
+    <tr>
+      <td>描述:</td>
+      <td><textarea></textarea></td>
+    </tr>
+  </table>
+      </fieldset>
+      </td>
+      <td>
     <fieldset>
         <legend>安全选项</legend>
         有效开始日:<input type="text" name="uid" /><br/>
@@ -35,7 +62,10 @@
         过期天数:<input type="text" name="repassword" /><br/>
         过期次数:<input type="text" name="repassword" /><br/>
     </fieldset>
-
+      </td>
+    </tr>
+    <tr>
+      <td>
     <fieldset>
         <legend>关联信息</legend>
         雇员ID:<input type="text" name="uid" /><br/>
@@ -43,6 +73,10 @@
         供应商ID:<input type="text" name="uid" /><br/>
         合伙人ID:<input type="text" name="uid" /><br/>
     </fieldset>
+      </td>
+    </tr>
+  </table>
+
 <pre>
 -------------------------------------------------
 职责         
