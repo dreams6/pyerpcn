@@ -26,7 +26,7 @@ form p.hint, form span.hint { color: #666; font-size: 100%; font-style: italic; 
 fieldset.iefix { background: transparent; border: none; padding: 0; margin: 0;}
 * html fieldset.iefix { width: 98% }
 fieldset.iefix p { margin: 0 }
-legend { color: #999; padding: 0 .25em; font-size: 90%; font-weight: bold }
+legend { color: #999; padding: 0 .25em; font-weight: bold }
 label.disabled { color: #d7d7d7 }
 .buttons { margin: .5em .5em .5em 0 }
 .buttons form, .buttons form div { display: inline }
