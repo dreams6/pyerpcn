@@ -17,5 +17,11 @@ __svn__ = get_svn_revision(__name__)
 def display_main(request, func_id=None):
     fun = fnd_models.Function.objects.get(pk=func_id)
     support_site_url = hasattr(settings, 'SUPPORT_SITE_URL') and settings.SUPPORT_SITE_URL or 'http://code.pyerp.cn'
-    return HttpResponseRedirect(support_site_url + '/wiki/help/' + fun.package.encode("utf-8"))
+
+    req = urllib.urlencode({
+          'sn'       : settings.SUPPORT_SN,
+          'referer'  : support_site_url + '/wiki/help/' + fun.package.encode("utf-8")
+        })
+
+    return HttpResponseRedirect(support_site_url + '/snlogin?' + req)
 

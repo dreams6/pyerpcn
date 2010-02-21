@@ -16,7 +16,7 @@ __svn__ = get_svn_revision(__name__)
 
 def display_main(request, func_id=None):
     fun = fnd_models.Function.objects.get(pk=func_id)
-    req = urllib.urlencode({
+    referer = urllib.urlencode({
           # "reporter"    : fnd_global.user.username,
           "summary"     : "",
           "type"        : "缺陷",
@@ -43,7 +43,12 @@ def display_main(request, func_id=None):
           "keywords"    : "",
           "cc"          : fun.svn_revision[2]  # SVN's author
         })
-    
+
     support_site_url = hasattr(settings, 'SUPPORT_SITE_URL') and settings.SUPPORT_SITE_URL or 'http://code.pyerp.cn'
-    return HttpResponseRedirect(support_site_url + '/newticket?' + req)
+    req = urllib.urlencode({
+          'sn'       : settings.SUPPORT_SN,
+          'referer'  : support_site_url + '/newticket?' + referer
+        })
+
+    return HttpResponseRedirect(support_site_url + '/snlogin?' + req)
 
