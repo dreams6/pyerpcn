@@ -68,7 +68,6 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'pyerp.fnd.middleware.FndGlobalMiddleware', 
     #'django.middleware.transaction.TransactionMiddleware', 
-    
 )
 
 
@@ -78,6 +77,7 @@ MIDDLEWARE_CLASSES = (
 # FEEDBACK_URL = SUPPORT_SITE_URL + '/newticket'
 # HELP_URL = SUPPORT_SITE_URL + '/wiki/help'
 SUPPORT_SITE_URL = 'http://code.pyerp.cn'
+SUPPORT_SN = 'demosn'
 
 #
 # ...
