@@ -230,6 +230,7 @@ class ProfileOptionValues(models.Model):
 class Function(models.Model):
     name               = models.CharField(max_length=100, unique=True)
     description        = models.CharField(max_length=240)
+    app                = models.CharField(max_length=255, null=False)
     package            = models.CharField(max_length=255, null=False)
     paramters          = models.CharField(max_length=255, null=True)
     # ========================================================

@@ -38,8 +38,8 @@ def display_main(request, func_id=None):
 #          "status"      : "new",
           "priority"    : "中等优先级",
           "milestone"   : "01_Pilot",
-          "component"   : "fnd",
-          "version"     : __import__('pyerp').__version__,
+          "component"   : fun.app,
+          "version"     : __import__(fun.app, {}, {}, ['']).__version__,
           "keywords"    : "",
           "cc"          : fun.svn_revision[2]  # SVN's author
         })

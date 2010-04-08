@@ -24,20 +24,21 @@ __svn__ = get_svn_revision(__name__)
 
 
 
-def add(name, description, package, paramters):
-  fun = models.Function()
-  fun.name = name
-  fun.description = description
-  fun.package = package
-  fun.paramters = paramters
-  # ==============================
-  fun.created_by = fnd_global.user_id
-  fun.last_updated_by = fnd_global.user_id
-  # ==============================
-  fun.save()
-  return fun
+def add(name, description, app, package, paramters):
+    fun = models.Function()
+    fun.name = name
+    fun.description = description
+    fun.app = app
+    fun.package = package
+    fun.paramters = paramters
+    # ==============================
+    fun.created_by = fnd_global.user_id
+    fun.last_updated_by = fnd_global.user_id
+    # ==============================
+    fun.save()
+    return fun
 
 def remove():
-  pass
-  
+    pass
+
 
