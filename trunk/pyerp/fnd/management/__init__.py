@@ -47,10 +47,10 @@ def fnd_init():
     fnd_lookup.addlookupnode("APP"      , "Application"      , "Application."  , node.id)
 
     # FUNCTION=================================
-    fun1 = fnd_function.add("Application", "Applications Form", "pyerp.survey"                     , None)
-    fun2 = fnd_function.add("Functions"  , "Function Form"    , "pyerp.fnd.functions.resp.function"   , None)
-    fun3 = fnd_function.add("Menus"      , "Menus Form"       , "pyerp.fnd.functions.resp.menu"                     , None)
-    fun4 = fnd_function.add("Messages"   , "Messages Form"    , "pyerp.survey"                     , None)
+    fun1 = fnd_function.add("Application", "Applications Form", "pyerp.survey", "pyerp.survey"                     , None)
+    fun2 = fnd_function.add("Functions"  , "Function Form"    , "pyerp.fnd", "pyerp.fnd.functions.resp.function"   , None)
+    fun3 = fnd_function.add("Menus"      , "Menus Form"       , "pyerp.fnd", "pyerp.fnd.functions.resp.menu"                     , None)
+    fun4 = fnd_function.add("Messages"   , "Messages Form"    , "pyerp.fnd", "pyerp.survey"                     , None)
 
     # MENU, MENU ITEM==========================
     menu = fnd_menu.add("Application Developer", "Applications Form")
@@ -64,10 +64,10 @@ def fnd_init():
     fnd_menu.additem(menu, 5, "Lookup", "descr5", None, submenu)
 
     demomenu = fnd_menu.add("实现标准Demo", "Implements Demo")
-    fnd_menu.additem(demomenu, 1, "查询", "search",              fnd_function.add("DEMO_SEARCH"            , "Search"             , "pyerp.fnd.functions.resp.profile" , None))
-    fnd_menu.additem(demomenu, 2, "数据维护", "data management", fnd_function.add("DEMO_DATA_MANAGEMENT"   , "Data Management"    , "pyerp.fnd.functions.resp.profile" , None))
-    fnd_menu.additem(demomenu, 3, "LOV", "list of view",         fnd_function.add("DEMO_LOV"               , "LOV"                , "pyerp.fnd.functions.resp.profile" , None))
-    fnd_menu.additem(demomenu, 4, "输入校验", "input validate",  fnd_function.add("DEMO_VALIDATE"          , "Input Validate"     , "pyerp.fnd.functions.resp.profile" , None))
+    fnd_menu.additem(demomenu, 1, "查询", "search",              fnd_function.add("DEMO_SEARCH"            , "Search"             , "pyerp.fnd", "pyerp.fnd.functions.resp.profile" , None))
+    fnd_menu.additem(demomenu, 2, "数据维护", "data management", fnd_function.add("DEMO_DATA_MANAGEMENT"   , "Data Management"    , "pyerp.fnd", "pyerp.fnd.functions.resp.profile" , None))
+    fnd_menu.additem(demomenu, 3, "LOV", "list of view",         fnd_function.add("DEMO_LOV"               , "LOV"                , "pyerp.fnd", "pyerp.fnd.functions.resp.profile" , None))
+    fnd_menu.additem(demomenu, 4, "输入校验", "input validate",  fnd_function.add("DEMO_VALIDATE"          , "Input Validate"     , "pyerp.fnd", "pyerp.fnd.functions.resp.profile" , None))
     fnd_menu.additem(menu, 6, "实现标准Demo", "descr5", None, demomenu)
 
     # system adminstrator
@@ -75,14 +75,14 @@ def fnd_init():
     c_menu = fnd_menu.add("Concurrent Menu - System Administrator GUI", "System Administrator concurrent processing menu")
     fnd_menu.additem(ad_menu, 0, "Concurrent", "通知", fun1)
     fnd_menu.additem(ad_menu, 1, "Concurrent", "concurrent processing", None, c_menu)
-    fnd_menu.additem(c_menu, 1, "请求", "执行Concurrent程序", fnd_function.add("ConcurrentRequest"   , "Concurrent Request"    , "pyerp.fnd.functions.resp.request" , None))
+    fnd_menu.additem(c_menu, 1, "请求", "执行Concurrent程序", fnd_function.add("ConcurrentRequest"   , "Concurrent Request"    , "pyerp.fnd", "pyerp.fnd.functions.resp.request" , None))
     fnd_menu.additem(c_menu, 2, "请求集合", "不明", fun2)
     fnd_menu.additem(c_menu, 3, "冲突Domain", "不明", fun3)
 
     p_menu = fnd_menu.add("Concurrent Programs Menu", "Concurrent Programs")
     fnd_menu.additem(c_menu, 4, "Programs", "Concurrent Programs", None, p_menu)
-    fnd_menu.additem(p_menu, 1, "定义", "定义Concurrent Programs", fnd_function.add("ConcurrentProgram"   , "Concurrent Program"    , "pyerp.fnd.functions.resp.program" , None))
-    fnd_menu.additem(p_menu, 2, "执行文件", "注册执行文件", fnd_function.add("ConcurrentExecutable"   , "Concurrent Executable"    , "pyerp.fnd.functions.resp.executable" , None))
+    fnd_menu.additem(p_menu, 1, "定义", "定义Concurrent Programs", fnd_function.add("ConcurrentProgram"   , "Concurrent Program"    , "pyerp.fnd", "pyerp.fnd.functions.resp.program" , None))
+    fnd_menu.additem(p_menu, 2, "执行文件", "注册执行文件", fnd_function.add("ConcurrentExecutable"   , "Concurrent Executable"    , "pyerp.fnd", "pyerp.fnd.functions.resp.executable" , None))
     fnd_menu.additem(p_menu, 3, "类型", "不明", fun3)
 
     m_menu = fnd_menu.add("Concurrent Manager Menu", "Concurrent Management")
@@ -93,15 +93,15 @@ def fnd_init():
 
     p_menu = fnd_menu.add("Profile Menu - System Administrator GUI", "Profile Menu")
     fnd_menu.additem(ad_menu, 6, "Profile", "Profile", None, p_menu)
-    fnd_menu.additem(p_menu, 0, "定义", "定义Profile", fnd_function.add("DefineProfile"   , "Define Profile"    , "pyerp.fnd.functions.resp.profile" , None))
-    fnd_menu.additem(p_menu, 1, "系统", "系统Profile", fnd_function.add("SystemProfile"   , "System Profile"    , "pyerp.fnd.functions.resp.profile" , 'system/'))
-    fnd_menu.additem(p_menu, 2, "个别", "个别Profile", fnd_function.add("UserProfile"   , "User Profile"    , "pyerp.fnd.functions.resp.profile" , 'person/'))
+    fnd_menu.additem(p_menu, 0, "定义", "定义Profile", fnd_function.add("DefineProfile"   , "Define Profile"    , "pyerp.fnd", "pyerp.fnd.functions.resp.profile" , None))
+    fnd_menu.additem(p_menu, 1, "系统", "系统Profile", fnd_function.add("SystemProfile"   , "System Profile"    , "pyerp.fnd", "pyerp.fnd.functions.resp.profile" , 'system/'))
+    fnd_menu.additem(p_menu, 2, "个别", "个别Profile", fnd_function.add("UserProfile"   , "User Profile"    , "pyerp.fnd", "pyerp.fnd.functions.resp.profile" , 'person/'))
 
 
     s_menu = fnd_menu.add("Security Menu - System Security GUI", "Security Menu")
     fnd_menu.additem(ad_menu, 7, "安全", "Security", None, s_menu)
-    fnd_menu.additem(s_menu, 1, "用户", "User Master",           fnd_function.add("UserMaster"   , "User Master"    , "pyerp.fnd.functions.resp.user" , None))
-    fnd_menu.additem(s_menu, 2, "职责", "Responsibility Master", fnd_function.add("ResponsibilityMaster"   , "Responsibility Master"    , "pyerp.fnd.functions.resp.responsibility" , None))
+    fnd_menu.additem(s_menu, 1, "用户", "User Master",           fnd_function.add("UserMaster"   , "User Master"    , "pyerp.fnd", "pyerp.fnd.functions.resp.user" , None))
+    fnd_menu.additem(s_menu, 2, "职责", "Responsibility Master", fnd_function.add("ResponsibilityMaster"   , "pyerp.fnd", "Responsibility Master"    , "pyerp.fnd.functions.resp.responsibility" , None))
 
     s_menu = fnd_menu.add("Setup Menu - System Setup GUI", "Setup Menu")
     fnd_menu.additem(ad_menu, 8, "设定", "Setup", None, s_menu)
@@ -116,7 +116,7 @@ def fnd_init():
 
 
     s_menu = fnd_menu.add("Development Guide - Applications Common Master GUI", "Development Guide")
-    fnd_menu.additem(s_menu, 1, "Suggest", "输入提示", fnd_function.add("Suggest"   , "Suggest"    , "pyerp.ak.functions.resp.suggest" ,None))
+    fnd_menu.additem(s_menu, 1, "Suggest", "输入提示", fnd_function.add("Suggest"   , "Suggest"    , "pyerp.ak", "pyerp.ak.functions.resp.suggest" ,None))
     ak_resp = fnd_resp.add("Applications Common Master", "Applications Common Master Responsibility", s_menu)
 
 
@@ -153,7 +153,7 @@ def fnd_init():
     # print fnd_profile.value("org_id")
 
     # 登录user Function
-    fun1 = fnd_function.add("fnd.Main", "导航菜单", "pyerp.fnd.functions.user.main"   , None)
+    fun1 = fnd_function.add("fnd.Main", "导航菜单", "pyerp.fnd", "pyerp.fnd.functions.user.main"   , None)
     fm = fnd_models.FuncMapping()
     fm.regex_pattern = '^main/'
     fm.type = 'user'
@@ -175,7 +175,7 @@ def fnd_init():
     # ==============================
     fm.save()
 
-    fun1 = fnd_function.add("fnd.ChangePwd", "修改密码", "pyerp.fnd.functions.user.changepwd"   , None)
+    fun1 = fnd_function.add("fnd.ChangePwd", "修改密码", "pyerp.fnd", "pyerp.fnd.functions.user.changepwd"   , None)
     fm = fnd_models.FuncMapping()
     fm.regex_pattern = '^changepwd/'
     fm.type = 'user'
@@ -187,7 +187,7 @@ def fnd_init():
     # ==============================
     fm.save()
     
-    fun1 = fnd_function.add("fnd.Feedback", "用户反馈", "pyerp.fnd.functions.user.feedback"   , None)
+    fun1 = fnd_function.add("fnd.Feedback", "用户反馈", "pyerp.fnd", "pyerp.fnd.functions.user.feedback"   , None)
     fm = fnd_models.FuncMapping()
     fm.regex_pattern = '^feedback/'
     fm.type = 'user'
@@ -199,7 +199,7 @@ def fnd_init():
     # ==============================
     fm.save()
 
-    fun1 = fnd_function.add("fnd.MailBox", "站内信", "pyerp.fnd.functions.user.mailbox"   , None)
+    fun1 = fnd_function.add("fnd.MailBox", "站内信", "pyerp.fnd", "pyerp.fnd.functions.user.mailbox"   , None)
     fm = fnd_models.FuncMapping()
     fm.regex_pattern = '^mailbox/'
     fm.type = 'user'
@@ -211,7 +211,7 @@ def fnd_init():
     # ==============================
     fm.save()
 
-    fun1 = fnd_function.add("fnd.Notices", "通知", "pyerp.fnd.functions.user.notification"   , None)
+    fun1 = fnd_function.add("fnd.Notices", "通知", "pyerp.fnd", "pyerp.fnd.functions.user.notification"   , None)
     fm = fnd_models.FuncMapping()
     fm.regex_pattern = '^notices/'
     fm.type = 'user'
@@ -223,7 +223,7 @@ def fnd_init():
     # ==============================
     fm.save()
     
-    fun1 = fnd_function.add("fnd.Help", "帮助", "pyerp.fnd.functions.user.help"   , None)
+    fun1 = fnd_function.add("fnd.Help", "帮助", "pyerp.fnd", "pyerp.fnd.functions.user.help"   , None)
     fm = fnd_models.FuncMapping()
     fm.regex_pattern = '^help/'
     fm.type = 'user'
@@ -236,7 +236,7 @@ def fnd_init():
     fm.save()
 
     
-    fun1 = fnd_function.add("fnd.Login", "登录", "pyerp.fnd.functions.pub.login"   , None)
+    fun1 = fnd_function.add("fnd.Login", "登录", "pyerp.fnd", "pyerp.fnd.functions.pub.login"   , None)
     fm = fnd_models.FuncMapping()
     fm.regex_pattern = '^login/$'
     fm.type = 'pub'
@@ -249,7 +249,7 @@ def fnd_init():
     fm.save()
 
 
-    fun1 = fnd_function.add("fnd.Lougot", "退出", "pyerp.fnd.functions.pub.logout"   , None)
+    fun1 = fnd_function.add("fnd.Lougot", "退出", "pyerp.fnd", "pyerp.fnd.functions.pub.logout"   , None)
     fm = fnd_models.FuncMapping()
     fm.regex_pattern = '^logout/$'
     fm.type = 'pub'
@@ -262,7 +262,7 @@ def fnd_init():
     fm.save()
 
 
-    fun1 = fnd_function.add("fnd.Index", "首页", "pyerp.fnd.functions.pub.index"   , None)
+    fun1 = fnd_function.add("fnd.Index", "首页", "pyerp.fnd", "pyerp.fnd.functions.pub.index"   , None)
     fm = fnd_models.FuncMapping()
     fm.regex_pattern = '^.*'
     fm.type = 'pub'
