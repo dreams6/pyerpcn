@@ -100,8 +100,8 @@ def fnd_init():
 
     s_menu = fnd_menu.add("Security Menu - System Security GUI", "Security Menu")
     fnd_menu.additem(ad_menu, 7, "安全", "Security", None, s_menu)
-    fnd_menu.additem(s_menu, 1, "用户", "User Master",           fnd_function.add("UserMaster"   , "User Master"    , "pyerp.fnd", "pyerp.fnd.functions.resp.user" , None))
-    fnd_menu.additem(s_menu, 2, "职责", "Responsibility Master", fnd_function.add("ResponsibilityMaster"   , "pyerp.fnd", "Responsibility Master"    , "pyerp.fnd.functions.resp.responsibility" , None))
+    fnd_menu.additem(s_menu, 1, "用户", "User Master",           fnd_function.add("UserMaster"             , "User Master"          , "pyerp.fnd", "pyerp.fnd.functions.resp.user" , None))
+    fnd_menu.additem(s_menu, 2, "职责", "Responsibility Master", fnd_function.add("ResponsibilityMaster"   , "Responsibility Master", "pyerp.fnd", "pyerp.fnd.functions.resp.responsibility" , None))
 
     s_menu = fnd_menu.add("Setup Menu - System Setup GUI", "Setup Menu")
     fnd_menu.additem(ad_menu, 8, "设定", "Setup", None, s_menu)
