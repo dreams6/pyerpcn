@@ -20,7 +20,7 @@ def fnd_render_to_response(template_name, extra_context=None, request=None):
     context = {
         'fnd_global': fnd_global,
         'fnd_profile': fnd_profile,
-        'fnd_media_prefix': settings.FND_MEDIA_PREFIX,
+        'fnd_media_prefix': fnd_global.context_prefix + settings.FND_MEDIA_PREFIX,
         'fnd_resp_site_prefix': fnd_global.context_prefix + settings.FND_RESP_SITE_PREFIX,
         'fnd_user_site_prefix': fnd_global.context_prefix + settings.FND_USER_SITE_PREFIX,
         'fnd_pub_site_prefix':  fnd_global.context_prefix + settings.FND_PUB_SITE_PREFIX,

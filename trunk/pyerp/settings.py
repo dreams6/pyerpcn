@@ -26,7 +26,7 @@ SERVER_EMAIL="demo@pyerp.cn"
 # Database connection settings
 #
 DATABASE_ENGINE = 'mysql'      # 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
-DATABASE_NAME = 'pyerp_db'     # Or path to database file if using sqlite3.
+DATABASE_NAME = 'pyerp_trunk'  # Or path to database file if using sqlite3.
 DATABASE_USER = 'root'         # Not used with sqlite3.
 DATABASE_PASSWORD = ''         # Not used with sqlite3.
 DATABASE_HOST = ''             # Set to empty string for localhost. Not used with sqlite3.
@@ -97,7 +97,7 @@ ROOT_URLCONF = 'pyerp.urls'
 #
 # FOR fnd.templatetags.fndtag.py
 #
-FND_MEDIA_PREFIX='/fnd_media/'
+FND_MEDIA_PREFIX='fnd_media/'
 FND_RESP_SITE_PREFIX = 'resp/'
 FND_USER_SITE_PREFIX = 'user/'
 FND_PUB_SITE_PREFIX = ''
