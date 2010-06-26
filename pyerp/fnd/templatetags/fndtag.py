@@ -36,11 +36,11 @@ def fnd_show_resp(resp_id):
     <td><img src="%simages/t.gif" width="4"></td>
     <td width="100%%"><a class="%s" href="%smain/%s/">%s</a></td>
   </tr>
-  """ % (settings.FND_MEDIA_PREFIX, 
+  """ % (fnd_global.context_prefix + settings.FND_MEDIA_PREFIX, 
          fnd_global.context_prefix + settings.FND_USER_SITE_PREFIX, 
          responsibility.id, 
-         settings.FND_MEDIA_PREFIX, 
-         settings.FND_MEDIA_PREFIX, 
+         fnd_global.context_prefix + settings.FND_MEDIA_PREFIX, 
+         fnd_global.context_prefix + settings.FND_MEDIA_PREFIX, 
          l_class, 
          fnd_global.context_prefix + settings.FND_USER_SITE_PREFIX, 
          responsibility.id, 
@@ -63,10 +63,10 @@ def r_menuitem_html(p_menu, p_title, resp, sub_title=None):
   <td valign="top"><a target="_blank" href="%s"><img src="%simages/func_item.gif" border="0"></a></td>
   <td><img src="%simages/t.gif" width="4"></td>
   <td width="100%%"><a class="mlink" target="_blank" href="%s">%s</a></td>
-</tr>""" % (settings.FND_MEDIA_PREFIX, 
+</tr>""" % (fnd_global.context_prefix + settings.FND_MEDIA_PREFIX, 
             fnd_global.context_prefix + settings.FND_RESP_SITE_PREFIX + str(resp.id) + "/" + str(mi.id) + "/" + str(mi.function.id) + "/" + (mi.function.paramters or ""), 
-            settings.FND_MEDIA_PREFIX, 
-            settings.FND_MEDIA_PREFIX, 
+            fnd_global.context_prefix + settings.FND_MEDIA_PREFIX, 
+            fnd_global.context_prefix + settings.FND_MEDIA_PREFIX, 
             fnd_global.context_prefix + settings.FND_RESP_SITE_PREFIX + str(resp.id) + "/" + str(mi.id) + "/" + str(mi.function.id) + "/" + (mi.function.paramters or ""), 
             mi.prompt) )
     
@@ -79,8 +79,8 @@ def r_menuitem_html(p_menu, p_title, resp, sub_title=None):
 <tr>
   <td><img src="%simages/t.gif" width="4"></td>
   <td colspan="3"><span class="mtitle">%s</span></td>
-</tr>""" % (settings.FND_MEDIA_PREFIX, 
-            settings.FND_MEDIA_PREFIX, 
+</tr>""" % (fnd_global.context_prefix + settings.FND_MEDIA_PREFIX, 
+            fnd_global.context_prefix + settings.FND_MEDIA_PREFIX, 
             (p_title and p_title + " : ") + mi.prompt ) )
         ret = ret + r_menuitem_html(mi.submenu, mi.prompt, resp, sub_t)
 
@@ -93,21 +93,21 @@ def fnd_show_resp_menu(resp_id):
     menu_html_str = """<table width="100%" border="0" cellspacing="0" cellpadding="0">"""
     if resp_id is None:
         menu_html_str = menu_html_str + ("""<tr><td><img src="%simages/t.gif" width="4"></td><td colspan="3" width="100%%"><span class="mtitle">%s</span></td></tr>""" 
-                                         % (settings.FND_MEDIA_PREFIX, '请选择职责.'))
+                                         % (fnd_global.context_prefix + settings.FND_MEDIA_PREFIX, '请选择职责.'))
     else:
         try:
             resp = fnd_global.user.responsibilities.get(pk=resp_id)
             menu_html_str = menu_html_str + ("""<tr><td><img src="%simages/t.gif" width="4"></td><td colspan="3"><span class="mtitle">%s</span></td></tr>""" 
-                                             % (settings.FND_MEDIA_PREFIX, resp.name))
+                                             % (fnd_global.context_prefix + settings.FND_MEDIA_PREFIX, resp.name))
             menu_html_str = menu_html_str + r_menuitem_html(resp.menu, "", resp)
         except (Responsibility.DoesNotExist):
         # 职责不存在或,用户不能访问
             menu_html_str = menu_html_str + ("""<tr><td><img src="%simages/t.gif" width="4"></td><td colspan="3" width="100%%"><span class="mtitle">%s</span></td></tr>""" 
-                                             % (settings.FND_MEDIA_PREFIX, '不可访问的职责.'))
+                                             % (fnd_global.context_prefix + settings.FND_MEDIA_PREFIX, '不可访问的职责.'))
 
 
     menu_html_str = menu_html_str + ("""<tr><td colspan="4"><img height="10" src="%simages/t.gif"></td></tr></table>""" 
-                                         % (settings.FND_MEDIA_PREFIX))
+                                         % (fnd_global.context_prefix + settings.FND_MEDIA_PREFIX))
     return mark_safe(menu_html_str)
 
 fnd_show_resp_menu = register.simple_tag(fnd_show_resp_menu)
