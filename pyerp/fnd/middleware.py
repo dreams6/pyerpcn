@@ -52,9 +52,9 @@ class FndGlobalMiddleware(object):
         except AttributeError:
             context_prefix = request.environ['SCRIPT_NAME']
             if context_prefix.endswith('/'):
-                fnd_global.set_attr("context_prefix", context_prefix)
+                fnd_global.set_attr("context_prefix", context_prefix.encode("utf-8"))
             else:
-                fnd_global.set_attr("context_prefix", context_prefix + '/')
+                fnd_global.set_attr("context_prefix", context_prefix.encode("utf-8") + '/')
 
         # 当前控制器前缀
         if view_kwargs.has_key('site_prefix'):
