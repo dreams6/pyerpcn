@@ -16,10 +16,10 @@ class MediaTestCase(unittest.TestCase):
 
     def test_image(self):
         c = Client()
-        response = c.get('' + settings.FND_MEDIA_PREFIX + 'images/pyerp.ico')
+        response = c.get('/' + settings.FND_MEDIA_PREFIX + 'images/pyerp.ico')
         self.assertEquals(200, response.status_code)
 
-        response1 = c.get('' + settings.FND_MEDIA_PREFIX + 'images/pyerpxxx.ico')
+        response1 = c.get('/' + settings.FND_MEDIA_PREFIX + 'images/pyerpxxx.ico')
         self.assertEquals(404, response1.status_code)
 
 
