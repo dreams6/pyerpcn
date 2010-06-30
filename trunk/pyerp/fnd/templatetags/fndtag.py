@@ -60,9 +60,9 @@ def r_menuitem_html(p_menu, p_title, resp, sub_title=None):
     for mi in mi_list:
         ret = ret + ("""<tr>
   <td><img src="%simages/t.gif" width="4"></td>
-  <td valign="top"><a href="%s"><img src="%simages/func_item.gif" border="0"></a></td>
+  <td valign="top"><a target="_blank" href="%s"><img src="%simages/func_item.gif" border="0"></a></td>
   <td><img src="%simages/t.gif" width="4"></td>
-  <td width="100%%"><a class="mlink" target="_blank" href="%s">%s</a></td>
+  <td width="100%%"><a class="mlink" href="%s">%s</a></td>
 </tr>""" % (fnd_global.context_prefix + settings.FND_MEDIA_PREFIX, 
             fnd_global.context_prefix + settings.FND_RESP_SITE_PREFIX + str(resp.id) + "/" + str(mi.id) + "/" + str(mi.function.id) + "/" + (mi.function.paramters or ""), 
             fnd_global.context_prefix + settings.FND_MEDIA_PREFIX, 
