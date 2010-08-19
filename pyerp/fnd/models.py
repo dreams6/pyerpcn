@@ -783,7 +783,5 @@ class ObservedItem(models.Model):
     def send_notice(self):
         send([self.user], self.notice_type.label,
              {'observed': self.observed_object})
-
-pass
 #==============================================notification end
 
