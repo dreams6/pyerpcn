@@ -786,4 +786,3 @@ class ObservedItem(models.Model):
 
 pass
 #==============================================notification end
-
