@@ -196,4 +196,3 @@ class Profile(object):
         return self.value(key)
 
 fnd_profile = Profile()
-
