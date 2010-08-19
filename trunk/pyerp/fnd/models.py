@@ -785,3 +785,4 @@ class ObservedItem(models.Model):
              {'observed': self.observed_object})
 #==============================================notification end
 
+
