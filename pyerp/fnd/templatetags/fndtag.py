@@ -44,7 +44,7 @@ def fnd_show_resp(resp_id):
          l_class, 
          fnd_global.context_prefix + settings.FND_USER_SITE_PREFIX, 
          responsibility.id, 
-         responsibility.name) )
+         _(responsibility.name)) )
     menu_html_str = menu_html_str + "</table>"
     return mark_safe(menu_html_str)
 fnd_show_resp = register.simple_tag(fnd_show_resp)
@@ -98,7 +98,7 @@ def fnd_show_resp_menu(resp_id):
         try:
             resp = fnd_global.user.responsibilities.get(pk=resp_id)
             menu_html_str = menu_html_str + ("""<tr><td><img src="%simages/t.gif" width="4"></td><td colspan="3"><span class="mtitle">%s</span></td></tr>""" 
-                                             % (fnd_global.context_prefix + settings.FND_MEDIA_PREFIX, resp.name))
+                                             % (fnd_global.context_prefix + settings.FND_MEDIA_PREFIX, _(resp.name)))
             menu_html_str = menu_html_str + r_menuitem_html(resp.menu, "", resp)
         except (Responsibility.DoesNotExist):
         # 职责不存在或,用户不能访问
