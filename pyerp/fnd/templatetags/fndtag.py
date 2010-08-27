@@ -4,6 +4,7 @@ from django.template import Library
 from django.utils.safestring import mark_safe
 from django.db.models import Q as Q
 from django.conf import settings
+from django.utils.translation import ugettext as _
 
 from pyerp.fnd.gbl import fnd_global
 from pyerp.fnd.sites import respsite, usersite, pubsite
