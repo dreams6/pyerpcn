@@ -69,7 +69,7 @@ def r_menuitem_html(p_menu, p_title, resp, sub_title=None):
             fnd_global.context_prefix + settings.FND_MEDIA_PREFIX, 
             fnd_global.context_prefix + settings.FND_MEDIA_PREFIX, 
             fnd_global.context_prefix + settings.FND_RESP_SITE_PREFIX + str(resp.id) + "/" + str(mi.id) + "/" + str(mi.function.id) + "/" + (mi.function.paramters or ""), 
-            mi.prompt) )
+            _(mi.prompt)) )
     
     # submenus
     mi_list = MenuItem.objects.filter(p_menu=p_menu, submenu__isnull=False).order_by('seq')
@@ -82,8 +82,8 @@ def r_menuitem_html(p_menu, p_title, resp, sub_title=None):
   <td colspan="3"><span class="mtitle">%s</span></td>
 </tr>""" % (fnd_global.context_prefix + settings.FND_MEDIA_PREFIX, 
             fnd_global.context_prefix + settings.FND_MEDIA_PREFIX, 
-            (p_title and p_title + " : ") + mi.prompt ) )
-        ret = ret + r_menuitem_html(mi.submenu, mi.prompt, resp, sub_t)
+            (p_title and p_title + " : ") + _(mi.prompt) ) )
+        ret = ret + r_menuitem_html(mi.submenu, _(mi.prompt), resp, sub_t)
 
     return ret
 
