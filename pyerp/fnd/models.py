@@ -40,53 +40,6 @@ class LookUpNode(models.Model):
                 ("parent_node", "name"),
                 )
 
-MESSAGE_TYPE_CHOICES = (
-    ('E', 'Error'),
-    ('W', 'Warning'),
-    ('N', 'Note'),
-    ('Q', 'Question'),
-    ('H', 'Hint'),
-    ('T', 'Tip'),
-    ('P', 'Prompt'),
-    ('M', 'Menu'),
-    ('O', 'Other'),
-)
-
-MESSAGE_CATEGORY_CHOICES = (
-    ('SYS', 'System'),
-    ('USR', 'User'),
-    ('PRO', 'Product'),
-    ('ERR', 'Error'),
-    ('SEC', 'Security'),
-    ('APP', 'Application'),
-)
-
-# NEW_MESSAGES
-class MessageResource(models.Model):
-    #application_id                 not null number
-    #message_number                          number(9)
-    language_code       = models.CharField(max_length=4)
-    name                = models.CharField(max_length=30)
-    type                = models.CharField(max_length=10, choices=MESSAGE_TYPE_CHOICES)
-    text                = models.CharField(max_length=2000)
-    description         = models.CharField(max_length=240)
-    max_length          = models.IntegerField()
-    category            = models.CharField(max_length=10, choices=MESSAGE_CATEGORY_CHOICES)
-    severity            = models.CharField(max_length=30)
-    log_severity        = models.CharField(max_length=30)
-
-    # ========================================================
-    created_by         = models.IntegerField(null=False)
-    creation_date      = models.DateTimeField(auto_now_add=True)
-    last_updated_by    = models.IntegerField(null=False)
-    last_updated_date  = models.DateTimeField(auto_now=True)
-    # ========================================================
-
-    class Meta:
-        unique_together = (
-                ("language_code", "name"),
-                )
-
 #
 # 
 #

@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*- 
 
 from pyerp.fnd.models import LookUpNode
-from pyerp.fnd.models import MessageResource
 from pyerp.fnd.gbl import fnd_global
 from pyerp.fnd.utils.version import get_svn_revision, get_version
 
@@ -107,51 +106,5 @@ def addlookupnode(name,
   node.save()
   return node
 
-#
-# 
-# 
-#
-def init_lookup():
-    node = addlookupnode("MSG_TYPE", "Message Type")
-    addlookupnode("E", "Error", "Error.", node.id)
-    addlookupnode("W", "Warning", "Warning.", node.id)
-    addlookupnode("N", "Note", "Note.", node.id)
-    addlookupnode("Q", "Question", "Question.", node.id)
-    addlookupnode("H", "Hint", "Hint.", node.id)
-    addlookupnode("T", "Tip", "Tip.", node.id)
-    addlookupnode("P", "Prompt", "Prompt.", node.id)
-    addlookupnode("M", "Menu", "Menu.", node.id)
-    addlookupnode("O", "Other", "Other.", node.id)
-    
-    node = addlookupnode("MSG_CATEGORY", "Message Category")
-    addlookupnode("SYS", "System", "System.", node.id)
-    addlookupnode("USR", "User", "User.", node.id)
-    addlookupnode("PRO", "Product", "Product.", node.id)
-    addlookupnode("ERR", "Error", "Error.", node.id)
-    addlookupnode("SEC", "Security", "Security.", node.id)
-    addlookupnode("APP", "Application", "Application.", node.id)
-    
-    pass
 
-# MessageText===============================================================
 
-#
-# 
-# 
-#
-def getmessagetext(name, lang="en"):
-  msg = MessageResource.objects.get(name=name, language_code=lang)
-  return msg.text
-
-#
-# 
-# 
-#
-def getmessage(name, lang="en"):
-  msg = MessageResource.objects.get(name=name, language_code=lang)
-  return msg
-
-#
-# 
-# 
-#

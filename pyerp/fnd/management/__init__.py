@@ -26,42 +26,16 @@ __svn__ = get_svn_revision(__name__)
 def fnd_init():
     fnd_global.enter_global_management(1)
 
-    # LOOKUP=================================
-    fnd_node = fnd_lookup.addlookupnode("FND", "Message Type")
-    node = fnd_lookup.addlookupnode("MSG_TYPE", "Message Type", "Message Type" , fnd_node.id)
-    fnd_lookup.addlookupnode("E"        , "Error"            , "Error."        , node.id)
-    fnd_lookup.addlookupnode("W"        , "Warning"          , "Warning."      , node.id)
-    fnd_lookup.addlookupnode("N"        , "Note"             , "Note."         , node.id)
-    fnd_lookup.addlookupnode("Q"        , "Question"         , "Question."     , node.id)
-    fnd_lookup.addlookupnode("H"        , "Hint"             , "Hint."         , node.id)
-    fnd_lookup.addlookupnode("T"        , "Tip"              , "Tip."          , node.id)
-    fnd_lookup.addlookupnode("P"        , "Prompt"           , "Prompt."       , node.id)
-    fnd_lookup.addlookupnode("M"        , "Menu"             , "Menu."         , node.id)
-    fnd_lookup.addlookupnode("O"        , "Other"            , "Other."        , node.id)
-    node = fnd_lookup.addlookupnode("MSG_CATEGORY", "Message Category", "Message Category" , fnd_node.id)
-    fnd_lookup.addlookupnode("SYS"      , "System"           , "System."       , node.id)
-    fnd_lookup.addlookupnode("USR"      , "User"             , "User."         , node.id)
-    fnd_lookup.addlookupnode("PRO"      , "Product"          , "Product."      , node.id)
-    fnd_lookup.addlookupnode("ERR"      , "Error"            , "Error."        , node.id)
-    fnd_lookup.addlookupnode("SEC"      , "Security"         , "Security."     , node.id)
-    fnd_lookup.addlookupnode("APP"      , "Application"      , "Application."  , node.id)
-
     # FUNCTION=================================
-    fun1 = fnd_function.add("Application", "Applications Form", "pyerp.survey", "pyerp.survey"                     , None)
+    fun1 = fnd_function.add("Application", "Applications Form", "pyerp.fnd", "pyerp.fnd.functions.resp.function"                     , None)
     fun2 = fnd_function.add("Functions"  , "Function Form"    , "pyerp.fnd", "pyerp.fnd.functions.resp.function"   , None)
     fun3 = fnd_function.add("Menus"      , "Menus Form"       , "pyerp.fnd", "pyerp.fnd.functions.resp.menu"                     , None)
-    fun4 = fnd_function.add("Messages"   , "Messages Form"    , "pyerp.fnd", "pyerp.survey"                     , None)
 
     # MENU, MENU ITEM==========================
     menu = fnd_menu.add("Application Developer", "Applications Form")
     fnd_menu.additem(menu, 1, "应用程序", "descr1", fun1)
     fnd_menu.additem(menu, 2, "功能部件", "descr2", fun2)
     fnd_menu.additem(menu, 3, "菜单", "descr3", fun3)
-    fnd_menu.additem(menu, 4, "消息", "descr4", fun4)
-    submenu = fnd_menu.add("Lookups", "Lookups")
-    fnd_menu.additem(submenu, 1, "submenu1", "submenu1", fun1)
-    fnd_menu.additem(submenu, 2, "submenu2", "submenu2", fun2)
-    fnd_menu.additem(menu, 5, "Lookup", "descr5", None, submenu)
 
     demomenu = fnd_menu.add("实现标准Demo", "Implements Demo")
     fnd_menu.additem(demomenu, 1, "查询", "search",              fnd_function.add("DEMO_SEARCH"            , "Search"             , "pyerp.fnd", "pyerp.fnd.functions.resp.profile" , None))
@@ -108,24 +82,19 @@ def fnd_init():
     fnd_menu.additem(s_menu, 1, "组织", "Organization Master", fun1)
     fnd_menu.additem(s_menu, 2, "活性域", "Flex Field Master", fun2)
 
-
-
     # RESPONSIBILITY
     resp = fnd_resp.add("Application Developer", "Application Developer Responsibility", menu)
     ad_resp = fnd_resp.add("System Adminstrator", "Application Object Library System Adminstrator", ad_menu)
 
-
     s_menu = fnd_menu.add("Development Guide - Applications Common Master GUI", "Development Guide")
     fnd_menu.additem(s_menu, 1, "Suggest", "输入提示", fnd_function.add("Suggest"   , "Suggest"    , "pyerp.ak", "pyerp.ak.functions.resp.suggest" ,None))
     ak_resp = fnd_resp.add("Applications Common Master", "Applications Common Master Responsibility", s_menu)
-
 
     # USER
     u0 = fnd_user.create_user("u0", "test", "Application Developer User", "pyerp_u0@yahoo.cn")
     u0.responsibilities.add(resp)            # "Application Developer Responsibility"
     u0.responsibilities.add(ad_resp)         # "System Adminstrator Responsibility"
     u0.responsibilities.add(ak_resp)         # "Applications Common Master Responsibility"
-
 
     u1 = fnd_user.create_user("u1", "test", "Application Developer User", "u1@localhost.com")
     u1.responsibilities.add(resp)      # "Application Developer Responsibility"

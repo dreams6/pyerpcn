@@ -23,3 +23,18 @@ msgstr "应用程序开发者"
 #: fnd resp
 msgid "System Adminstrator"
 msgstr "系统管理员"
+
+#: fnd menu
+msgid "Concurrent"
+msgstr "并发处理"
+
+#: fnd menu
+msgid "Programs"
+msgstr "程序"
+
+#: fnd menu
+msgid "Manager"
+msgstr "管理器"
+
+
+
