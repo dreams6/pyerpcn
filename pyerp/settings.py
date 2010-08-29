@@ -41,6 +41,13 @@ DATABASE_PORT = ''             # Set to empty string for default. Not used with 
 # system time zone.
 TIME_ZONE = 'America/Chicago'
 
+# Languages we provide translations for, out of the box. The language name
+# should be the utf-8 encoded local name for the language.
+LANGUAGES = (
+    ('en', 'English'),
+    ('zh-CN', 'Simplified Chinese'),
+)
+
 # Language code for this installation. All choices can be found here:
 # http://www.i18nguy.com/unicode/language-identifiers.html
 LANGUAGE_CODE = 'zh-CN'
@@ -50,6 +57,12 @@ SITE_ID = 1
 # If you set this to False, Django will make some optimizations so as not
 # to load the internationalization machinery.
 USE_I18N = True
+
+
+############
+# SESSIONS #
+############
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True                 # Whether a user's session cookie expires when the Web browser is closed.
 
 # Make this unique, and don't share it with anybody.
 SECRET_KEY = 'e-mmp#$-$#5qs37o@3755&6zaw#xuip&+-79m-q=zhd8!uzbg#'
