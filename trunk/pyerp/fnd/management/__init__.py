@@ -204,6 +204,19 @@ def fnd_init():
     # ==============================
     fm.save()
 
+    fun1 = fnd_function.add("fnd.Preferences", "偏好设定", "pyerp.fnd", "pyerp.fnd.functions.user.preferences"   , None)
+    fm = fnd_models.FuncMapping()
+    fm.regex_pattern = '^prefs/'
+    fm.type = 'user'
+    fm.seq = 7
+    fm.function = fun1
+    # ==============================
+    fm.created_by = fnd_global.user_id
+    fm.last_updated_by = fnd_global.user_id
+    # ==============================
+    fm.save()
+
+
     
     fun1 = fnd_function.add("fnd.Login", "登录", "pyerp.fnd", "pyerp.fnd.functions.pub.login"   , None)
     fm = fnd_models.FuncMapping()
@@ -242,6 +255,8 @@ def fnd_init():
     fm.last_updated_by = fnd_global.user_id
     # ==============================
     fm.save()
+
+
 
 
 
