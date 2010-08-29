@@ -15,7 +15,6 @@ __svn__ = get_svn_revision(__name__)
 
 def display_main(request, resp_id=None):
     supported_langs = settings.LANGUAGES
-    print supported_langs
 
     context = {
         'app_path': request.get_full_path(),
