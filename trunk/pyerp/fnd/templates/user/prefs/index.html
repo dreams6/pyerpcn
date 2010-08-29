@@ -1,46 +1,48 @@
 {% extends "layout.html" %}
+{% load i18n %}
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-{% block title %}修改密码{% endblock %}
+{% block title %}偏好设置{% endblock %}
 
 {% block left %}
 {% endblock %}
 
-{% block body %}
+{% block main %}
 
-<form action="{{ app_path }}" method="post" id="login-form">
-  <table width="98%" >
-  <col width="100"/>
-  <col width="*"/>
-  <tbody>
-    <tr>
-      <td class="left"><a name="title"><b>修改密码</b></a></td>
-    </tr>
-{% if message %}
-    <tr>
-      <td colspan="2" ><p class="error-content">{{ message }}</p></td>
-    </tr>
-{% endif %}
-    <tr>
-      <td><label for="id_username">登录ID:</label></td>
-      <td>{{ fnd_global.user.username }}</td>
-    </tr>
-    <tr>
-      <td><label for="id_old_password">旧密码:</label></td>
-      <td><input type="password" name="old_password" id="id_old_password"/></td>
-    </tr>
-    <tr>
-      <td><label for="id_new_password">新密码:</label></td>
-      <td><input type="password" name="new_password" id="id_new_password"/></td>
-    </tr>
-    <tr>
-      <td><label for="id_new_password1">新密码确认:</label></td>
-      <td><input type="password" name="new_password1" id="id_new_password1"/></td>
-    </tr>
-    <tr>
-      <td colspan="2" ><label>&nbsp;</label><input type="submit" name="confirm" value="确定" /></td>
-    </tr>
-  </tbody>
-  </table>
-</form>
+<div id="content" class="prefs">
+
+  <h1>偏好设置</h1>
+  <ul id="tabs">
+    <li class="active">一般</li>
+    <li id="tab_advanced">高级</li>
+    <li id="tab_datetime">日期和时间</li>
+    <li id="tab_keybindings">键盘快捷方式</li>
+    <li id="tab_language">语言</li>
+    <li id="tab_pygments">语法高亮</li>
+  </ul>
+  <div id="tabcontent">
+    <form id="userprefs" action="" method="post">
+      <table>
+        <tr class="field">
+          <th><label for="name">语言:</label></th>
+          <td>
+            <select name="language">
+              <option value="">默认语言</option>
+    {% for language_code, language in supported_languages %} 
+              <option value="{{ language_code }}"{% if fnd_global.language %} selected{% endif %}>{% trans language %}</option>
+    {% endfor %}
+            </select>
+          </td>
+        </tr>
+      </table>
+      <p class="hint">配置语言将会使本站所有文字显示为
+      您的语言而不是服务器使用的语言。</p>
+      <p class="hint">“缺省语言”选项使用浏览器的语言协商功能选择合适的语言。</p>
+      <div class="buttons">
+        <input type="hidden" name="action" value="save" />
+        <input type="submit" value="保存变更" />
+      </div>
+    </form>
+  </div>
+</div>
 {% endblock %}
 

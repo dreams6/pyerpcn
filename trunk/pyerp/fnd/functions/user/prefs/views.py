@@ -14,11 +14,14 @@ __svn__ = get_svn_revision(__name__)
 
 
 def display_main(request, resp_id=None):
+    supported_langs = settings.LANGUAGES
+    print supported_langs
 
     context = {
         'app_path': request.get_full_path(),
         'resp_id': resp_id,
         'last_login': request.session.pop('last_login', None),  # 取出最后登录时间,显示在画面上
+        'supported_languages' : supported_langs,
     }
     return fnd_render_to_response('user/prefs/index.html', context, request)
 

@@ -6,7 +6,7 @@ __svnid__ = '$Id$'
 __svn__ = get_svn_revision(__name__)
 
 
-urlpatterns = patterns('pyerp.fnd.functions.user.preferences.views',
+urlpatterns = patterns('pyerp.fnd.functions.user.prefs.views',
     (r'^$'                    , 'display_main'),
 )
 
