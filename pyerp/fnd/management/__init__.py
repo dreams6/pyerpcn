@@ -204,7 +204,7 @@ def fnd_init():
     # ==============================
     fm.save()
 
-    fun1 = fnd_function.add("fnd.Preferences", "偏好设定", "pyerp.fnd", "pyerp.fnd.functions.user.preferences"   , None)
+    fun1 = fnd_function.add("fnd.Preferences", "偏好设定", "pyerp.fnd", "pyerp.fnd.functions.user.prefs"   , None)
     fm = fnd_models.FuncMapping()
     fm.regex_pattern = '^prefs/'
     fm.type = 'user'
