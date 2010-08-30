@@ -122,30 +122,17 @@ $(window).resize(function() {
 <table cellspacing="0" width="100%" border="0" id="footer">
 <tbody>
   <tr>
-    <td>
-<table cellpadding="0" cellspacing="0" border="0" width="100%" align="center">
-  <tr>
-    <td width="100%">
-      <table cellpadding="0" cellspacing="0" border="0" align="center">
-        <tr>
-          <td><a title="诊断" href="javascript:void(0);" class="x2v" onclick="javascript:$('debug_sql').toggle();">诊断</a></td>
-          <td class="x4" >&nbsp;|&nbsp;</td>
+    <td valign="top" id="footnav" class="nav">
+      <ul>
+        <li class="first"><a title="诊断" href="javascript:void(0);" onclick="javascript:$('debug_sql').toggle();">诊断</a></li>
 {% if fnd_global.user.is_authenticated %}
-          <td><a title="{% trans 'Change Password' %}" href="{{ fnd_user_site_prefix }}changepwd/" class="x2v">{% trans 'Change Password' %}</a></td>
-          <td class="x4" >&nbsp;|&nbsp;</td>
-          <td><a title="{% trans 'Preferences' %}" href="{{ fnd_user_site_prefix }}prefs/" class="x2v">{% trans 'Preferences' %}</a></td>
-          <td class="x4">&nbsp;|&nbsp;</td>
-          <td><a target="_blank" title="{% trans 'Help' %}" href="{{ fnd_user_site_prefix }}help/{{ fnd_global.function.id }}/" class="x2v">{% trans 'Help' %}</a></td>
-          <td class="x4">&nbsp;|&nbsp;</td>
-          <td><a target="_blank" title="{% trans 'Feedback' %}" href="{{ fnd_user_site_prefix }}feedback/{{ fnd_global.function.id }}/" class="x2v">{% trans 'Feedback' %}</a></td>
-          <td class="x4">&nbsp;|&nbsp;</td>
+        <li><a title="{% trans 'Change Password' %}" href="{{ fnd_user_site_prefix }}changepwd/">{% trans 'Change Password' %}</a></li>
+        <li><a title="{% trans 'Preferences' %}" href="{{ fnd_user_site_prefix }}prefs/">{% trans 'Preferences' %}</a></li>
+        <li><a target="_blank" title="{% trans 'Help' %}" href="{{ fnd_user_site_prefix }}help/{{ fnd_global.function.id }}/">{% trans 'Help' %}</a></li>
+        <li><a target="_blank" title="{% trans 'Feedback' %}" href="{{ fnd_user_site_prefix }}feedback/{{ fnd_global.function.id }}/">{% trans 'Feedback' %}</a></li>
 {% endif %}
-          <td><a title="{% trans 'Page Information' %}" href="javascript:void(0);" onclick="javascript:$('#page_info').toggle();" class="x2v">{% trans 'Page Information' %}</a></td>
-        </tr>
-      </table>
-    </td>
-  </tr>
-</table>
+        <li class="last"><a title="{% trans 'Page Information' %}" href="javascript:void(0);" onclick="javascript:$('#page_info').toggle();">{% trans 'Page Information' %}</a></li>
+      </ul>
     </td>
   </tr>
   <tr id="debug_sql" style="display:none">

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*- 
 
-from django.conf.urls.defaults import *
+from django.conf.urls.defaults import patterns
 from django.conf import settings
 
 from pyerp.fnd.sites import respsite, usersite, pubsite, rootsite
