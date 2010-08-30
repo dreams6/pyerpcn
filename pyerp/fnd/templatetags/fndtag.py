@@ -94,7 +94,7 @@ def fnd_show_resp_menu(resp_id):
     menu_html_str = """<table width="100%" border="0" cellspacing="0" cellpadding="0">"""
     if resp_id is None:
         menu_html_str = menu_html_str + ("""<tr><td><img src="%simages/t.gif" width="4"></td><td colspan="3" width="100%%"><span class="mtitle">%s</span></td></tr>""" 
-                                         % (fnd_global.context_prefix + settings.FND_MEDIA_PREFIX, '请选择职责.'))
+                                         % (fnd_global.context_prefix + settings.FND_MEDIA_PREFIX, _('Please select a responsibility.') ))
     else:
         try:
             resp = fnd_global.user.responsibilities.get(pk=resp_id)
@@ -102,9 +102,9 @@ def fnd_show_resp_menu(resp_id):
                                              % (fnd_global.context_prefix + settings.FND_MEDIA_PREFIX, _(resp.name)))
             menu_html_str = menu_html_str + r_menuitem_html(resp.menu, "", resp)
         except (Responsibility.DoesNotExist):
-        # 职责不存在或,用户不能访问
+            # 职责不存在或,用户不能访问
             menu_html_str = menu_html_str + ("""<tr><td><img src="%simages/t.gif" width="4"></td><td colspan="3" width="100%%"><span class="mtitle">%s</span></td></tr>""" 
-                                             % (fnd_global.context_prefix + settings.FND_MEDIA_PREFIX, '不可访问的职责.'))
+                                             % (fnd_global.context_prefix + settings.FND_MEDIA_PREFIX, _('Can not access responsibility.') ))
 
 
     menu_html_str = menu_html_str + ("""<tr><td colspan="4"><img height="10" src="%simages/t.gif"></td></tr></table>""" 

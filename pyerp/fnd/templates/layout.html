@@ -1,4 +1,4 @@
-{% load fndtag %}<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+{% load fndtag %}{% load i18n %}<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <title>{% block title %}Pyerp{% endblock %}</title>
@@ -47,17 +47,17 @@ $(window).resize(function() {
   <tbody>
   <tr><!-- site banner and project image -->
     <td valign="top" rowspan="2" align="left" id="header">
-      <a id="logo" href="{{ fnd_user_site_prefix }}main/"><img src="{{ fnd_media_prefix }}images/logo.png" alt="导航菜单"/></a>
+      <a id="logo" href="{{ fnd_user_site_prefix }}main/"><img src="{{ fnd_media_prefix }}images/logo.png" alt="{% trans 'Navigation Menu' %}"/></a>
     </td>
     <td valign="top" align="right" id="metanav" class="nav">
       <ul>
       {% if fnd_global.user.is_authenticated %}
-        <li class="first">您好 {{ fnd_global.user.username }}{% if last_login %} 上次登录时间:{{ last_login }}{% endif %}</li>
-        <li><a title="首页" href="{{ fnd_pub_site_prefix }}">首页</a></li>
-        <li><a title="导航菜单" href="{{ fnd_user_site_prefix }}main/">导航菜单</a></li>
-        <li class="last"><a href="{{ fnd_pub_site_prefix }}logout/" title="退出" >退出</a></li>
+        <li class="first">{% trans 'Welcome' %} {{ fnd_global.user.username }}{% if last_login %} {% trans 'last logined at' %}:{{ last_login }}{% endif %}</li>
+        <li><a title="{% trans 'Home' %}" href="{{ fnd_pub_site_prefix }}">{% trans 'Home' %}</a></li>
+        <li><a title="{% trans 'Navigation Menu' %}" href="{{ fnd_user_site_prefix }}main/">{% trans 'Navigation Menu' %}</a></li>
+        <li class="last"><a href="{{ fnd_pub_site_prefix }}logout/" title="{% trans 'Logout' %}" >{% trans 'Logout' %}</a></li>
       {% else %}
-        <li class="first last"><a title="login" href="{{ fnd_pub_site_prefix }}login/">登录</a></span></li>
+        <li class="first last"><a title="{% trans 'Login' %}" href="{{ fnd_pub_site_prefix }}login/">{% trans 'Login' %}</a></span></li>
       {% endif %}
       </ul>
     </td>
@@ -68,7 +68,7 @@ $(window).resize(function() {
       <form id="search" action="{{ fnd_user_site_prefix }}search/" method="get">
         <label for="proj-search">Search:</label>
         <input type="text" id="proj-search" name="q" size="18" value="" />
-        <input type="submit" value="搜索" />
+        <input type="submit" value="{% trans 'Search' %}" />
       </form>
       {% endif %}
     </td>
@@ -131,18 +131,16 @@ $(window).resize(function() {
           <td><a title="诊断" href="javascript:void(0);" class="x2v" onclick="javascript:$('debug_sql').toggle();">诊断</a></td>
           <td class="x4" >&nbsp;|&nbsp;</td>
 {% if fnd_global.user.is_authenticated %}
-          <td><a title="修改密码" href="{{ fnd_user_site_prefix }}changepwd/" class="x2v">修改密码</a></td>
+          <td><a title="{% trans 'Change Password' %}" href="{{ fnd_user_site_prefix }}changepwd/" class="x2v">{% trans 'Change Password' %}</a></td>
           <td class="x4" >&nbsp;|&nbsp;</td>
-          <td><a title="偏好设置" href="{{ fnd_user_site_prefix }}prefs/" class="x2v">偏好设置</a></td>
+          <td><a title="{% trans 'Preferences' %}" href="{{ fnd_user_site_prefix }}prefs/" class="x2v">{% trans 'Preferences' %}</a></td>
           <td class="x4">&nbsp;|&nbsp;</td>
-          <td><a target="_blank" title="帮助" href="{{ fnd_user_site_prefix }}help/{{ fnd_global.function.id }}/" class="x2v">帮助</a></td>
+          <td><a target="_blank" title="{% trans 'Help' %}" href="{{ fnd_user_site_prefix }}help/{{ fnd_global.function.id }}/" class="x2v">{% trans 'Help' %}</a></td>
           <td class="x4">&nbsp;|&nbsp;</td>
-          <td><a target="_blank" title="反馈" href="{{ fnd_user_site_prefix }}feedback/{{ fnd_global.function.id }}/" class="x2v">反馈</a></td>
+          <td><a target="_blank" title="{% trans 'Feedback' %}" href="{{ fnd_user_site_prefix }}feedback/{{ fnd_global.function.id }}/" class="x2v">{% trans 'Feedback' %}</a></td>
           <td class="x4">&nbsp;|&nbsp;</td>
 {% endif %}
-          <td><a title="页面信息" href="javascript:void(0);" onclick="javascript:$('#page_info').toggle();" class="x2v">页面信息</a></td>
-          <td class="x4">&nbsp;|&nbsp;</td>
-          <td><a title="个人信息保护策略" href="{{ fnd_user_site_prefix }}xxx/" class="x2v">个人信息保护策略</a></td>
+          <td><a title="{% trans 'Page Information' %}" href="javascript:void(0);" onclick="javascript:$('#page_info').toggle();" class="x2v">{% trans 'Page Information' %}</a></td>
         </tr>
       </table>
     </td>

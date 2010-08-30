@@ -1,6 +1,7 @@
 {% extends "layout.html" %}
+{% load i18n %}
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-{% block title %}导航菜单{% endblock %}
+{% block title %}{% trans 'Navigation Menu' %}{% endblock %}
 
 {% block main %}
 {% load fndtag %}
@@ -9,25 +10,25 @@
     <td valign="top" width="66%">
       <table width="100%" border="0" cellspacing="0" cellpadding="0">
         <tr>
-          <td class="stitle">通知列表</td>
+          <td class="stitle">{% trans 'Notification List' %}</td>
         </tr>
         <tr>
           <td align="right" class="floatnav">
-            <a href="{{ fnd_user_site_prefix }}mailbox/">查 看 全 部 通 知</a>
+            <a href="{{ fnd_user_site_prefix }}mailbox/">{% trans 'View All Notice' %}</a>
           </td>
         </tr>
         <tr>
           <td>
             <table cellpadding="1" cellspacing="0" border="0" width="100%">
               <tr>
-                <th scope="col" class="mlistheader"><span class="x24">发送人</span></th>
-                <th scope="col" class="mlistheader"><span class="x23">主题</span></th>
-                <th scope="col" class="mlistheader"><span class="x23">发送</span></th>
-                <th scope="col" class="mlistheader"><span class="x24">状态</span></th>
+                <th scope="col" class="mlistheader"><span class="x24">{% trans 'Sender' %}</span></th>
+                <th scope="col" class="mlistheader"><span class="x23">{% trans 'Subject' %}</span></th>
+                <th scope="col" class="mlistheader"><span class="x23">{% trans 'Send At' %}</span></th>
+                <th scope="col" class="mlistheader"><span class="x24">{% trans 'Status' %}</span></th>
               </tr>
 {% if not new_messages %}
               <tr>
-                <td class="x1l x4x" colspan="4"><em>暂时没有收到的通知。</em></td>
+                <td class="x1l x4x" colspan="4"><em>{% trans 'No notification received.' %}</em></td>
               </tr>
 {% else %}
 {% for message in new_messages %}
@@ -52,11 +53,11 @@
           <td><img src="{{ fnd_media_prefix }}images/t.gif" width="4"></td>
         </tr>
         <tr>
-          <td class="stitle">导航菜单</td>
+          <td class="stitle">{% trans 'Navigation Menu' %}</td>
         </tr>
         <tr>
           <td align="right" class="floatnav">
-            <a href="{{ fnd_user_site_prefix }}mailbox/">编 辑 导 航 菜 单</a>
+            <a href="{{ fnd_user_site_prefix }}mailbox/">{% trans 'Edit Navigation Menu' %}</a>
           </td>
         </tr>
         <tr>
@@ -79,11 +80,11 @@
     <td valign="top" width="34%">
       <table width="100%" border="0" cellspacing="0" cellpadding="0">
         <tr>
-          <td class="stitle">收藏夹</td>
+          <td class="stitle">{% trans 'My Favorites' %}</td>
         </tr>
         <tr>
           <td align="right" class="floatnav">
-            <a href="{{ fnd_user_site_prefix }}mailbox/">编 辑 收 藏 夹</a>
+            <a href="{{ fnd_user_site_prefix }}mailbox/">{% trans 'Edit My Favorites' %}</a>
           </td>
         </tr>
         <tr>

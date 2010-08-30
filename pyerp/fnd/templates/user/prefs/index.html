@@ -1,7 +1,7 @@
 {% extends "layout.html" %}
 {% load i18n %}
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-{% block title %}偏好设置{% endblock %}
+{% block title %}{% trans 'Preferences' %}{% endblock %}
 
 {% block left %}
 {% endblock %}
@@ -10,9 +10,9 @@
 
 <div id="content" class="prefs">
 
-  <h1>偏好设置</h1>
+  <h1>{% trans 'Preferences' %}</h1>
   <ul id="tabs">
-    <li class="active">一般</li>
+    <li class="active">{% trans 'General' %}</li>
     <li id="tab_advanced">高级</li>
     <li id="tab_datetime">日期和时间</li>
     <li id="tab_keybindings">键盘快捷方式</li>
@@ -23,7 +23,7 @@
     <form id="userprefs" action="" method="post">
       <table>
         <tr class="field">
-          <th><label for="name">语言:</label></th>
+          <th><label for="name">{% trans 'Language' %}:</label></th>
           <td>
             <select name="language">
               <option value="">默认语言</option>
