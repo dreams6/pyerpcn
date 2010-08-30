@@ -111,7 +111,7 @@ class ThreadFndGlobal(object):
         """
         返回用户使用的语言.
         """
-        return self.session['language']
+        return self.session['django_language']
     language = property(get_language) 
 
     def get_appl_id(self):
