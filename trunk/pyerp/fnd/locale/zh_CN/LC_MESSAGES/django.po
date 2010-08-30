@@ -16,6 +16,89 @@ msgstr ""
 "X-Poedit-SourceCharset: utf-8\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
+#: Main Layout
+msgid "Change Password"
+msgstr "修改密码"
+
+msgid "Preferences"
+msgstr "偏好设置"
+
+msgid "Help"
+msgstr "帮助"
+
+msgid "Feedback"
+msgstr "反馈"
+
+msgid "Page Information"
+msgstr "页面信息"
+
+#: Main Layout header
+msgid "Welcome"
+msgstr "您好"
+
+msgid "last logined at"
+msgstr "上次登录时间"
+
+msgid "Home"
+msgstr "首页"
+
+msgid "Navigation Menu"
+msgstr "导航菜单"
+
+msgid "Logout"
+msgstr "退出"
+
+msgid "Login"
+msgstr "登录"
+
+msgid "Search"
+msgstr "搜索"
+
+#: Navigation Menu
+msgid "Notification List"
+msgstr "通知列表"
+
+msgid "Sender"
+msgstr "发件人"
+
+msgid "Subject"
+msgstr "主题"
+
+msgid "Send At"
+msgstr "发送于"
+
+msgid "Status"
+msgstr "状态"
+
+msgid "View All Notice"
+msgstr "查 看 全 部 通 知"
+
+msgid "No notification received."
+msgstr "暂时没有收到的通知。"
+
+msgid "Edit Navigation Menu"
+msgstr "编 辑 导 航 菜 单"
+
+msgid "Please select a responsibility."
+msgstr "请选择职责."
+
+msgid "Can not access responsibility."
+msgstr "不可访问的职责."
+
+
+msgid "My Favorites"
+msgstr "收藏夹"
+
+msgid "Edit My Favorites"
+msgstr "编 辑 收 藏 夹"
+
+msgid "General"
+msgstr "一般"
+
+msgid "Language"
+msgstr "语言"
+
+
 #: fnd resp
 msgid "Application Developer"
 msgstr "应用程序开发者"
