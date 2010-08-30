@@ -28,7 +28,7 @@
             <select name="language">
               <option value="">默认语言</option>
     {% for language_code, language in supported_languages %} 
-              <option value="{{ language_code }}"{% if fnd_global.language %} selected{% endif %}>{% trans language %}</option>
+              <option value="{{ language_code }}"{% ifequal fnd_global.language language_code %} selected{% endifequal %}>{% trans language %}</option>
     {% endfor %}
             </select>
           </td>
