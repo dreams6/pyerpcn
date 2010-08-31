@@ -1,19 +1,97 @@
 {% extends "layout.html" %}
+{% load i18n %}
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 
 {% block title %}用户{% endblock %}
 
+
+{% block css %}<link href="{{ fnd_media_prefix }}style/style.css" type="text/css" rel="stylesheet"/>
+<style type="text/css">
+.news{width:100%;}
+.news ul {list-style:none;padding:0;margin:0;}
+.news ul li{
+  margin-bottom:0px;
+  padding-top:5px;
+  text-align:left;
+  vertical-align:middle; 
+  background-color:#e5e5e5; 
+  border-right:#dbdcd7 solid 1px;
+  border-bottom:#dbdcd7 solid 1px;
+}
+.news ul li.on{ 
+  background-color:#ffffff; 
+  border:#FFFFFF 0px;
+}
+
+</style>
+{% endblock %}
+ 
 {% block left %}
-<div class="menuheader">
-  <font color="blue">用户</font>
+<div class="news">
+  <ul>
+    <li><a title="{% trans 'Home' %}" href="{{ fnd_pub_site_prefix }}">查询</a></li>
+    <li class="on"><a title="{% trans 'Home' %}" href="{{ fnd_pub_site_prefix }}">添加</a></li>
+    <li><a title="{% trans 'Home' %}" href="{{ fnd_pub_site_prefix }}">编辑</a></li>
+  </ul>
 </div>
-<menu compact="true">
-  <li><a title="mailto" href="">查询</a></li>
-  <li><a title="mailto" href="">添加</a></li>
-</menu>
+
 {% endblock %}
 
 {% block body %}
+
+<div id="content" class="prefs">
+  <h1 class="block_title">新建用户</h1>
+  <ul id="tabs">
+    <li class="active">基本信息</li>
+    <li id="tab_datetime">安全选项</li>
+    <li id="tab_keybindings">关联信息</li>
+    <li id="tab_datetime">职责</li>
+  </ul>
+  <div id="tabcontent">
+    <form id="userprefs" action="" method="post">
+      <table>
+        <tr>
+          <td>用户ID:</td>
+          <td><input type="text" name="uid" /></td>
+        </tr>
+        <tr>
+          <td>密码:</td>
+          <td><input type="password" name="password" class="textwidget" /></td>
+        </tr>
+        <tr>
+          <td>密码确认:</td>
+          <td><input type="password" name="repassword" class="textwidget" /></td>
+        </tr>
+        <tr>
+          <td>姓:</td>
+          <td><input type="text" name="last_name" /></td>
+        </tr>
+        <tr>
+          <td>名:</td>
+          <td><input type="text" name="first_name" /></td>
+        </tr>
+        <tr>
+          <td>Email:</td>
+          <td><input type="text" name="email" /></td>
+        </tr>
+        <tr>
+          <td>描述:</td>
+          <td><textarea></textarea></td>
+        </tr>
+      </table>
+      <p class="hint">配置语言将会使本站所有文字显示为
+      您的语言而不是服务器使用的语言。</p>
+      <p class="hint">“缺省语言”选项使用浏览器的语言协商功能选择合适的语言。</p>
+      <div class="buttons">
+        <input type="hidden" name="action" value="save" />
+        <input type="submit" value="保存变更" />
+      </div>
+    </form>
+  </div>
+</div>
+
+
+
 <h2><a name="welcome">用户</a></h2>
 <div class="section-content">
   <table>
