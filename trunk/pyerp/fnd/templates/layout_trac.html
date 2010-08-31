@@ -1,0 +1,108 @@
+{% load fndtag %}{% load i18n %}<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>{% block title %}Pyerp{% endblock %}</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+<meta content="pyerp" name="author"/>
+<link rel="icon" href="{{ fnd_media_prefix }}images/pyerp.ico" type="image/x-icon" />
+{% block css %}<link rel="stylesheet" href="{{ fnd_media_prefix }}css/trac.css" type="text/css" />
+<link rel="stylesheet" href="{{ fnd_media_prefix }}css/report.css" type="text/css" />
+<link rel="stylesheet" href="{{ fnd_media_prefix }}css/admin.css" type="text/css" />{% endblock %}
+{% block css_ext %}{% endblock %}
+<script type="text/javascript" src="{{ fnd_media_prefix }}js/jquery.js"></script>
+{% block js %}{% endblock %}
+{% block js_ext %}{% endblock %}
+</head>
+<body>
+<!-- start banner -->
+{% block banner %}
+<div id="banner">
+  <div id="header">
+    <a id="logo" href="{{ fnd_user_site_prefix }}main/"><img src="{{ fnd_media_prefix }}images/logo.png" alt="{% trans 'Navigation Menu' %}"/></a>
+  </div>
+  <form id="search" action="/search" method="get">
+    <div>
+      <label for="proj-search">Search:</label>
+      <input type="text" id="proj-search" name="q" size="18" value="" />
+      <input type="submit" value="搜索" />
+    </div>
+  </form>
+  <div id="metanav" class="nav">
+    <ul>
+    {% if fnd_global.user.is_authenticated %}
+      <li class="first">{% trans 'Welcome' %} {{ fnd_global.user.username }}{% if last_login %} {% trans 'last logined at' %}:{{ last_login }}{% endif %}</li>
+      <li><a title="{% trans 'Home' %}" href="{{ fnd_pub_site_prefix }}">{% trans 'Home' %}</a></li>
+      <li><a title="{% trans 'Navigation Menu' %}" href="{{ fnd_user_site_prefix }}main/">{% trans 'Navigation Menu' %}</a></li>
+      <li class="last"><a href="{{ fnd_pub_site_prefix }}logout/" title="{% trans 'Logout' %}" >{% trans 'Logout' %}</a></li>
+    {% else %}
+      <li class="first last"><a title="{% trans 'Login' %}" href="{{ fnd_pub_site_prefix }}login/">{% trans 'Login' %}</a></li>
+    {% endif %}
+    </ul>
+  </div>
+</div>
+{% endblock %}
+<!-- end banner -->
+
+{% block mainnav %}
+<!-- mainnav 
+<div id="mainnav" class="nav">
+  <ul>
+    <li class="first"><a href="/wiki">维基</a></li>
+    <li><a href="/timeline">时间轴</a></li>
+    <li><a href="/roadmap">路标</a></li>
+    <li><a href="/browser">游览源码</a></li>
+    <li class="active"><a href="/report">传票查询</a></li>
+    <li><a href="/newticket">新建传票</a></li>
+    <li><a href="/search">搜索</a></li>
+    <li><a href="/admin" title="管理面板">管理</a></li>
+    <li class="last"><a class="" href="/build">Build Status</a></li>
+  </ul>
+</div>
+-->
+<hr style="margin: 4px 0px 0px 0px;"/>
+{% endblock %}
+
+{% block main %}
+<div id="main">
+  {% block ctxtnav %}
+  <!-- 
+  <div id="ctxtnav" class="nav">
+    <h2>Context Navigation</h2>
+      <ul>
+        <li class="first"><a href="/report">现有报表</a></li><li class="last">自定义查询</li>
+      </ul>
+    <hr />
+  </div>
+  -->
+  {% endblock %}
+  {% block content %}
+  <div id="content">
+
+  </div>
+  {% endblock %}
+</div>
+{% endblock %}
+
+{% block footer %}
+<div id="footer">
+  <hr />
+  <div id="footnav" class="nav">
+    <ul>
+      <li class="first"><a title="诊断" href="javascript:void(0);" onclick="javascript:$('debug_sql').toggle();">诊断</a></li>
+{% if fnd_global.user.is_authenticated %}
+      <li><a title="{% trans 'Change Password' %}" href="{{ fnd_user_site_prefix }}changepwd/">{% trans 'Change Password' %}</a></li>
+      <li><a title="{% trans 'Preferences' %}" href="{{ fnd_user_site_prefix }}prefs/">{% trans 'Preferences' %}</a></li>
+      <li><a target="_blank" title="{% trans 'Help' %}" href="{{ fnd_user_site_prefix }}help/{{ fnd_global.function.id }}/">{% trans 'Help' %}</a></li>
+      <li><a target="_blank" title="{% trans 'Feedback' %}" href="{{ fnd_user_site_prefix }}feedback/{{ fnd_global.function.id }}/">{% trans 'Feedback' %}</a></li>
+{% endif %}
+      <li class="last"><a title="{% trans 'Page Information' %}" href="javascript:void(0);" onclick="javascript:$('#page_info').toggle();">{% trans 'Page Information' %}</a></li>
+    </ul>
+  </div>
+  <p class="center">
+    Copyright © Pyerp Technologies Inc, 2009
+  </p>
+</div>
+{% endblock %}
+
+</body>
+</html>

@@ -8,8 +8,8 @@ __svn__ = get_svn_revision(__name__)
 
 
 urlpatterns = patterns('pyerp.fnd.functions.resp.user.views',
-    (r'^$'          , 'index'),
-    
+    (r'^$'          , 'query'),
+    (r'^add/$'      , 'add'),
 )
 
 

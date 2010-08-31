@@ -1,0 +1,356 @@
+{% extends "layout_trac.html" %}
+{% load i18n %}
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+
+{% block title %}用户{% endblock %}
+
+{% block js_ext %}
+<script type="text/javascript" src="{{ fnd_media_prefix }}js/trac.js"></script>
+<script type="text/javascript" src="{{ fnd_media_prefix }}js/search.js"></script>
+<script type="text/javascript" src="{{ fnd_media_prefix }}js/query.js"></script>
+<script type="text/javascript" src="{{ fnd_media_prefix }}js/folding.js"></script>
+<script type="text/javascript">
+jQuery(document).ready(function($) {
+  $("#group").change(function() {
+    $("#groupdesc").enable(this.selectedIndex != 0)
+  }).change();
+  $("fieldset legend.foldable").enableFolding(false);
+  /* Hide the filters for saved queries. */
+  if ( window.location.href.search(/[?&amp;]report=[0-9]+/) != -1 )
+    $("#filters").toggleClass("collapsed");
+  /* Hide the columns by default. */
+  $("#columns").toggleClass("collapsed");
+});
+</script>
+{% endblock %}
+
+{% block content %}
+<div id="content" class="admin">
+  <h1>用户管理</h1>
+  <div id="tabs">
+    <ul>
+      <li class="active">操作
+        <ul>
+          <li class="active"><a href="/admin/general/basics">查询</a></li>
+          <li><a href="add">添加</a></li>
+        </ul>
+      </li>
+    </ul>
+    <ul>
+      <li>相关操作
+        <ul>
+          <li><a href="/admin/accounting/accounting_csv_query">废止</a></li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+  <div id="tabcontent">
+  <h2>自定义查询</h2>
+  <form id="query" method="post" action="/query"><div><input type="hidden" name="__FORM_TOKEN" value="6c621f103e7e30e01389c407" /></div>
+    <fieldset id="filters">
+      <legend class="foldable">过滤器</legend>
+      <table summary="Query filters">
+        <tbody>
+          <tr style="height: 1px"><td colspan="4"></td></tr>
+        </tbody>
+        <tbody>
+          <tr class="owner">
+            <th scope="row"><label>所有者</label></th>
+            <td class="mode">
+              <select name="owner_mode">
+                <option value="~">包含</option>
+                <option value="!~">不包含</option>
+                <option value="^">开始以</option>
+                <option value="$">结束以</option>
+                <option value="" selected="selected">等于</option>
+                <option value="!">不等于</option>
+              </select>
+            </td>
+            <td class="filter">
+              <input type="text" name="owner" value="yuhere" size="42" />
+            </td>
+            <td class="actions"><input type="submit" name="rm_filter_owner_0" value="-" /></td>
+          </tr>
+        </tbody>
+        <tbody>
+          <tr class="status">
+            <th scope="row"><label>状态</label></th>
+            <td class="filter" colspan="2">
+              <input type="checkbox" id="status_accepted" name="status" value="accepted" checked="checked" />
+              <label for="status_accepted">accepted</label>
+              <input type="checkbox" id="status_assigned" name="status" value="assigned" checked="checked" />
+              <label for="status_assigned">assigned</label>
+              <input type="checkbox" id="status_closed" name="status" value="closed" />
+              <label for="status_closed">closed</label>
+              <input type="checkbox" id="status_new" name="status" value="new" checked="checked" />
+              <label for="status_new">new</label>
+              <input type="checkbox" id="status_reopened" name="status" value="reopened" checked="checked" />
+              <label for="status_reopened">reopened</label>
+            </td>
+            <td class="actions"><input type="submit" name="rm_filter_status" value="-" /></td>
+          </tr>
+        </tbody>
+        <tbody>
+          <tr class="actions">
+            <td class="actions" colspan="4" style="text-align: right">
+              <label for="add_filter">添加过滤器</label> 
+              <select name="add_filter" id="add_filter">
+                <option></option>
+                <option value="cc">抄送</option>
+                <option value="component">组件</option>
+                <option value="description">描述</option>
+                <option value="keywords">关键词</option>
+                <option value="milestone">里程碑</option>
+                <option value="owner">所有者</option>
+                <option value="priority">优先度</option>
+                <option value="reporter">提交者</option>
+                <option value="resolution">解决状态</option>
+                <option value="status" disabled="disabled">状态</option>
+                <option value="summary">概要</option>
+                <option value="type">类型</option>
+                <option value="version">版本</option>
+                <option value="actual_date">实际完成日期</option>
+                <option value="actual_hours">实际工时</option>
+                <option value="due_date">预计完成日期</option>
+                <option value="due_hours">预计工时</option>
+              </select>
+              <input type="submit" name="add" value="+" />
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </fieldset>
+    <fieldset id="columns">
+      <legend class="foldable">显示列名</legend>
+      <div>
+        <label><input type="checkbox" name="col" value="summary" checked="checked" />概要</label>
+        <label><input type="checkbox" name="col" value="status" checked="checked" />状态</label>
+        <label><input type="checkbox" name="col" value="owner" />所有者</label>
+        <label><input type="checkbox" name="col" value="type" checked="checked" />类型</label>
+        <label><input type="checkbox" name="col" value="priority" checked="checked" />优先度</label>
+        <label><input type="checkbox" name="col" value="milestone" checked="checked" />里程碑</label>
+        <label><input type="checkbox" name="col" value="component" checked="checked" />组件</label>
+        <label><input type="checkbox" name="col" value="version" />版本</label>
+        <label><input type="checkbox" name="col" value="resolution" />解决状态</label>
+        <label><input type="checkbox" name="col" value="due_hours" />预计工时</label>
+        <label><input type="checkbox" name="col" value="due_date" />预计完成日期</label>
+        <label><input type="checkbox" name="col" value="actual_hours" />实际工时</label>
+        <label><input type="checkbox" name="col" value="actual_date" />实际完成日期</label>
+        <label><input type="checkbox" name="col" value="reporter" />提交者</label>
+        <label><input type="checkbox" name="col" value="keywords" />关键词</label>
+        <label><input type="checkbox" name="col" value="cc" />抄送</label>
+        <label><input type="checkbox" name="col" value="time" />创建时间</label>
+        <label><input type="checkbox" name="col" value="changetime" />修改时间</label>
+      </div>
+    </fieldset>
+    <p class="option">
+      <label for="group">结果分组 按</label>
+      <select name="group" id="group">
+        <option></option>
+        <option value="component">组件</option>
+        <option value="milestone">里程碑</option>
+        <option value="owner">所有者</option>
+        <option value="priority">优先度</option>
+        <option value="reporter">提交者</option>
+        <option value="resolution">解决状态</option>
+        <option value="status">状态</option>
+        <option value="type">类型</option>
+        <option value="version">版本</option>
+      </select>
+      <input type="checkbox" name="groupdesc" id="groupdesc" />
+      <label for="groupdesc">倒序</label>
+    </p>
+    <p class="option">
+      <label for="max">每页最大数量</label>
+      <input type="text" name="max" id="max" size="10" value="100" />
+    </p>
+    <div class="buttons">
+      <input type="hidden" name="order" value="priority" />
+      <input type="submit" name="update" value="更新" />
+    </div>
+    <hr />
+  </form>
+  <script type="text/javascript">
+    var properties={
+      status: { type: "radio", label: "状态"
+      , options: [
+        "accepted",
+        "assigned",
+        "closed",
+        "new",
+        "reopened"
+        ]
+      },
+      due_date: { type: "text", label: "预计完成日期"
+      },
+      due_hours: { type: "text", label: "预计工时"
+      },
+      description: { type: "textarea", label: "描述"
+      },
+      reporter: { type: "text", label: "提交者"
+      },
+      cc: { type: "text", label: "抄送"
+      },
+      resolution: { type: "radio", label: "解决状态"
+      , options: [
+        "不需要解决",
+        "解决-未满足期待",
+        "解决-满足期待",
+        "解决-超出期待"
+        ]
+      },
+      actual_hours: { type: "text", label: "实际工时"
+      },
+      component: { type: "select", label: "组件"
+      , options: [
+        "pyerp.ap",
+        "pyerp.ar",
+        "pyerp.fnd",
+        "pyerp.gl"
+        ]
+      },
+      summary: { type: "text", label: "概要"
+      },
+      priority: { type: "select", label: "优先度"
+      , options: [
+        "最高优先级",
+        "高优先级",
+        "中等优先级",
+        "低优先级",
+        "最低优先级"
+        ]
+      },
+      keywords: { type: "text", label: "关键词"
+      },
+      version: { type: "select", label: "版本"
+      , options: [
+        "0.0.2-dev-0",
+        "0.0.1-dev-0",
+        "0.1.0-alpha"
+        ]
+      },
+      milestone: { type: "select", label: "里程碑"
+      , options: [
+        "01_Pilot",
+        "02_基础应用程序集",
+        "03_财务应用程序集",
+        "04_结合测试"
+        ]
+      },
+      owner: { type: "text", label: "所有者"
+      },
+      type: { type: "select", label: "类型"
+      , options: [
+        "任务",
+        "缺陷",
+        "功能增强"
+        ]
+      },
+      actual_date: { type: "text", label: "实际完成日期"
+      }
+    };
+    var modes = {
+      text: [
+        {text: "包含", value: "~"},
+        {text: "不包含", value: "!~"},
+        {text: "开始以", value: "^"},
+        {text: "结束以", value: "$"},
+        {text: "等于", value: ""},
+        {text: "不等于", value: "!"}
+        ],
+      select: [
+        {text: "等于", value: ""},
+        {text: "不等于", value: "!"}
+        ],
+      textarea: [
+        {text: "包含", value: "~"},
+        {text: "不包含", value: "!~"}
+        ]
+    };
+    initializeFilters();
+  </script>
+  <div>
+  <table class="listing tickets">
+    <thead>
+      <tr>
+        <th class="id">
+          <a title="Sort by 传票" href="/query?status=%21closed&amp;order=id&amp;owner=yuhere">传票</a>
+        </th><th class="summary">
+          <a title="Sort by 概要" href="/query?status=%21closed&amp;order=summary&amp;owner=yuhere">概要</a>
+        </th><th class="status">
+          <a title="Sort by 状态" href="/query?status=%21closed&amp;order=status&amp;owner=yuhere">状态</a>
+        </th><th class="type">
+          <a title="Sort by 类型" href="/query?status=%21closed&amp;order=type&amp;owner=yuhere">类型</a>
+        </th><th class="priority asc">
+          <a title="Sort by 优先度 (descending)" href="/query?status=%21closed&amp;order=priority&amp;owner=yuhere&amp;desc=1">优先度</a>
+        </th><th class="milestone">
+          <a title="Sort by 里程碑" href="/query?status=%21closed&amp;order=milestone&amp;owner=yuhere">里程碑</a>
+        </th><th class="component">
+          <a title="Sort by 组件" href="/query?status=%21closed&amp;order=component&amp;owner=yuhere">组件</a>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+    <tr class="even">
+      <td colspan="7">
+        没有找到传票
+      </td>
+    </tr>
+    </tbody>
+  </table>
+
+  <table class="listing tickets">
+    <thead>
+      <tr>
+        <th class="id">
+          <a title="Sort by 传票" href="/query?status=accepted&amp;status=assigned&amp;status=closed&amp;status=new&amp;status=reopened&amp;col=id&amp;col=summary&amp;col=status&amp;col=type&amp;col=priority&amp;col=milestone&amp;col=component&amp;order=id">用户ID</a>
+        </th><th class="summary">
+          <a title="Sort by 概要" href="/query?status=accepted&amp;status=assigned&amp;status=closed&amp;status=new&amp;status=reopened&amp;col=id&amp;col=summary&amp;col=status&amp;col=type&amp;col=priority&amp;col=milestone&amp;col=component&amp;order=summary">用户名</a>
+        </th><th class="status">
+          <a title="Sort by 状态" href="/query?status=accepted&amp;status=assigned&amp;status=closed&amp;status=new&amp;status=reopened&amp;col=id&amp;col=summary&amp;col=status&amp;col=type&amp;col=priority&amp;col=milestone&amp;col=component&amp;order=status">注册时间</a>
+        </th><th class="type">
+          <a title="Sort by 类型" href="/query?status=accepted&amp;status=assigned&amp;status=closed&amp;status=new&amp;status=reopened&amp;col=id&amp;col=summary&amp;col=status&amp;col=type&amp;col=priority&amp;col=milestone&amp;col=component&amp;order=type">描述</a>
+        </th><th class="priority asc">
+          <a title="Sort by 优先度 (descending)" href="/query?status=accepted&amp;status=assigned&amp;status=closed&amp;status=new&amp;status=reopened&amp;col=id&amp;col=summary&amp;col=status&amp;col=type&amp;col=priority&amp;col=milestone&amp;col=component&amp;desc=1&amp;order=priority">电子邮件</a>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+{% for record in page.object_list  %}
+      <tr class="{% cycle 'even' 'odd' %} prio3">
+        <td class="id"><a href="/ticket/{{ record.id }}/" title="View ticket">{{ record.username }}</a></td>
+        <td class="summary">
+          <a href="/ticket/1" title="View ticket">{{ record.first_name }} {{ record.last_name }}</a>
+        </td>
+        <td class="status">
+          {{ record.date_joined }}
+        </td>
+        <td class="type">
+          {{ record.description }}
+        </td>
+        <td class="priority">
+          {{ record.email }}
+        </td>
+      </tr>
+{% endfor %}
+    </tbody>
+  </table>
+  </div>
+
+  <div>
+    <span class="step-links">
+        {% if page.has_previous %}
+            <a href="?page={{ page.previous_page_number }}">前一页</a>
+        {% endif %}
+        第{{ page.number }}页/共{{ page.paginator.num_pages }}页
+        {% if page.has_next %}
+            <a href="?page={{ page.next_page_number }}">后一页</a>
+        {% endif %}
+    </span>
+  </div>
+
+
+  </div>
+
+</div>
+{% endblock %}

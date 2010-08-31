@@ -244,9 +244,10 @@ class FuncMapping(models.Model):
                 ('regex_pattern', 'type'),
                 ('type', 'seq'),
                 )
-#
-# 
-#
+
+####################
+# 菜单
+####################
 class Menu(models.Model):
     name               = models.CharField(max_length=100, unique=True)
     #type 
@@ -258,9 +259,9 @@ class Menu(models.Model):
     last_updated_date  = models.DateTimeField(auto_now=True)
     # ========================================================
 
-#
-# 
-#
+####################
+# 菜单项
+####################
 class MenuItem(models.Model):
     p_menu             = models.ForeignKey(Menu, related_name="p_menu")
     seq                = models.IntegerField(null=False)
@@ -280,9 +281,10 @@ class MenuItem(models.Model):
                 ("p_menu", "submenu"),
                 ("p_menu", "function"),
                 )
-#
-# 
-#
+
+####################
+# 职责
+####################
 class Responsibility(models.Model):
     name               = models.CharField(max_length=100, unique=True)
     menu               = models.ForeignKey(Menu)
@@ -294,9 +296,10 @@ class Responsibility(models.Model):
     last_updated_by    = models.IntegerField(null=False, default=fnd_global.get_user_id)
     last_updated_date  = models.DateTimeField(auto_now=True)
     # ========================================================
-#
-#
-#
+
+####################
+# 用户
+####################
 class User(dj_auth_models.User):
     description    = models.CharField(max_length=240, blank=False)
     fax            = models.CharField(max_length=80, null=True)
