@@ -124,7 +124,7 @@ label.disabled { color: #d7d7d7 }
 }
 #header h1 :link:hover, #header h1 :visited:hover { color: #000 }
 
-#search-box { float:right }
+#search-box { float:right;margin-top: 0.5em }
 #banner { height: 60px;border-bottom: 1px solid #ccccbb;margin-bottom: 0.5em }
 
 /* Quick search */
