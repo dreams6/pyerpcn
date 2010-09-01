@@ -112,9 +112,10 @@ label.disabled { color: #d7d7d7 }
 }
 
 /* Header */
+#header { float:left }
 #header hr { display: none }
 #header h1 { margin: 1.5em 0 -1.5em; }
-#header img { border: none; margin: 0 0 -3em }
+#header img { border: none; margin: 0 0 0 0 }
 #header :link, #header :visited, #header :link:hover, #header :visited:hover {
  background: transparent;
  color: #555;
@@ -122,6 +123,9 @@ label.disabled { color: #d7d7d7 }
  border: none;
 }
 #header h1 :link:hover, #header h1 :visited:hover { color: #000 }
+
+#search-box { float:right }
+#banner { height: 60px;border-bottom: 1px solid #ccccbb }
 
 /* Quick search */
 #search {
