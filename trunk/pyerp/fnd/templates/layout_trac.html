@@ -20,13 +20,6 @@
   <div id="header">
     <a id="logo" href="{{ fnd_user_site_prefix }}main/"><img src="{{ fnd_media_prefix }}images/logo.png" alt="{% trans 'Navigation Menu' %}"/></a>
   </div>
-  <form id="search" action="/search" method="get">
-    <div>
-      <label for="proj-search">Search:</label>
-      <input type="text" id="proj-search" name="q" size="18" value="" />
-      <input type="submit" value="搜索" />
-    </div>
-  </form>
   <div id="metanav" class="nav">
     <ul>
     {% if fnd_global.user.is_authenticated %}
@@ -38,6 +31,13 @@
       <li class="first last"><a title="{% trans 'Login' %}" href="{{ fnd_pub_site_prefix }}login/">{% trans 'Login' %}</a></li>
     {% endif %}
     </ul>
+  </div>
+  <div id="search-box">
+    <form id="search" action="/search" method="get">
+        <label for="proj-search">Search:</label>
+        <input type="text" id="proj-search" name="q" size="18" value="" />
+        <input type="submit" value="搜索" />
+    </form>
   </div>
 </div>
 {% endblock %}
@@ -59,7 +59,6 @@
   </ul>
 </div>
 -->
-<hr style="margin: 4px 0px 0px 0px;"/>
 {% endblock %}
 
 {% block main %}
