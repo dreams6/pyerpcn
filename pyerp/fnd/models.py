@@ -313,7 +313,7 @@ class User(dj_auth_models.User):
     person_party_id  = models.IntegerField(null=True)
     start_date_active  = models.DateField(default=date.today)
     end_date_active    = models.DateField(null=True)
-    last_login         = models.DateTimeField(default=datetime.now)
+    # last_login         = models.DateTimeField(default=datetime.now)
     # ========================================================
     created_by         = models.IntegerField(null=False, default=fnd_global.get_user_id)
     creation_date      = models.DateTimeField(auto_now_add=True)
