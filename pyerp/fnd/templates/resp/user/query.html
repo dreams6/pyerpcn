@@ -96,23 +96,9 @@ jQuery(document).ready(function($) {
               <label for="add_filter">添加过滤器</label> 
               <select name="add_filter" id="add_filter">
                 <option></option>
-                <option value="cc">抄送</option>
-                <option value="component">组件</option>
-                <option value="description">描述</option>
-                <option value="keywords">关键词</option>
-                <option value="milestone">里程碑</option>
-                <option value="owner">所有者</option>
-                <option value="priority">优先度</option>
-                <option value="reporter">提交者</option>
-                <option value="resolution">解决状态</option>
-                <option value="status" disabled="disabled">状态</option>
-                <option value="summary">概要</option>
-                <option value="type">类型</option>
-                <option value="version">版本</option>
-                <option value="actual_date">实际完成日期</option>
-                <option value="actual_hours">实际工时</option>
-                <option value="due_date">预计完成日期</option>
-                <option value="due_hours">预计工时</option>
+{% for key, value in filter_properties.items %}
+                <option value="{{ key }}"{% if key in selected_filter_properties %} disabled="disabled"{% endif %}>{{ value.label }}</option>
+{% endfor %}
               </select>
               <input type="submit" name="add" value="+" />
             </td>
@@ -123,43 +109,11 @@ jQuery(document).ready(function($) {
     <fieldset id="columns">
       <legend class="foldable">显示列名</legend>
       <div>
-        <label><input type="checkbox" name="col" value="summary" checked="checked" />概要</label>
-        <label><input type="checkbox" name="col" value="status" checked="checked" />状态</label>
-        <label><input type="checkbox" name="col" value="owner" />所有者</label>
-        <label><input type="checkbox" name="col" value="type" checked="checked" />类型</label>
-        <label><input type="checkbox" name="col" value="priority" checked="checked" />优先度</label>
-        <label><input type="checkbox" name="col" value="milestone" checked="checked" />里程碑</label>
-        <label><input type="checkbox" name="col" value="component" checked="checked" />组件</label>
-        <label><input type="checkbox" name="col" value="version" />版本</label>
-        <label><input type="checkbox" name="col" value="resolution" />解决状态</label>
-        <label><input type="checkbox" name="col" value="due_hours" />预计工时</label>
-        <label><input type="checkbox" name="col" value="due_date" />预计完成日期</label>
-        <label><input type="checkbox" name="col" value="actual_hours" />实际工时</label>
-        <label><input type="checkbox" name="col" value="actual_date" />实际完成日期</label>
-        <label><input type="checkbox" name="col" value="reporter" />提交者</label>
-        <label><input type="checkbox" name="col" value="keywords" />关键词</label>
-        <label><input type="checkbox" name="col" value="cc" />抄送</label>
-        <label><input type="checkbox" name="col" value="time" />创建时间</label>
-        <label><input type="checkbox" name="col" value="changetime" />修改时间</label>
+{% for col in filter_columns %}
+        <label><input type="checkbox" name="col" value="{{ col.value }}" {% if col.value in selected_columns %}checked="checked" {% endif %}/>{{ col.text }}</label>
+{% endfor %}
       </div>
     </fieldset>
-    <p class="option">
-      <label for="group">结果分组 按</label>
-      <select name="group" id="group">
-        <option></option>
-        <option value="component">组件</option>
-        <option value="milestone">里程碑</option>
-        <option value="owner">所有者</option>
-        <option value="priority">优先度</option>
-        <option value="reporter">提交者</option>
-        <option value="resolution">解决状态</option>
-        <option value="status">状态</option>
-        <option value="type">类型</option>
-        <option value="version">版本</option>
-      </select>
-      <input type="checkbox" name="groupdesc" id="groupdesc" />
-      <label for="groupdesc">倒序</label>
-    </p>
     <p class="option">
       <label for="max">每页最大数量</label>
       <input type="text" name="max" id="max" size="10" value="100" />
@@ -171,25 +125,8 @@ jQuery(document).ready(function($) {
     <hr />
   </form>
   <script type="text/javascript">
-    var properties= {{ filter_properties|safe }};
-    var modes = {
-      text: [
-        {text: "包含", value: "~"},
-        {text: "不包含", value: "!~"},
-        {text: "开始以", value: "^"},
-        {text: "结束以", value: "$"},
-        {text: "等于", value: ""},
-        {text: "不等于", value: "!"}
-        ],
-      select: [
-        {text: "等于", value: ""},
-        {text: "不等于", value: "!"}
-        ],
-      textarea: [
-        {text: "包含", value: "~"},
-        {text: "不包含", value: "!~"}
-        ]
-    };
+    var properties= {{ filter_properties_json|safe }};
+    var modes = {{ filter_modes_json|safe }};
     initializeFilters();
   </script>
   <div>
@@ -197,19 +134,19 @@ jQuery(document).ready(function($) {
     <thead>
       <tr>
         <th class="id">
-          <a title="Sort by 传票" href="/query?status=%21closed&amp;order=id&amp;owner=yuhere">传票</a>
-        </th><th class="summary">
-          <a title="Sort by 概要" href="/query?status=%21closed&amp;order=summary&amp;owner=yuhere">概要</a>
-        </th><th class="status">
-          <a title="Sort by 状态" href="/query?status=%21closed&amp;order=status&amp;owner=yuhere">状态</a>
-        </th><th class="type">
-          <a title="Sort by 类型" href="/query?status=%21closed&amp;order=type&amp;owner=yuhere">类型</a>
-        </th><th class="priority asc">
-          <a title="Sort by 优先度 (descending)" href="/query?status=%21closed&amp;order=priority&amp;owner=yuhere&amp;desc=1">优先度</a>
-        </th><th class="milestone">
-          <a title="Sort by 里程碑" href="/query?status=%21closed&amp;order=milestone&amp;owner=yuhere">里程碑</a>
-        </th><th class="component">
-          <a title="Sort by 组件" href="/query?status=%21closed&amp;order=component&amp;owner=yuhere">组件</a>
+          <a title="Sort by 传票" href="/query?status=accepted&amp;status=assigned&amp;status=closed&amp;status=new&amp;status=reopened&amp;col=id&amp;col=summary&amp;col=status&amp;col=type&amp;col=priority&amp;col=milestone&amp;col=component&amp;order=id">用户ID</a>
+        </th>
+        <th class="summary">
+          <a title="Sort by 概要" href="/query?status=accepted&amp;status=assigned&amp;status=closed&amp;status=new&amp;status=reopened&amp;col=id&amp;col=summary&amp;col=status&amp;col=type&amp;col=priority&amp;col=milestone&amp;col=component&amp;order=summary">用户名</a>
+        </th>
+        <th class="status">
+          <a title="Sort by 状态" href="/query?status=accepted&amp;status=assigned&amp;status=closed&amp;status=new&amp;status=reopened&amp;col=id&amp;col=summary&amp;col=status&amp;col=type&amp;col=priority&amp;col=milestone&amp;col=component&amp;order=status">注册时间</a>
+        </th>
+        <th class="type">
+          <a title="Sort by 类型" href="/query?status=accepted&amp;status=assigned&amp;status=closed&amp;status=new&amp;status=reopened&amp;col=id&amp;col=summary&amp;col=status&amp;col=type&amp;col=priority&amp;col=milestone&amp;col=component&amp;order=type">描述</a>
+        </th>
+        <th class="priority asc">
+          <a title="Sort by 优先度 (descending)" href="/query?status=accepted&amp;status=assigned&amp;status=closed&amp;status=new&amp;status=reopened&amp;col=id&amp;col=summary&amp;col=status&amp;col=type&amp;col=priority&amp;col=milestone&amp;col=component&amp;desc=1&amp;order=priority">电子邮件</a>
         </th>
       </tr>
     </thead>
@@ -227,13 +164,17 @@ jQuery(document).ready(function($) {
       <tr>
         <th class="id">
           <a title="Sort by 传票" href="/query?status=accepted&amp;status=assigned&amp;status=closed&amp;status=new&amp;status=reopened&amp;col=id&amp;col=summary&amp;col=status&amp;col=type&amp;col=priority&amp;col=milestone&amp;col=component&amp;order=id">用户ID</a>
-        </th><th class="summary">
+        </th>
+        <th class="summary">
           <a title="Sort by 概要" href="/query?status=accepted&amp;status=assigned&amp;status=closed&amp;status=new&amp;status=reopened&amp;col=id&amp;col=summary&amp;col=status&amp;col=type&amp;col=priority&amp;col=milestone&amp;col=component&amp;order=summary">用户名</a>
-        </th><th class="status">
+        </th>
+        <th class="status">
           <a title="Sort by 状态" href="/query?status=accepted&amp;status=assigned&amp;status=closed&amp;status=new&amp;status=reopened&amp;col=id&amp;col=summary&amp;col=status&amp;col=type&amp;col=priority&amp;col=milestone&amp;col=component&amp;order=status">注册时间</a>
-        </th><th class="type">
+        </th>
+        <th class="type">
           <a title="Sort by 类型" href="/query?status=accepted&amp;status=assigned&amp;status=closed&amp;status=new&amp;status=reopened&amp;col=id&amp;col=summary&amp;col=status&amp;col=type&amp;col=priority&amp;col=milestone&amp;col=component&amp;order=type">描述</a>
-        </th><th class="priority asc">
+        </th>
+        <th class="priority asc">
           <a title="Sort by 优先度 (descending)" href="/query?status=accepted&amp;status=assigned&amp;status=closed&amp;status=new&amp;status=reopened&amp;col=id&amp;col=summary&amp;col=status&amp;col=type&amp;col=priority&amp;col=milestone&amp;col=component&amp;desc=1&amp;order=priority">电子邮件</a>
         </th>
       </tr>

@@ -54,10 +54,41 @@ properties = {
       'actual_date' : { 'type': 'text', 'label': '实际完成日期' }
 }
 
+modes = {'text'     : [{'text': '包含',  'value': '~'},
+                       {'text': '不包含', 'value': '!~'},
+                       {'text': '开始以', 'value': '^'},
+                       {'text': '结束以', 'value': '$'},
+                       {'text': '等于',   'value': ''},
+                       {'text': '不等于', 'value': '!'}],
+         'select'   : [{'text': '等于',   'value': ''},
+                       {'text': '不等于', 'value': '!'}],
+         'textarea' : [{'text': '包含',   'value': '~'},
+                       {'text': '不包含', 'value': '!~'}]
+    }
+
+
 ####################
 # 可显示项目
 ####################
-
+columns = [{'text': '概要',   'value': 'summary'},
+           {'text': '状态',   'value': 'status'},
+           {'text': '所有者',   'value': 'type'},
+           {'text': '优先度',   'value': 'priority'},
+           {'text': '里程碑',   'value': 'milestone'},
+           {'text': '组件',   'value': 'component'},
+           {'text': '版本',   'value': 'version'},
+           {'text': '解决状态',   'value': 'resolution'},
+           {'text': '预计工时',   'value': 'due_hours'},
+           {'text': '预计完成日期',   'value': 'due_date'},
+           {'text': '实际工时',   'value': 'actual_hours'},
+           {'text': '预计工时',   'value': 'due_hours'},
+           {'text': '实际完成日期',   'value': 'actual_date'},
+           {'text': '提交者',   'value': 'reporter'},
+           {'text': '关键词',   'value': 'keywords'},
+           {'text': '抄送',   'value': 'cc'},
+           {'text': '创建时间',   'value': 'time'},
+           {'text': '修改时间',   'value': 'changetime'},
+           ]
 
 
 ####################
@@ -75,7 +106,14 @@ def query(request):
     context = {
         'app_path': request.get_full_path(), 
         'page': paginator.page(page_num),
-        'filter_properties' : simplejson.dumps(properties),
+        'filter_properties' : properties,
+        'selected_filter_properties' : ['status'],
+        'filter_properties_json' : simplejson.dumps(properties),
+        'filter_modes' : modes,
+        'filter_modes_json' : simplejson.dumps(modes),
+        'filter_columns' : columns,
+        'selected_columns' : ['cc'],
+        
     }
 
     return fnd_render_to_response('resp/user/query.html', context)
