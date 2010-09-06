@@ -105,7 +105,7 @@ ROOT_URLCONF = 'pyerp.urls'
 #
 # FOR fnd.templatetags.fndtag.py
 #
-FND_MEDIA_PREFIX='/fnd_media/'
+FND_MEDIA_PREFIX='fnd_media/'
 FND_RESP_SITE_PREFIX = 'resp/'
 FND_USER_SITE_PREFIX = 'user/'
 FND_PUB_SITE_PREFIX = ''
