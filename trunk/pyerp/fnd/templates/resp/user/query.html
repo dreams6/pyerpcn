@@ -1,5 +1,5 @@
 {% extends "layout_trac.html" %}
-{% load i18n %}
+{% load i18n %}{% load fndtag %}
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 
 {% block title %}用户{% endblock %}
@@ -53,9 +53,10 @@ jQuery(document).ready(function($) {
         <tbody>
           <tr style="height: 1px"><td colspan="4"></td></tr>
         </tbody>
+{% for prop_name in selected_filter_properties %}
         <tbody>
-          <tr class="owner">
-            <th scope="row"><label>所有者</label></th>
+          <tr class="{{ prop_name }}">
+            <th scope="row"><label>{{ filter_properties|get:prop_name|get:'label' }}</label></th>
             <td class="mode">
               <select name="owner_mode">
                 <option value="~">包含</option>
@@ -72,6 +73,7 @@ jQuery(document).ready(function($) {
             <td class="actions"><input type="submit" name="rm_filter_owner_0" value="-" /></td>
           </tr>
         </tbody>
+{% endfor %}
         <tbody>
           <tr class="status">
             <th scope="row"><label>状态</label></th>
