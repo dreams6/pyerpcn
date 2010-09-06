@@ -114,4 +114,9 @@ def fnd_show_resp_menu(resp_id):
 fnd_show_resp_menu = register.simple_tag(fnd_show_resp_menu)
 
 
+@register.filter
+def get(value, arg):
+    "Removes value from dict by key"
+    return value.get(arg)
+
 
