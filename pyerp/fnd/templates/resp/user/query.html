@@ -46,7 +46,7 @@ jQuery(document).ready(function($) {
   </div>
   <div id="tabcontent">
   <h2>自定义查询</h2>
-  <form id="query" method="post" action="/query"><div><input type="hidden" name="__FORM_TOKEN" value="6c621f103e7e30e01389c407" /></div>
+  <form id="query" method="post" action=""><div><input type="hidden" name="__FORM_TOKEN" value="6c621f103e7e30e01389c407" /></div>
     <fieldset id="filters">
       <legend class="foldable">过滤器</legend>
       <table summary="Query filters">
@@ -54,44 +54,39 @@ jQuery(document).ready(function($) {
           <tr style="height: 1px"><td colspan="4"></td></tr>
         </tbody>
 {% for prop_name in selected_filter_properties %}
+  {% if filter_properties|get:prop_name|get:'type' == 'text'  %}
         <tbody>
           <tr class="{{ prop_name }}">
             <th scope="row"><label>{{ filter_properties|get:prop_name|get:'label' }}</label></th>
             <td class="mode">
-              <select name="owner_mode">
-                <option value="~">包含</option>
-                <option value="!~">不包含</option>
-                <option value="^">开始以</option>
-                <option value="$">结束以</option>
-                <option value="" selected="selected">等于</option>
-                <option value="!">不等于</option>
+              <select name="{{ prop_name }}_mode">
+    {% for mode in filter_modes.text %}
+                <option value="{{ mode.value }}">{{ mode.text }}</option>
+    {% endfor %}
               </select>
             </td>
             <td class="filter">
-              <input type="text" name="owner" value="yuhere" size="42" />
+              <input type="text" name="{{ prop_name }}" value="yuhere" size="42" />
             </td>
-            <td class="actions"><input type="submit" name="rm_filter_owner_0" value="-" /></td>
+            <td class="actions"><input type="submit" name="rm_filter_{{ prop_name }}_0" value="-" /></td>
           </tr>
         </tbody>
-{% endfor %}
+  {% endif %}
+  {% if filter_properties|get:prop_name|get:'type' == 'radio'  %}
         <tbody>
-          <tr class="status">
-            <th scope="row"><label>状态</label></th>
+          <tr class="{{ prop_name }}">
+            <th scope="row"><label>{{ filter_properties|get:prop_name|get:'label' }}</label></th>
             <td class="filter" colspan="2">
-              <input type="checkbox" id="status_accepted" name="status" value="accepted" checked="checked" />
-              <label for="status_accepted">accepted</label>
-              <input type="checkbox" id="status_assigned" name="status" value="assigned" checked="checked" />
-              <label for="status_assigned">assigned</label>
-              <input type="checkbox" id="status_closed" name="status" value="closed" />
-              <label for="status_closed">closed</label>
-              <input type="checkbox" id="status_new" name="status" value="new" checked="checked" />
-              <label for="status_new">new</label>
-              <input type="checkbox" id="status_reopened" name="status" value="reopened" checked="checked" />
-              <label for="status_reopened">reopened</label>
+    {% for option in filter_properties|get:prop_name|get:'options' %}
+              <input type="checkbox" id="{{ prop_name }}_{{ option }}" name="{{ prop_name }}" value="{{ option }}" checked="checked" />
+              <label for="{{ prop_name }}_{{ option }}">{{ option }}</label>
+    {% endfor %}
             </td>
-            <td class="actions"><input type="submit" name="rm_filter_status" value="-" /></td>
+            <td class="actions"><input type="submit" name="rm_filter_{{ prop_name }}" value="-" /></td>
           </tr>
         </tbody>
+  {% endif %}
+{% endfor %}
         <tbody>
           <tr class="actions">
             <td class="actions" colspan="4" style="text-align: right">
@@ -99,7 +94,7 @@ jQuery(document).ready(function($) {
               <select name="add_filter" id="add_filter">
                 <option></option>
 {% for key, value in filter_properties.items %}
-                <option value="{{ key }}"{% if key in selected_filter_properties %} disabled="disabled"{% endif %}>{{ value.label }}</option>
+                <option value="{{ key }}"{% if key in selected_filter_properties and value.type == 'radio' %} disabled="disabled"{% endif %}>{{ value.label }}</option>
 {% endfor %}
               </select>
               <input type="submit" name="add" value="+" />
@@ -188,13 +183,13 @@ jQuery(document).ready(function($) {
         <td class="summary">
           <a href="/ticket/1" title="View ticket">{{ record.first_name }} {{ record.last_name }}</a>
         </td>
-        <td class="status">
-          {{ record.date_joined }}
+        <td class="date_joined">
+          {{ record|get:'date_joined' }}
         </td>
-        <td class="type">
-          {{ record.description }}
+        <td class="description">
+          {{ record|get:'description' }}
         </td>
-        <td class="priority">
+        <td class="email">
           {{ record.email }}
         </td>
       </tr>
@@ -214,7 +209,6 @@ jQuery(document).ready(function($) {
         {% endif %}
     </span>
   </div>
-
 
   </div>
 

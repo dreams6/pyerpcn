@@ -72,7 +72,7 @@ modes = {'text'     : [{'text': '包含',  'value': '~'},
 ####################
 columns = [{'text': '概要',   'value': 'summary'},
            {'text': '状态',   'value': 'status'},
-           {'text': '所有者',   'value': 'type'},
+           {'text': '所有者',   'value': 'owner'},
            {'text': '优先度',   'value': 'priority'},
            {'text': '里程碑',   'value': 'milestone'},
            {'text': '组件',   'value': 'component'},
@@ -90,24 +90,32 @@ columns = [{'text': '概要',   'value': 'summary'},
            {'text': '修改时间',   'value': 'changetime'},
            ]
 
+####################
+# Build Query URL
+####################
+
+
 
 ####################
 # 查询
 ####################
 def query(request):
     from django.utils import simplejson
-    
+
+    #~ if 'update' in request.REQUEST:
+        #~ req.redirect(query.get_href(req.href))
+
     try:
         page_num = int(request.GET.get('page', '1'))
     except ValueError:
         page_num = 1
-    
+
     paginator = Paginator(User.objects.all(), 20)
     context = {
         'app_path': request.get_full_path(), 
         'page': paginator.page(page_num),
         'filter_properties' : properties,
-        'selected_filter_properties' : ['status'],
+        'selected_filter_properties' : ['status', 'owner', 'priority'],
         'filter_properties_json' : simplejson.dumps(properties),
         'filter_modes' : modes,
         'filter_modes_json' : simplejson.dumps(modes),
