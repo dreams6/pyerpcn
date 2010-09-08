@@ -1,5 +1,9 @@
 # -*- coding: utf-8 -*- 
+
+import urllib
+
 from django.core.paginator import Paginator
+from django.http import HttpResponseRedirect
 
 from pyerp.fnd.shortcuts import fnd_render_to_response
 from pyerp.fnd.utils.version import get_svn_revision, get_version
@@ -90,11 +94,51 @@ columns = [{'text': '概要',   'value': 'summary'},
            {'text': '修改时间',   'value': 'changetime'},
            ]
 
-####################
-# Build Query URL
-####################
+###############################
+# 将请求参数字典转换成query url
+###############################
+def query_string(req_dict):
+    req_params = []
+    for param_name, param_value in req_dict.items():
+        if (type(param_value)==list):
+            for v in param_value:
+                req_params.append( (param_name, v.encode('utf-8')) )
+        else:
+            req_params.append( (param_name, param_value.encode('utf-8')) )
+    return urllib.urlencode(req_params)
 
-
+######################
+# 将请求参数转换成字典
+######################
+def req2dict(request):
+    req_params = {}
+    for prop_name in properties.keys():
+        ####################
+        # 指定的过滤条件
+        ####################
+        if request.REQUEST.has_key(prop_name):
+            pv = request.REQUEST.getlist(prop_name)
+            req_params[prop_name] = pv
+        ####################
+        # 操作符
+        ####################
+        if request.REQUEST.has_key(prop_name + '_mode'):
+            pv = request.REQUEST.getlist(prop_name + '_mode')
+            req_params[prop_name + '_mode'] = pv
+    
+    ####################
+    # 一页显示数量
+    ####################
+    if request.REQUEST.has_key('max'):
+        req_params['max'] = request.REQUEST['max']
+        
+    ##############################
+    # 请求参数为空时，设定缺省参数
+    ##############################
+    if not req_params:
+        req_params['max'] = '20'
+        
+    return req_params
 
 ####################
 # 查询
@@ -102,8 +146,12 @@ columns = [{'text': '概要',   'value': 'summary'},
 def query(request):
     from django.utils import simplejson
 
-    #~ if 'update' in request.REQUEST:
-        #~ req.redirect(query.get_href(req.href))
+    req_params = req2dict(request)
+
+
+    if 'update' in request.REQUEST:
+        redirect_url = query_string(req_params)
+        return HttpResponseRedirect('?' + redirect_url)
 
     try:
         page_num = int(request.GET.get('page', '1'))
@@ -121,6 +169,7 @@ def query(request):
         'filter_modes_json' : simplejson.dumps(modes),
         'filter_columns' : columns,
         'selected_columns' : ['cc'],
+        'req_params' : req_params,
         
     }
 
