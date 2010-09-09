@@ -53,32 +53,41 @@ jQuery(document).ready(function($) {
         <tbody>
           <tr style="height: 1px"><td colspan="4"></td></tr>
         </tbody>
-{% for prop_name in selected_filter_properties %}
-  {% if filter_properties|get:prop_name|get:'type' == 'text'  %}
+{% for prop_name, prop_value in filter_properties.items %}
+{% if prop_name in req_params %}
+  {% if prop_value|get:'type' == 'text' %}
         <tbody>
+    {% for par in req_params|get:prop_name %}
           <tr class="{{ prop_name }}">
-            <th scope="row"><label>{{ filter_properties|get:prop_name|get:'label' }}</label></th>
+      {% if forloop.first %}
+            <th scope="row"><label>{{ prop_value|get:'label' }}</label></th>
             <td class="mode">
               <select name="{{ prop_name }}_mode">
-    {% for mode in filter_modes.text %}
-                <option value="{{ mode.value }}">{{ mode.text }}</option>
-    {% endfor %}
+        {% for mode in filter_modes.text %}{% with prop_name|add:'_mode' as p_name %}
+                <option value="{{ mode.value }}"{% if mode.value in req_params|get:p_name %} selected="selected"{% endif %} >{{ mode.text }}</option>
+        {% endwith %}{% endfor %}
               </select>
             </td>
             <td class="filter">
-              <input type="text" name="{{ prop_name }}" value="yuhere" size="42" />
+              <input type="text" name="{{ prop_name }}" value="{{ par }}" size="42" />
             </td>
-            <td class="actions"><input type="submit" name="rm_filter_{{ prop_name }}_0" value="-" /></td>
+            <td class="actions"><input type="submit" name="rm_filter_{{ prop_name }}" value="-" /></td>
+      {% else %}
+            <th scope="row" colspan="2"><label>or</label></th>
+            <td class="filter"><input type="text" name="{{ prop_name }}" value="{{ par }}" size="42"></td>
+            <td class="actions"><input type="submit" name="rm_filter_{{ prop_name }}" value="-" /></td>
+      {% endif %}
           </tr>
+    {% endfor %}
         </tbody>
   {% endif %}
-  {% if filter_properties|get:prop_name|get:'type' == 'radio'  %}
+  {% if prop_value|get:'type' == 'radio' %}
         <tbody>
           <tr class="{{ prop_name }}">
-            <th scope="row"><label>{{ filter_properties|get:prop_name|get:'label' }}</label></th>
+            <th scope="row"><label>{{ prop_value|get:'label' }}</label></th>
             <td class="filter" colspan="2">
-    {% for option in filter_properties|get:prop_name|get:'options' %}
-              <input type="checkbox" id="{{ prop_name }}_{{ option }}" name="{{ prop_name }}" value="{{ option }}" checked="checked" />
+    {% for option in prop_value|get:'options' %}
+              <input type="checkbox" id="{{ prop_name }}_{{ option }}" name="{{ prop_name }}" value="{{ option }}"{% if option in req_params|get:prop_name %} checked="checked"{% endif %} />
               <label for="{{ prop_name }}_{{ option }}">{{ option }}</label>
     {% endfor %}
             </td>
@@ -86,6 +95,45 @@ jQuery(document).ready(function($) {
           </tr>
         </tbody>
   {% endif %}
+  {% if prop_value|get:'type' == 'select' %}
+        <tbody>
+    {% for par in req_params|get:prop_name %}
+          <tr class="{{ prop_name }}">
+      {% if forloop.first %}
+            <th scope="row"><label>{{ prop_value|get:'label' }}</label></th>
+            <td class="mode">
+              <select name="{{ prop_name }}_mode">
+        {% for mode in filter_modes.select %}{% with prop_name|add:'_mode' as p_name %}
+                <option value="{{ mode.value }}"{% if mode.value in req_params|get:p_name %} selected="selected"{% endif %} >{{ mode.text }}</option>
+        {% endwith %}{% endfor %}
+              </select>
+            </td>
+            <td class="filter">
+              <select name="{{ prop_name }}">
+                <option></option>
+        {% for option in prop_value|get:'options' %}
+                <option value="{{ option }}"{% if option == par %} selected="selected"{% endif %}>{{ option }}</option>
+        {% endfor %}
+              </select>
+            </td>
+            <td class="actions"><input type="submit" name="rm_filter_{{ prop_name }}" value="-" /></td>
+      {% else %}
+            <th scope="row" colspan="2"><label>or</label></th>
+            <td class="filter">
+              <select name="{{ prop_name }}">
+                <option></option>
+        {% for option in prop_value|get:'options' %}
+                <option value="{{ option }}"{% if option == par %} selected="selected"{% endif %}>{{ option }}</option>
+        {% endfor %}
+              </select>
+            </td>
+            <td class="actions"><input type="submit" name="rm_filter_{{ prop_name }}" value="-" /></td>
+      {% endif %}
+          </tr>
+    {% endfor %}
+        </tbody>
+  {% endif %}
+{% endif %}
 {% endfor %}
         <tbody>
           <tr class="actions">
@@ -107,7 +155,7 @@ jQuery(document).ready(function($) {
       <legend class="foldable">显示列名</legend>
       <div>
 {% for col in filter_columns %}
-        <label><input type="checkbox" name="col" value="{{ col.value }}" {% if col.value in selected_columns %}checked="checked" {% endif %}/>{{ col.text }}</label>
+        <label><input type="checkbox" name="col" value="{{ col.value }}"{% if col.value in req_params|get:'col' %} checked="checked"{% endif %} />{{ col.text }}</label>
 {% endfor %}
       </div>
     </fieldset>
