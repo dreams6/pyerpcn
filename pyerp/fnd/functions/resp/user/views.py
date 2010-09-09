@@ -58,7 +58,7 @@ properties = {
       'actual_date' : { 'type': 'text', 'label': '实际完成日期' }
 }
 
-modes = {'text'     : [{'text': '包含',  'value': '~'},
+modes = {'text'     : [{'text': '包含',   'value': '~'},
                        {'text': '不包含', 'value': '!~'},
                        {'text': '开始以', 'value': '^'},
                        {'text': '结束以', 'value': '$'},
@@ -69,7 +69,6 @@ modes = {'text'     : [{'text': '包含',  'value': '~'},
          'textarea' : [{'text': '包含',   'value': '~'},
                        {'text': '不包含', 'value': '!~'}]
     }
-
 
 ####################
 # 可显示项目
@@ -117,27 +116,27 @@ def req2dict(request):
         # 指定的过滤条件
         ####################
         if request.REQUEST.has_key(prop_name):
-            pv = request.REQUEST.getlist(prop_name)
-            req_params[prop_name] = pv
+            req_params[prop_name] = request.REQUEST.getlist(prop_name)
         ####################
         # 操作符
         ####################
         if request.REQUEST.has_key(prop_name + '_mode'):
-            pv = request.REQUEST.getlist(prop_name + '_mode')
-            req_params[prop_name + '_mode'] = pv
-    
+            req_params[prop_name + '_mode'] = request.REQUEST.getlist(prop_name + '_mode')
+    ####################
+    # 显示列名
+    ####################
+    if request.REQUEST.has_key('col'):
+        req_params['col'] = request.REQUEST.getlist('col')
     ####################
     # 一页显示数量
     ####################
     if request.REQUEST.has_key('max'):
         req_params['max'] = request.REQUEST['max']
-        
-    ##############################
-    # 请求参数为空时，设定缺省参数
-    ##############################
-    if not req_params:
-        req_params['max'] = '20'
-        
+    #~ ##############################
+    #~ # 请求参数为空时，设定缺省参数
+    #~ ##############################
+    #~ if not req_params:
+        #~ req_params['max'] = '20'
     return req_params
 
 ####################
@@ -147,11 +146,17 @@ def query(request):
     from django.utils import simplejson
 
     req_params = req2dict(request)
-
-
+    
     if 'update' in request.REQUEST:
         redirect_url = query_string(req_params)
         return HttpResponseRedirect('?' + redirect_url)
+
+    ######################################
+    # 请求参数为空时(初始显示时)，设定初始参数
+    ######################################
+    #~ if not req_params:
+        #~ req_params['max'] = '20'
+
 
     try:
         page_num = int(request.GET.get('page', '1'))
@@ -168,7 +173,6 @@ def query(request):
         'filter_modes' : modes,
         'filter_modes_json' : simplejson.dumps(modes),
         'filter_columns' : columns,
-        'selected_columns' : ['cc'],
         'req_params' : req_params,
         
     }
