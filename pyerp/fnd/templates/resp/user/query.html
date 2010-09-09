@@ -46,7 +46,7 @@ jQuery(document).ready(function($) {
   </div>
   <div id="tabcontent">
   <h2>自定义查询</h2>
-  <form id="query" method="post" action=""><div><input type="hidden" name="__FORM_TOKEN" value="6c621f103e7e30e01389c407" /></div>
+  <form id="query" method="post" action="./"><div><input type="hidden" name="__FORM_TOKEN" value="6c621f103e7e30e01389c407" /></div>
     <fieldset id="filters">
       <legend class="foldable">过滤器</legend>
       <table summary="Query filters">
@@ -86,10 +86,7 @@ jQuery(document).ready(function($) {
           <tr class="{{ prop_name }}">
             <th scope="row"><label>{{ prop_value|get:'label' }}</label></th>
             <td class="filter" colspan="2">
-    {% for option in prop_value|get:'options' %}
-              <input type="checkbox" id="{{ prop_name }}_{{ option }}" name="{{ prop_name }}" value="{{ option }}"{% if option in req_params|get:prop_name %} checked="checked"{% endif %} />
-              <label for="{{ prop_name }}_{{ option }}">{{ option }}</label>
-    {% endfor %}
+    {% for option in prop_value|get:'options' %}<input type="checkbox" id="{{ prop_name }}_{{ option }}" name="{{ prop_name }}" value="{{ option }}"{% if option in req_params|get:prop_name %} checked="checked"{% endif %} /><label for="{{ prop_name }}_{{ option }}">{{ option }}</label>{% endfor %}
             </td>
             <td class="actions"><input type="submit" name="rm_filter_{{ prop_name }}" value="-" /></td>
           </tr>
@@ -142,7 +139,7 @@ jQuery(document).ready(function($) {
               <select name="add_filter" id="add_filter">
                 <option></option>
 {% for key, value in filter_properties.items %}
-                <option value="{{ key }}"{% if key in selected_filter_properties and value.type == 'radio' %} disabled="disabled"{% endif %}>{{ value.label }}</option>
+                <option value="{{ key }}"{% if key in req_params and value.type == 'radio' %} disabled="disabled"{% endif %}>{{ value.label }}</option>
 {% endfor %}
               </select>
               <input type="submit" name="add" value="+" />

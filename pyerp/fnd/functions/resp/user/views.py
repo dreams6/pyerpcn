@@ -4,6 +4,7 @@ import urllib
 
 from django.core.paginator import Paginator
 from django.http import HttpResponseRedirect
+from django.utils.translation import ugettext as _
 
 from pyerp.fnd.shortcuts import fnd_render_to_response
 from pyerp.fnd.utils.version import get_svn_revision, get_version
@@ -13,49 +14,27 @@ from pyerp.fnd.models import User
 __svnid__ = '$Id$'
 __svn__ = get_svn_revision(__name__)
 
+
+def y_options():
+    
+    
+    
+    return ['none', 'days', 'accesses']
+
+
 ####################
 # 过滤器属性
 ####################
 properties = {
-      'status'      : { 'type': 'radio', 'label': '状态' , 'options': ['accepted',
-                                                                'assigned',
-                                                                'closed',
-                                                                'new',
-                                                                'reopened'] },
-      'due_date'    : { 'type': 'text', 'label': '预计完成日期' },
-      'due_hours'   : { 'type': 'text', 'label': '预计工时' },
-      'description' : { 'type': 'textarea', 'label': '描述' },
-      'reporter'    : { 'type': 'text', 'label': '提交者' },
-      'cc'          : { 'type': 'text', 'label': '抄送' },
-      'resolution'  : { 'type': 'radio', 'label': '解决状态', 'options': ['不需要解决',
-                                                               '解决-未满足期待',
-                                                               '解决-满足期待',
-                                                               '解决-超出期待'
-                                                              ] },
-      'actual_hours': { 'type': 'text', 'label': '实际工时' },
-      'component'   : { 'type': 'select', 'label': '组件', 'options': ['pyerp.ap',
-                                                            'pyerp.ar',
-                                                            'pyerp.fnd',
-                                                            'pyerp.gl' ] },
-      'summary'     : { 'type': 'text', 'label': '概要' },
-      'priority'    : { 'type': 'select', 'label': '优先度', 'options': ['最高优先级',
-                                                            '高优先级',
-                                                            '中等优先级',
-                                                            '低优先级',
-                                                            '最低优先级' ] },
-      'keywords'    : { 'type': 'text', 'label': '关键词'},
-      'version'     : { 'type': 'select', 'label': '版本', 'options': ['0.0.2-dev-0',
-                                                          '0.0.1-dev-0',
-                                                          '0.1.0-alpha']},
-      'milestone'   : { 'type': 'select', 'label': '里程碑', 'options': ['01_Pilot',
-                                                              '02_基础应用程序集',
-                                                              '03_财务应用程序集',
-                                                              '04_结合测试' ] },
-      'owner'       : { 'type': 'text', 'label': '所有者' },
-      'type'        : { 'type': 'select', 'label': '类型', 'options': ['任务',
-                                                      '缺陷',
-                                                      '功能增强'] },
-      'actual_date' : { 'type': 'text', 'label': '实际完成日期' }
+      'username'    : { 'type': 'text',   'label': '用户名' },
+      'email'       : { 'type': 'text',   'label': '电子邮件' },
+      'pwd_expire_type' : { 'type': 'radio',   'label': '密码过期类型' , 'options' : y_options()},
+      'first_name'  : { 'type': 'text',   'label': '姓' },
+      'last_name'   : { 'type': 'text',   'label': '名' },
+      'description' : { 'type': 'text',   'label': '描述' },
+      'type'        : { 'type': 'select', 'label': '类型', 'options': [u'任务',
+                                                                       u'缺陷',
+                                                                       u'功能增强'] },
 }
 
 modes = {'text'     : [{'text': '包含',   'value': '~'},
@@ -68,30 +47,17 @@ modes = {'text'     : [{'text': '包含',   'value': '~'},
                        {'text': '不等于', 'value': '!'}],
          'textarea' : [{'text': '包含',   'value': '~'},
                        {'text': '不包含', 'value': '!~'}]
-    }
+        }
 
 ####################
 # 可显示项目
 ####################
-columns = [{'text': '概要',   'value': 'summary'},
-           {'text': '状态',   'value': 'status'},
-           {'text': '所有者',   'value': 'owner'},
-           {'text': '优先度',   'value': 'priority'},
-           {'text': '里程碑',   'value': 'milestone'},
-           {'text': '组件',   'value': 'component'},
-           {'text': '版本',   'value': 'version'},
-           {'text': '解决状态',   'value': 'resolution'},
-           {'text': '预计工时',   'value': 'due_hours'},
-           {'text': '预计完成日期',   'value': 'due_date'},
-           {'text': '实际工时',   'value': 'actual_hours'},
-           {'text': '预计工时',   'value': 'due_hours'},
-           {'text': '实际完成日期',   'value': 'actual_date'},
-           {'text': '提交者',   'value': 'reporter'},
-           {'text': '关键词',   'value': 'keywords'},
-           {'text': '抄送',   'value': 'cc'},
-           {'text': '创建时间',   'value': 'time'},
-           {'text': '修改时间',   'value': 'changetime'},
-           ]
+columns = [{'text': '用户名',         'value': 'username'},
+           {'text': '电子邮件',       'value': 'email'},
+           {'text': '密码过期类型',   'value': 'pwd_expire_type'},
+           {'text': '姓',             'value': 'first_name'},
+           {'text': '名',             'value': 'last_name'},
+           {'text': '描述',           'value': 'description'}]
 
 ###############################
 # 将请求参数字典转换成query url
