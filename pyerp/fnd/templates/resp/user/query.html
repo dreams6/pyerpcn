@@ -48,7 +48,7 @@ jQuery(document).ready(function($) {
   <h2>自定义查询</h2>
   <form id="query" method="post" action="./"><div><input type="hidden" name="__FORM_TOKEN" value="6c621f103e7e30e01389c407" /></div>
     <fieldset id="filters">
-      <legend class="foldable">过滤器</legend>
+      <legend class="foldable">{% trans 'Filters' %}</legend>
       <table summary="Query filters">
         <tbody>
           <tr style="height: 1px"><td colspan="4"></td></tr>
@@ -149,7 +149,7 @@ jQuery(document).ready(function($) {
       </table>
     </fieldset>
     <fieldset id="columns">
-      <legend class="foldable">显示列名</legend>
+      <legend class="foldable">{% trans 'Columns' %}</legend>
       <div>
 {% for col in filter_columns %}
         <label><input type="checkbox" name="col" value="{{ col.value }}"{% if col.value in req_params|get:'col' %} checked="checked"{% endif %} />{{ col.text }}</label>
@@ -157,7 +157,7 @@ jQuery(document).ready(function($) {
       </div>
     </fieldset>
     <p class="option">
-      <label for="max">每页最大数量</label>
+      <label for="max">{% trans 'Max items per page' %}</label>
       <input type="text" name="max" id="max" size="10" value="100" />
     </p>
     <div class="buttons">
@@ -172,77 +172,128 @@ jQuery(document).ready(function($) {
     initializeFilters();
   </script>
   <div>
+
+<h2 class="report-result">
+    Results <span class="numresults">(131 - 140 of 238)</span>
+</h2>
+
+<div class="paging">
+    <span class="previous">
+      <a title="Previous Page" href="/demo-0.11/query?status=accepted&amp;status=assigned&amp;status=new&amp;status=reopened&amp;max=10&amp;page=13&amp;order=priority">←</a>
+    </span>
+    <span>
+    <a title="Page 4" href="/demo-0.11/query?status=accepted&amp;status=assigned&amp;status=new&amp;status=reopened&amp;max=10&amp;page=4&amp;order=priority">4</a>
+    </span>
+    <span>
+    <a title="Page 5" href="/demo-0.11/query?status=accepted&amp;status=assigned&amp;status=new&amp;status=reopened&amp;max=10&amp;page=5&amp;order=priority">5</a>
+    </span>
+    <span>
+    <a title="Page 6" href="/demo-0.11/query?status=accepted&amp;status=assigned&amp;status=new&amp;status=reopened&amp;max=10&amp;page=6&amp;order=priority">6</a>
+    </span>
+    <span>
+    <a title="Page 7" href="/demo-0.11/query?status=accepted&amp;status=assigned&amp;status=new&amp;status=reopened&amp;max=10&amp;page=7&amp;order=priority">7</a>
+    </span>
+    <span>
+    <a title="Page 8" href="/demo-0.11/query?status=accepted&amp;status=assigned&amp;status=new&amp;status=reopened&amp;max=10&amp;page=8&amp;order=priority">8</a>
+    </span>
+    <span>
+    <a title="Page 9" href="/demo-0.11/query?status=accepted&amp;status=assigned&amp;status=new&amp;status=reopened&amp;max=10&amp;page=9&amp;order=priority">9</a>
+    </span>
+    <span>
+    <a title="Page 10" href="/demo-0.11/query?status=accepted&amp;status=assigned&amp;status=new&amp;status=reopened&amp;max=10&amp;page=10&amp;order=priority">10</a>
+    </span>
+    <span>
+    <a title="Page 11" href="/demo-0.11/query?status=accepted&amp;status=assigned&amp;status=new&amp;status=reopened&amp;max=10&amp;page=11&amp;order=priority">11</a>
+    </span>
+    <span>
+    <a title="Page 12" href="/demo-0.11/query?status=accepted&amp;status=assigned&amp;status=new&amp;status=reopened&amp;max=10&amp;page=12&amp;order=priority">12</a>
+    </span>
+    <span>
+    <a title="Page 13" href="/demo-0.11/query?status=accepted&amp;status=assigned&amp;status=new&amp;status=reopened&amp;max=10&amp;page=13&amp;order=priority">13</a>
+    </span>
+    <span>
+    <span class="current">14</span>
+    </span>
+    <span>
+    <a title="Page 15" href="/demo-0.11/query?status=accepted&amp;status=assigned&amp;status=new&amp;status=reopened&amp;max=10&amp;page=15&amp;order=priority">15</a>
+    </span>
+    <span>
+    <a title="Page 16" href="/demo-0.11/query?status=accepted&amp;status=assigned&amp;status=new&amp;status=reopened&amp;max=10&amp;page=16&amp;order=priority">16</a>
+    </span>
+    <span>
+    <a title="Page 17" href="/demo-0.11/query?status=accepted&amp;status=assigned&amp;status=new&amp;status=reopened&amp;max=10&amp;page=17&amp;order=priority">17</a>
+    </span>
+    <span>
+    <a title="Page 18" href="/demo-0.11/query?status=accepted&amp;status=assigned&amp;status=new&amp;status=reopened&amp;max=10&amp;page=18&amp;order=priority">18</a>
+    </span>
+    <span>
+    <a title="Page 19" href="/demo-0.11/query?status=accepted&amp;status=assigned&amp;status=new&amp;status=reopened&amp;max=10&amp;page=19&amp;order=priority">19</a>
+    </span>
+    <span>
+    <a title="Page 20" href="/demo-0.11/query?status=accepted&amp;status=assigned&amp;status=new&amp;status=reopened&amp;max=10&amp;page=20&amp;order=priority">20</a>
+    </span>
+    <span>
+    <a title="Page 21" href="/demo-0.11/query?status=accepted&amp;status=assigned&amp;status=new&amp;status=reopened&amp;max=10&amp;page=21&amp;order=priority">21</a>
+    </span>
+    <span>
+    <a title="Page 22" href="/demo-0.11/query?status=accepted&amp;status=assigned&amp;status=new&amp;status=reopened&amp;max=10&amp;page=22&amp;order=priority">22</a>
+    </span>
+    <span>
+    <a title="Page 23" href="/demo-0.11/query?status=accepted&amp;status=assigned&amp;status=new&amp;status=reopened&amp;max=10&amp;page=23&amp;order=priority">23</a>
+    </span>
+    <span>
+    <a title="Page 24" href="/demo-0.11/query?status=accepted&amp;status=assigned&amp;status=new&amp;status=reopened&amp;max=10&amp;page=24&amp;order=priority">24</a>
+    </span>
+    <span class="next">
+      <a title="Next Page" href="/demo-0.11/query?status=accepted&amp;status=assigned&amp;status=new&amp;status=reopened&amp;max=10&amp;page=15&amp;order=priority">→</a>
+    </span>
+</div>
+
   <table class="listing tickets">
     <thead>
       <tr>
         <th class="id">
-          <a title="Sort by 传票" href="/query?status=accepted&amp;status=assigned&amp;status=closed&amp;status=new&amp;status=reopened&amp;col=id&amp;col=summary&amp;col=status&amp;col=type&amp;col=priority&amp;col=milestone&amp;col=component&amp;order=id">用户ID</a>
+          <a title="Sort by {{ col.text }}" href="/query?status=accepted&amp;status=assigned&amp;status=closed&amp;status=new&amp;status=reopened&amp;col=id&amp;col=summary&amp;col=status&amp;col=type&amp;col=priority&amp;col=milestone&amp;col=component&amp;order=id">Id</a>
         </th>
-        <th class="summary">
-          <a title="Sort by 概要" href="/query?status=accepted&amp;status=assigned&amp;status=closed&amp;status=new&amp;status=reopened&amp;col=id&amp;col=summary&amp;col=status&amp;col=type&amp;col=priority&amp;col=milestone&amp;col=component&amp;order=summary">用户名</a>
+{% for col in filter_columns %}
+  {% if col.value in req_params|get:'col' %}
+        <th class="{{ col.value }}">
+          <a title="Sort by {{ col.text }}" href="/query?status=accepted&amp;status=assigned&amp;status=closed&amp;status=new&amp;status=reopened&amp;col=id&amp;col=summary&amp;col=status&amp;col=type&amp;col=priority&amp;col=milestone&amp;col=component&amp;order=id">{{ col.text }}</a>
         </th>
-        <th class="status">
-          <a title="Sort by 状态" href="/query?status=accepted&amp;status=assigned&amp;status=closed&amp;status=new&amp;status=reopened&amp;col=id&amp;col=summary&amp;col=status&amp;col=type&amp;col=priority&amp;col=milestone&amp;col=component&amp;order=status">注册时间</a>
-        </th>
-        <th class="type">
-          <a title="Sort by 类型" href="/query?status=accepted&amp;status=assigned&amp;status=closed&amp;status=new&amp;status=reopened&amp;col=id&amp;col=summary&amp;col=status&amp;col=type&amp;col=priority&amp;col=milestone&amp;col=component&amp;order=type">描述</a>
-        </th>
-        <th class="priority asc">
-          <a title="Sort by 优先度 (descending)" href="/query?status=accepted&amp;status=assigned&amp;status=closed&amp;status=new&amp;status=reopened&amp;col=id&amp;col=summary&amp;col=status&amp;col=type&amp;col=priority&amp;col=milestone&amp;col=component&amp;desc=1&amp;order=priority">电子邮件</a>
-        </th>
+  {% endif %}
+{% endfor %}
       </tr>
     </thead>
     <tbody>
+{% if page.object_list  %}
+  {% for record in page.object_list  %}
+      <tr class="{% cycle 'even' 'odd' %} prio3">
+        <td class="id">
+          <a title="Edit the user" href="{{ record.id }}">{{ record.id }}</a>
+        </td>
+    {% for col in filter_columns %}
+      {% if col.value in req_params|get:'col' %}
+        <td class="{{ col.value }}">
+          {{ record|get:col.value }}
+        </td>
+      {% endif %}
+    {% endfor %}
+      </tr>
+  {% endfor %}
+{% else %}
+  {% if req_params|get:'col' %}
     <tr class="even">
-      <td colspan="7">
-        没有找到传票
+      <td colspan="{{  req_params|get:'col'|length }}">
+        没有符合条件的数据。
       </td>
     </tr>
+  {% endif %}
+{% endif %}
     </tbody>
   </table>
 
-  <table class="listing tickets">
-    <thead>
-      <tr>
-        <th class="id">
-          <a title="Sort by 传票" href="/query?status=accepted&amp;status=assigned&amp;status=closed&amp;status=new&amp;status=reopened&amp;col=id&amp;col=summary&amp;col=status&amp;col=type&amp;col=priority&amp;col=milestone&amp;col=component&amp;order=id">用户ID</a>
-        </th>
-        <th class="summary">
-          <a title="Sort by 概要" href="/query?status=accepted&amp;status=assigned&amp;status=closed&amp;status=new&amp;status=reopened&amp;col=id&amp;col=summary&amp;col=status&amp;col=type&amp;col=priority&amp;col=milestone&amp;col=component&amp;order=summary">用户名</a>
-        </th>
-        <th class="status">
-          <a title="Sort by 状态" href="/query?status=accepted&amp;status=assigned&amp;status=closed&amp;status=new&amp;status=reopened&amp;col=id&amp;col=summary&amp;col=status&amp;col=type&amp;col=priority&amp;col=milestone&amp;col=component&amp;order=status">注册时间</a>
-        </th>
-        <th class="type">
-          <a title="Sort by 类型" href="/query?status=accepted&amp;status=assigned&amp;status=closed&amp;status=new&amp;status=reopened&amp;col=id&amp;col=summary&amp;col=status&amp;col=type&amp;col=priority&amp;col=milestone&amp;col=component&amp;order=type">描述</a>
-        </th>
-        <th class="priority asc">
-          <a title="Sort by 优先度 (descending)" href="/query?status=accepted&amp;status=assigned&amp;status=closed&amp;status=new&amp;status=reopened&amp;col=id&amp;col=summary&amp;col=status&amp;col=type&amp;col=priority&amp;col=milestone&amp;col=component&amp;desc=1&amp;order=priority">电子邮件</a>
-        </th>
-      </tr>
-    </thead>
-    <tbody>
-{% for record in page.object_list  %}
-      <tr class="{% cycle 'even' 'odd' %} prio3">
-        <td class="id"><a href="/ticket/{{ record.id }}/" title="View ticket">{{ record.username }}</a></td>
-        <td class="summary">
-          <a href="/ticket/1" title="View ticket">{{ record.first_name }} {{ record.last_name }}</a>
-        </td>
-        <td class="date_joined">
-          {{ record|get:'date_joined' }}
-        </td>
-        <td class="description">
-          {{ record|get:'description' }}
-        </td>
-        <td class="email">
-          {{ record.email }}
-        </td>
-      </tr>
-{% endfor %}
-    </tbody>
-  </table>
   </div>
-
+  
   <div>
     <span class="step-links">
         {% if page.has_previous %}
@@ -254,7 +305,7 @@ jQuery(document).ready(function($) {
         {% endif %}
     </span>
   </div>
-
+  
   </div>
 
 </div>

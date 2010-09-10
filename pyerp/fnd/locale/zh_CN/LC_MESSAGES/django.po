@@ -119,5 +119,52 @@ msgstr "程序"
 msgid "Manager"
 msgstr "管理器"
 
+#: Query Filters
+msgid "Filters"
+msgstr "过滤器"
+
+#: Query Filters
+msgid "Columns"
+msgstr "列"
+
+#: Query Filters
+msgid "Max items per page"
+msgstr "每页最大数量"
+
+#: Query Filters
+msgid "contains"
+msgstr "包含"
+
+#: Query Filters
+msgid "doesn't contain"
+msgstr "不包含"
+
+#: Query Filters
+msgid "begins with"
+msgstr "开始以"
+
+#: Query Filters
+msgid "ends with"
+msgstr "结束以"
+
+#: Query Filters
+msgid "equal"
+msgstr "等于"
+
+#: Query Filters
+msgid "not equal"
+msgstr "不等于"
+
+
+#: Fnd User
+msgid "Password expirtion"
+msgstr "密码过期方式"
+
+#: Fnd User
+msgid "Description"
+msgstr "描述"
+
+
+
 
 
