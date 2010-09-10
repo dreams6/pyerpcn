@@ -78,7 +78,8 @@ def query_string(req_dict):
                 req_params.append( (param_name, v.encode('utf-8')) )
         else:
             req_params.append( (param_name, param_value.encode('utf-8')) )
-    return urllib.urlencode(req_params)
+    url = urllib.urlencode(req_params)
+    return url and url + '&' or ''
 
 ######################
 # 将请求参数转换成字典
@@ -133,23 +134,22 @@ def query(request):
     ############################
     # 将请求重镜像成带参数的GET请求
     ############################
+    redirect_url = query_string(req_params)
     if 'update' in request.REQUEST:
-        redirect_url = query_string(req_params)
         return HttpResponseRedirect('?' + redirect_url)
 
     ######################################
-    # 请求参数为空时(初始显示时)，设定初始参数
+    # 请求参数为空时(初始显示时)，设定缺省参数
     ######################################
     #~ if not req_params:
         #~ req_params['max'] = '20'
-    #print modes
 
     try:
         page_num = int(request.REQUEST.get('page', '1'))
     except ValueError:
         page_num = 1
 
-    paginator = Paginator(User.objects.all(), 20)
+    paginator = Paginator(User.objects.all(), 2)
 
     modes = get_modes()
     columns = get_columns()
@@ -163,6 +163,7 @@ def query(request):
         'filter_modes_json' : simplejson.dumps(modes),
         'filter_columns' : columns,
         'req_params' : req_params,
+        'link_url' : redirect_url,
         
     }
 
