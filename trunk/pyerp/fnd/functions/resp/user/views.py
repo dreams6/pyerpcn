@@ -20,16 +20,16 @@ __svn__ = get_svn_revision(__name__)
 # 查询比较方法
 ####################
 def get_modes():
-    modes = {'text'     : [{'text': _('contains'),         'value': '~'},
-                           {'text': _('doesn\'t contain'), 'value': '!~'},
-                           {'text': _('begins with'),      'value': '^'},
-                           {'text': _('ends with'),        'value': '$'},
-                           {'text': _('equal'),            'value': ''},
-                           {'text': _('not equal'),        'value': '!'}],
-             'select'   : [{'text': _('equal'),            'value': ''},
-                           {'text': _('not equal'),        'value': '!'}],
-             'textarea' : [{'text': _('contains'),         'value': '~'},
-                           {'text': _('doesn\'t contain'), 'value': '!~'}]
+    modes = {'text'     : ( ('~'  ,   _('contains')           ),
+                            ('!~' ,   _('doesn\'t contain')   ),
+                            ('^'  ,   _('begins with')        ),
+                            ('$'  ,   _('ends with')          ),
+                            (''   ,   _('equal')              ),
+                            ('!'  ,   _('not equal')          ) ),
+             'select'   : ( (''   ,   _('equal')              ),
+                            ('!'  ,   _('not equal')          ) ),
+             'textarea' : ( ('~'  ,   _('contains')           ),
+                            ('!~' ,   _('doesn\'t contain')   ) )
             }
     return modes
 
@@ -37,21 +37,21 @@ def get_modes():
 # 过滤器属性
 ####################
 def get_filter_properties():
-    
-    def y_options():
-        return ['none', 'days', 'accesses']
-    
-    
     properties = {
           'username'    : { 'type': 'text',   'label': _('Username') },
           'email'       : { 'type': 'text',   'label': _('Email address') },
-          'pwd_expiration_type' : { 'type': 'radio',   'label': _('Password expirtion') , 'options' : y_options()},
+          'pwd_expiration_type' : 
+                          { 'type': 'radio',   'label': _('Password expirtion') , 
+                            'options' : ( ('0', 'none'), 
+                                          ('1', 'days'),
+                                          ('2', 'accesses'))},
           'first_name'  : { 'type': 'text',   'label': _('last name') },
           'last_name'   : { 'type': 'text',   'label': _('first name') },
           'description' : { 'type': 'text',   'label': _('Description') },
-          'type'        : { 'type': 'select', 'label': '类型', 'options': [u'任务',
-                                                                           u'缺陷',
-                                                                           u'功能增强'] },
+          'type'        : { 'type': 'select', 'label': '类型', 
+                            'options' : ( ('1', '任务'),
+                                          ('2', '缺陷'),
+                                          ('3', '功能增强')) },
     }
     return properties
 
@@ -59,12 +59,12 @@ def get_filter_properties():
 # 可显示项目
 ####################
 def get_columns():
-    columns = [{'text': _('Username'),            'value': 'username'},
-               {'text': _('Email address'),       'value': 'email'},
-               {'text': _('Password expirtion'),  'value': 'pwd_expiration_type'},
-               {'text': _('last name'),           'value': 'first_name'},
-               {'text': _('first name'),          'value': 'last_name'},
-               {'text': _('Description'),         'value': 'description'}]
+    columns = ( ('username',            _('Username')             ),
+                ('email',               _('Email address')        ),
+                ('pwd_expiration_type', _('Password expirtion')   ),
+                ('first_name',          _('last name')            ),
+                ('last_name',           _('first name')           ),
+                ('description',         _('Description')          ) )
     return columns
 
 ###############################
@@ -107,8 +107,7 @@ def req2dict(request, properties):
     ####################
     if request.REQUEST.has_key('max'):
         req_params['max'] = request.REQUEST['max']
-    
-    
+
     #~ ##############################
     #~ # 请求参数为空时，设定缺省参数
     #~ ##############################

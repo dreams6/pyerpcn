@@ -119,8 +119,14 @@ def get(value, arg):
     "Removes value from dict by key"
     if (type(value)==dict):
         return value.get(arg)
-    elif (type(value)==list):
-        return value[arg]
+    elif (type(value) in (list, tuple)):
+        if (type(arg)==int):
+            return value[arg]
+        else:
+            for item in value:
+                if (type(item) in (list, tuple)):
+                    if (item[0]==arg):
+                        return item[1]
     else:
         return getattr(value, arg)
 

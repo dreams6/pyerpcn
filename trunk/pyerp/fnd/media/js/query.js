@@ -153,9 +153,9 @@
           for (var i = 0; i < options.length; i++) {
             var option;
             if (typeof(options[i]) == "object") {
-              option = new Option(options[i].text, options[i].value);
+              option = new Option(options[i][1], options[i][0]);
             } else {
-              option = new Option(options[i], options[i]);
+              option = new Option(options, options);
             }
             e.options[e.options.length] = option;
           }
@@ -196,10 +196,10 @@
         if (property.type == "radio") {
           for (var i = 0; i < property.options.length; i++) {
             var option = property.options[i];
-            td.appendChild(createCheckbox(propertyName, option,
-              propertyName + "_" + option));
-            td.appendChild(createLabel(option ? option : "none",
-              propertyName + "_" + option));
+            td.appendChild(createCheckbox(propertyName, option[0],
+              propertyName + "_" + option[0]));
+            td.appendChild(createLabel(option[1] ? option[1] : "none",
+              propertyName + "_" + option[0]));
           }
         } else {
           td.appendChild(createRadio(propertyName, "1", propertyName + "_on"));
