@@ -64,7 +64,7 @@ jQuery(document).ready(function($) {
             <td class="mode">
               <select name="{{ prop_name }}_mode">
         {% for mode in filter_modes.text %}{% with prop_name|add:'_mode' as p_name %}
-                <option value="{{ mode.value }}"{% if mode.value in req_params|get:p_name %} selected="selected"{% endif %} >{{ mode.text }}</option>
+                <option value="{{ mode.0 }}"{% if mode.0 in req_params|get:p_name %} selected="selected"{% endif %} >{{ mode.1 }}</option>
         {% endwith %}{% endfor %}
               </select>
             </td>
@@ -86,7 +86,9 @@ jQuery(document).ready(function($) {
           <tr class="{{ prop_name }}">
             <th scope="row"><label>{{ prop_value|get:'label' }}</label></th>
             <td class="filter" colspan="2">
-    {% for option in prop_value|get:'options' %}<input type="checkbox" id="{{ prop_name }}_{{ option }}" name="{{ prop_name }}" value="{{ option }}"{% if option in req_params|get:prop_name %} checked="checked"{% endif %} /><label for="{{ prop_name }}_{{ option }}">{{ option }}</label>{% endfor %}
+{% with prop_value|get:'options' as s_options %}
+    {% for option, option_text in s_options %}<input type="checkbox" id="{{ prop_name }}_{{ option }}" name="{{ prop_name }}" value="{{ option }}"{% if option in req_params|get:prop_name %} checked="checked"{% endif %} /><label for="{{ prop_name }}_{{ option }}">{{ option_text }}</label>{% endfor %}
+{% endwith %}
             </td>
             <td class="actions"><input type="submit" name="rm_filter_{{ prop_name }}" value="-" /></td>
           </tr>
@@ -101,16 +103,16 @@ jQuery(document).ready(function($) {
             <td class="mode">
               <select name="{{ prop_name }}_mode">
         {% for mode in filter_modes.select %}{% with prop_name|add:'_mode' as p_name %}
-                <option value="{{ mode.value }}"{% if mode.value in req_params|get:p_name %} selected="selected"{% endif %} >{{ mode.text }}</option>
+                <option value="{{ mode.0 }}"{% if mode.0 in req_params|get:p_name %} selected="selected"{% endif %} >{{ mode.1 }}</option>
         {% endwith %}{% endfor %}
               </select>
             </td>
             <td class="filter">
               <select name="{{ prop_name }}">
                 <option></option>
-        {% for option in prop_value|get:'options' %}
-                <option value="{{ option }}"{% if option == par %} selected="selected"{% endif %}>{{ option }}</option>
-        {% endfor %}
+        {% with prop_value|get:'options' as s_options %}{% for option in prop_value|get:'options' %}
+                <option value="{{ option.0 }}"{% if option.0 == par %} selected="selected"{% endif %}>{{ option.1 }}</option>
+        {% endfor %}{% endwith %}
               </select>
             </td>
             <td class="actions"><input type="submit" name="rm_filter_{{ prop_name }}" value="-" /></td>
@@ -152,7 +154,7 @@ jQuery(document).ready(function($) {
       <legend class="foldable">{% trans 'Columns' %}</legend>
       <div>
 {% for col in filter_columns %}
-        <label><input type="checkbox" name="col" value="{{ col.value }}"{% if col.value in req_params|get:'col' %} checked="checked"{% endif %} />{{ col.text }}</label>
+        <label><input type="checkbox" name="col" value="{{ col.0 }}"{% if col.0 in req_params|get:'col' %} checked="checked"{% endif %} />{{ col.1 }}</label>
 {% endfor %}
       </div>
     </fieldset>
@@ -200,9 +202,9 @@ jQuery(document).ready(function($) {
           <a title="Sort by id" href="/query?status=accepted&amp;status=assigned&amp;status=closed&amp;status=new&amp;status=reopened&amp;col=id&amp;col=summary&amp;col=status&amp;col=type&amp;col=priority&amp;col=milestone&amp;col=component&amp;order=id">Id</a>
         </th>
 {% for col in filter_columns %}
-  {% if col.value in req_params|get:'col' %}
-        <th class="{{ col.value }}">
-          <a title="Sort by {{ col.text }}" href="/query?status=accepted&amp;status=assigned&amp;status=closed&amp;status=new&amp;status=reopened&amp;col=id&amp;col=summary&amp;col=status&amp;col=type&amp;col=priority&amp;col=milestone&amp;col=component&amp;order=id">{{ col.text }}</a>
+  {% if col.0 in req_params|get:'col' %}
+        <th class="{{ col.0 }}">
+          <a title="Sort by {{ col.1 }}" href="/query?status=accepted&amp;status=assigned&amp;status=closed&amp;status=new&amp;status=reopened&amp;col=id&amp;col=summary&amp;col=status&amp;col=type&amp;col=priority&amp;col=milestone&amp;col=component&amp;order=id">{{ col.1 }}</a>
         </th>
   {% endif %}
 {% endfor %}
@@ -216,9 +218,17 @@ jQuery(document).ready(function($) {
           <a title="Edit the user" href="{{ record.id }}">{{ record.id }}</a>
         </td>
     {% for col in filter_columns %}
-      {% if col.value in req_params|get:'col' %}
-        <td class="{{ col.value }}">
-          {{ record|get:col.value }}
+      {% if col.0 in req_params|get:'col' %}
+        <td class="{{ col.0 }}">
+{% if filter_properties|get:col.0|get:'type' == 'radio' %}
+  {% with filter_properties|get:col.0|get:'options' as p_options %}
+  {% with record|get:col.0 as r_value %}
+    {{ p_options|get:r_value }}
+  {% endwith %}
+  {% endwith %}
+{% else %}
+          {{ record|get:col.0 }}
+{% endif %}
         </td>
       {% endif %}
     {% endfor %}
