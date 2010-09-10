@@ -120,6 +120,10 @@ def req2dict(request, properties):
 ####################
 def query(request):
     from django.utils import simplejson
+    from django.contrib import messages
+    
+    messages.warning(request, 'Your account expires in three days.')
+
     
     ####################
     # 过滤器属性
@@ -166,7 +170,7 @@ def query(request):
         
     }
 
-    return fnd_render_to_response('resp/user/query.html', context)
+    return fnd_render_to_response('resp/user/query.html', context, request)
 
 ####################
 # 添加用户

@@ -46,6 +46,16 @@ jQuery(document).ready(function($) {
   </div>
   <div id="tabcontent">
   <h2>自定义查询</h2>
+
+{% if messages %}
+{% for message in messages %}
+  <div class="system-message"{% if message.tags %} id="{{ message.tags }}"{% endif %}>
+    <strong>{{ message.tags }}:</strong>
+    {{ message }}
+  </div>
+{% endfor %}
+{% endif %}
+  
   <form id="query" method="post" action="./"><div><input type="hidden" name="__FORM_TOKEN" value="6c621f103e7e30e01389c407" /></div>
     <fieldset id="filters">
       <legend class="foldable">{% trans 'Filters' %}</legend>
