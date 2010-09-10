@@ -15,49 +15,57 @@ __svnid__ = '$Id$'
 __svn__ = get_svn_revision(__name__)
 
 
-def y_options():
-    
-    
-    
-    return ['none', 'days', 'accesses']
 
+####################
+# 查询比较方法
+####################
+def get_modes():
+    modes = {'text'     : [{'text': _('contains'),         'value': '~'},
+                           {'text': _('doesn\'t contain'), 'value': '!~'},
+                           {'text': _('begins with'),      'value': '^'},
+                           {'text': _('ends with'),        'value': '$'},
+                           {'text': _('equal'),            'value': ''},
+                           {'text': _('not equal'),        'value': '!'}],
+             'select'   : [{'text': _('equal'),            'value': ''},
+                           {'text': _('not equal'),        'value': '!'}],
+             'textarea' : [{'text': _('contains'),         'value': '~'},
+                           {'text': _('doesn\'t contain'), 'value': '!~'}]
+            }
+    return modes
 
 ####################
 # 过滤器属性
 ####################
-properties = {
-      'username'    : { 'type': 'text',   'label': '用户名' },
-      'email'       : { 'type': 'text',   'label': '电子邮件' },
-      'pwd_expire_type' : { 'type': 'radio',   'label': '密码过期类型' , 'options' : y_options()},
-      'first_name'  : { 'type': 'text',   'label': '姓' },
-      'last_name'   : { 'type': 'text',   'label': '名' },
-      'description' : { 'type': 'text',   'label': '描述' },
-      'type'        : { 'type': 'select', 'label': '类型', 'options': [u'任务',
-                                                                       u'缺陷',
-                                                                       u'功能增强'] },
-}
-
-modes = {'text'     : [{'text': '包含',   'value': '~'},
-                       {'text': '不包含', 'value': '!~'},
-                       {'text': '开始以', 'value': '^'},
-                       {'text': '结束以', 'value': '$'},
-                       {'text': '等于',   'value': ''},
-                       {'text': '不等于', 'value': '!'}],
-         'select'   : [{'text': '等于',   'value': ''},
-                       {'text': '不等于', 'value': '!'}],
-         'textarea' : [{'text': '包含',   'value': '~'},
-                       {'text': '不包含', 'value': '!~'}]
-        }
+def get_filter_properties():
+    
+    def y_options():
+        return ['none', 'days', 'accesses']
+    
+    
+    properties = {
+          'username'    : { 'type': 'text',   'label': _('Username') },
+          'email'       : { 'type': 'text',   'label': _('Email address') },
+          'pwd_expiration_type' : { 'type': 'radio',   'label': _('Password expirtion') , 'options' : y_options()},
+          'first_name'  : { 'type': 'text',   'label': _('last name') },
+          'last_name'   : { 'type': 'text',   'label': _('first name') },
+          'description' : { 'type': 'text',   'label': _('Description') },
+          'type'        : { 'type': 'select', 'label': '类型', 'options': [u'任务',
+                                                                           u'缺陷',
+                                                                           u'功能增强'] },
+    }
+    return properties
 
 ####################
 # 可显示项目
 ####################
-columns = [{'text': '用户名',         'value': 'username'},
-           {'text': '电子邮件',       'value': 'email'},
-           {'text': '密码过期类型',   'value': 'pwd_expire_type'},
-           {'text': '姓',             'value': 'first_name'},
-           {'text': '名',             'value': 'last_name'},
-           {'text': '描述',           'value': 'description'}]
+def get_columns():
+    columns = [{'text': _('Username'),            'value': 'username'},
+               {'text': _('Email address'),       'value': 'email'},
+               {'text': _('Password expirtion'),  'value': 'pwd_expiration_type'},
+               {'text': _('last name'),           'value': 'first_name'},
+               {'text': _('first name'),          'value': 'last_name'},
+               {'text': _('Description'),         'value': 'description'}]
+    return columns
 
 ###############################
 # 将请求参数字典转换成query url
@@ -75,7 +83,7 @@ def query_string(req_dict):
 ######################
 # 将请求参数转换成字典
 ######################
-def req2dict(request):
+def req2dict(request, properties):
     req_params = {}
     for prop_name in properties.keys():
         ####################
@@ -98,6 +106,8 @@ def req2dict(request):
     ####################
     if request.REQUEST.has_key('max'):
         req_params['max'] = request.REQUEST['max']
+    
+    
     #~ ##############################
     #~ # 请求参数为空时，设定缺省参数
     #~ ##############################
@@ -110,9 +120,19 @@ def req2dict(request):
 ####################
 def query(request):
     from django.utils import simplejson
-
-    req_params = req2dict(request)
     
+    ####################
+    # 过滤器属性
+    ####################
+    properties = get_filter_properties()
+    ######################
+    # 将请求参数转换成字典
+    ######################
+    req_params = req2dict(request, properties)
+    
+    ############################
+    # 将请求重镜像成带参数的GET请求
+    ############################
     if 'update' in request.REQUEST:
         redirect_url = query_string(req_params)
         return HttpResponseRedirect('?' + redirect_url)
@@ -122,21 +142,24 @@ def query(request):
     ######################################
     #~ if not req_params:
         #~ req_params['max'] = '20'
-
+    #print modes
 
     try:
-        page_num = int(request.GET.get('page', '1'))
+        page_num = int(request.REQUEST.get('page', '1'))
     except ValueError:
         page_num = 1
 
     paginator = Paginator(User.objects.all(), 20)
+
+    modes = get_modes()
+    columns = get_columns()
+
     context = {
         'app_path': request.get_full_path(), 
         'page': paginator.page(page_num),
-        'filter_properties' : properties,
-        'selected_filter_properties' : ['status', 'owner', 'priority'],
+        'filter_properties' : get_filter_properties(),
         'filter_properties_json' : simplejson.dumps(properties),
-        'filter_modes' : modes,
+        'filter_modes' : get_modes(),
         'filter_modes_json' : simplejson.dumps(modes),
         'filter_columns' : columns,
         'req_params' : req_params,
@@ -144,7 +167,6 @@ def query(request):
     }
 
     return fnd_render_to_response('resp/user/query.html', context)
-
 
 ####################
 # 添加用户
