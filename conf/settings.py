@@ -79,6 +79,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.locale.LocaleMiddleware', 
     'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'django.contrib.messages.middleware.MessageMiddleware',
     'pyerp.fnd.middleware.FndGlobalMiddleware', 
     #'django.middleware.transaction.TransactionMiddleware', 
 )
@@ -97,7 +98,8 @@ SUPPORT_SN = 'demosn'
 #
 INTERNAL_IPS = ('127.0.0.1',)
 TEMPLATE_CONTEXT_PROCESSORS = ( 
-    "django.core.context_processors.debug",    #debug .........SQL.."
+    "django.core.context_processors.debug",                   # 调试SQL
+    'django.contrib.messages.context_processors.messages',    # 消息FW
 ) 
 
 
@@ -120,11 +122,16 @@ FND_PUB_SITE_PREFIX = ''
 #
 AUTHENTICATION_BACKENDS = ('pyerp.fnd.auth.FndUserBackend',)
 
+MESSAGE_STORAGE = 'django.contrib.messages.storage.session.SessionStorage'
+
+
+
 INSTALLED_APPS = (
     'django.contrib.sites',         
     'django.contrib.contenttypes',  
     'django.contrib.sessions',      
     'django.contrib.auth',          
+    'django.contrib.messages',      
     'pyerp.fnd',
     # 'pyerp.ak',
     # 'pyerp.gl',
