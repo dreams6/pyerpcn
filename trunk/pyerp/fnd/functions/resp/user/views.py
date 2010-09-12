@@ -184,4 +184,4 @@ def add(request):
     context = {
         'app_path': request.get_full_path(),
     }
-    return fnd_render_to_response('resp/user/index.html', context)
+    return fnd_render_to_response('resp/user/add.html', context)

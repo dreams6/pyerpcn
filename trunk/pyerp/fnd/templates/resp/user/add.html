@@ -1,0 +1,125 @@
+{% extends "layout_trac.html" %}
+{% load i18n %}{% load fndtag %}
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+
+{% block title %}用户{% endblock %}
+
+{% block js_ext %}
+<script type="text/javascript" src="{{ fnd_media_prefix }}js/trac.js"></script>
+<script type="text/javascript" src="{{ fnd_media_prefix }}js/search.js"></script>
+<script type="text/javascript" src="{{ fnd_media_prefix }}js/query.js"></script>
+<script type="text/javascript" src="{{ fnd_media_prefix }}js/folding.js"></script>
+{% endblock %}
+
+{% block content %}
+<div id="content" class="admin">
+  <h1>用户管理</h1>
+  <div id="tabs">
+    <ul>
+      <li class="active">操作
+        <ul>
+          <li><a href="../">查询</a></li>
+          <li class="active">添加</li>
+        </ul>
+      </li>
+    </ul>
+    <ul>
+      <li>相关操作
+        <ul>
+          <li><a href="/admin/accounting/accounting_csv_query">废止</a></li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+  <div id="tabcontent">
+  <h2>添加用户</h2>
+
+{% if messages %}
+{% for message in messages %}
+  <div class="system-message"{% if message.tags %} id="{{ message.tags }}"{% endif %}>
+    <strong>{{ message.tags }}:</strong>
+    {{ message }}
+  </div>
+{% endfor %}
+{% endif %}
+  
+  <form id="query" method="post" action="./"><div><input type="hidden" name="__FORM_TOKEN" value="6c621f103e7e30e01389c407" /></div>
+  
+  </form>
+  <table>
+    <tr>
+      <td rowspan="2" style="vertical-align: top">
+    <fieldset id="filters">
+        <legend class="foldable">基本信息</legend>
+  <table>
+    <tr>
+      <td>用户ID:</td>
+      <td><input type="text" name="uid" /></td>
+    </tr>
+    <tr>
+      <td>密码:</td>
+      <td><input type="password" name="password" class="textwidget" /></td>
+    </tr>
+    <tr>
+      <td>密码确认:</td>
+      <td><input type="password" name="repassword" class="textwidget" /></td>
+    </tr>
+    <tr>
+      <td>姓:</td>
+      <td><input type="text" name="last_name" /></td>
+    </tr>
+    <tr>
+      <td>名:</td>
+      <td><input type="text" name="first_name" /></td>
+    </tr>
+    <tr>
+      <td>Email:</td>
+      <td><input type="text" name="email" /></td>
+    </tr>
+    <tr>
+      <td>描述:</td>
+      <td><textarea></textarea></td>
+    </tr>
+  </table>
+      </fieldset>
+      </td>
+      <td>
+    <fieldset>
+        <legend>安全选项</legend>
+        有效开始日:<input type="text" name="uid" /><br/>
+        有效结束日:<input type="text" name="uid" /><br/>
+        密码过期方法:<input type="radio" />永远不过期 <input type="radio" />N天后过期 <input type="radio" />登录N次后过期<br/>
+        过期天数:<input type="text" name="repassword" /><br/>
+        过期次数:<input type="text" name="repassword" /><br/>
+    </fieldset>
+      </td>
+    </tr>
+    <tr>
+      <td>
+    <fieldset>
+        <legend>关联信息</legend>
+        雇员ID:<input type="text" name="uid" /><br/>
+        顾客ID:<input type="text" name="uid" /><br/>
+        供应商ID:<input type="text" name="uid" /><br/>
+        合伙人ID:<input type="text" name="uid" /><br/>
+    </fieldset>
+      </td>
+    </tr>
+  </table>
+
+<pre>
+-------------------------------------------------
+职责         
+------------------------------------------------
+系统管理员____
+应用开发者____
+XXXXX_________
+XXXXX_________
+-------------------------------------------------
+</pre>
+
+
+  </div>
+
+</div>
+{% endblock %}
