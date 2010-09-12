@@ -98,7 +98,7 @@ SUPPORT_SN = 'demosn'
 #
 INTERNAL_IPS = ('127.0.0.1',)
 TEMPLATE_CONTEXT_PROCESSORS = ( 
-    "django.core.context_processors.debug",                   # 调试SQL
+    'django.core.context_processors.debug',                   # 调试SQL
     'django.contrib.messages.context_processors.messages',    # 消息FW
 ) 
 
