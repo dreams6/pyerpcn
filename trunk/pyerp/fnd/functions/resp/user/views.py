@@ -122,8 +122,6 @@ def query(request):
     from django.utils import simplejson
     from django.contrib import messages
     
-    messages.warning(request, 'Your account expires in three days.')
-
     
     ####################
     # 过滤器属性
@@ -152,23 +150,30 @@ def query(request):
     except ValueError:
         page_num = 1
 
-    paginator = Paginator(User.objects.all(), 2)
-
+    context = {}
     modes = get_modes()
     columns = get_columns()
+    context.update({'app_path': request.get_full_path(),
+                    'filter_properties' : properties,
+                    'filter_properties_json' : simplejson.dumps(properties),
+                    'filter_modes' : get_modes(),
+                    'filter_modes_json' : simplejson.dumps(modes),
+                    'filter_columns' : columns,
+                    'req_params' : req_params,
+                    'link_url'   : redirect_url} )
+    
+    
+    
+    messages.warning(request, 'Your account expires in three days.')
+    messages.error(request, 'Your account expires in three days.')
+    # messages.info(request, 'Your account expires in three days.')
+    # messages.debug(request, 'Your account expires in three days.')
 
-    context = {
-        'app_path': request.get_full_path(), 
-        'page': paginator.page(page_num),
-        'filter_properties' : get_filter_properties(),
-        'filter_properties_json' : simplejson.dumps(properties),
-        'filter_modes' : get_modes(),
-        'filter_modes_json' : simplejson.dumps(modes),
-        'filter_columns' : columns,
-        'req_params' : req_params,
-        'link_url' : redirect_url,
-        
-    }
+    paginator = Paginator(User.objects.all(), 2)
+    
+    context.update( {'page': paginator.page(page_num)} )
+    
+
 
     return fnd_render_to_response('resp/user/query.html', context, request)
 
