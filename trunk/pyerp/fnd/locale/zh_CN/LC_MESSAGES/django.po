@@ -165,6 +165,10 @@ msgid "Description"
 msgstr "描述"
 
 
+msgid "Add filter"
+msgstr "添加过滤器"
 
+msgid "Update"
+msgstr "更新"
 
 

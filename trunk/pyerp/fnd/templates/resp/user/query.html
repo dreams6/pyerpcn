@@ -18,6 +18,8 @@ jQuery(document).ready(function($) {
   /* Hide the filters for saved queries. */
   if ( window.location.href.search(/[?&amp;]report=[0-9]+/) != -1 )
     $("#filters").toggleClass("collapsed");
+  /* Hide the filters by default. */
+  $("#filters").toggleClass("collapsed");
   /* Hide the columns by default. */
   $("#columns").toggleClass("collapsed");
 });
@@ -56,7 +58,7 @@ jQuery(document).ready(function($) {
 {% endfor %}
 {% endif %}
   
-  <form id="query" method="post" action="./"><div><input type="hidden" name="__FORM_TOKEN" value="6c621f103e7e30e01389c407" /></div>
+  <form id="query" method="post" action="./"><div><input type="hidden" name="page" value="1" /><input type="hidden" name="__FORM_TOKEN" value="6c621f103e7e30e01389c407" /></div>
     <fieldset id="filters">
       <legend class="foldable">{% trans 'Filters' %}</legend>
       <table summary="Query filters">
@@ -147,7 +149,7 @@ jQuery(document).ready(function($) {
         <tbody>
           <tr class="actions">
             <td class="actions" colspan="4" style="text-align: right">
-              <label for="add_filter">添加过滤器</label> 
+              <label for="add_filter">{% trans 'Add filter' %}</label> 
               <select name="add_filter" id="add_filter">
                 <option></option>
 {% for key, value in filter_properties.items %}
@@ -170,11 +172,11 @@ jQuery(document).ready(function($) {
     </fieldset>
     <p class="option">
       <label for="max">{% trans 'Max items per page' %}</label>
-      <input type="text" name="max" id="max" size="10" value="100" />
+      <input type="text" name="max" id="max" size="10" value="{{ req_params.max }}" />
     </p>
     <div class="buttons">
       <input type="hidden" name="order" value="priority" />
-      <input type="submit" name="update" value="更新" />
+      <input type="submit" name="update" value="{% trans 'Update' %}" />
     </div>
     <hr />
   </form>

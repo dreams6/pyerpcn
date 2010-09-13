@@ -103,11 +103,13 @@ def req2dict(request, properties):
     if request.REQUEST.has_key('col'):
         req_params['col'] = request.REQUEST.getlist('col')
     ####################
-    # 一页显示数量
+    # 一页显示数量/x页
     ####################
     if request.REQUEST.has_key('max'):
-        req_params['max'] = request.REQUEST['max']
-
+        req_params['max'] = request.REQUEST.get('max', '20')
+    if request.REQUEST.has_key('page'):
+        req_params['page'] = request.REQUEST.get('page', '1')
+    
     #~ ##############################
     #~ # 请求参数为空时，设定缺省参数
     #~ ##############################
@@ -122,7 +124,6 @@ def query(request):
     from django.utils import simplejson
     from django.contrib import messages
     
-    
     ####################
     # 过滤器属性
     ####################
@@ -132,24 +133,27 @@ def query(request):
     ######################
     req_params = req2dict(request, properties)
     
+    ######################################
+    # 请求参数为空时(初始显示时)，设定缺省参数
+    ######################################
+    if not req_params:
+        req_params['max'] = '20'
+        req_params['col'] = ['username', 'email', 'pwd_expiration_type', 'first_name', 'last_name', 'description']
+        req_params['page'] = '1'
+    
     ############################
     # 将请求重镜像成带参数的GET请求
     ############################
     redirect_url = query_string(req_params)
     if 'update' in request.REQUEST:
         return HttpResponseRedirect('?' + redirect_url)
-
-    ######################################
-    # 请求参数为空时(初始显示时)，设定缺省参数
-    ######################################
-    #~ if not req_params:
-        #~ req_params['max'] = '20'
-
-    try:
-        page_num = int(request.REQUEST.get('page', '1'))
-    except ValueError:
-        page_num = 1
-
+    
+    ############################
+    # 输入校验
+    ############################
+    
+    
+    
     context = {}
     modes = get_modes()
     columns = get_columns()
@@ -162,16 +166,14 @@ def query(request):
                     'req_params' : req_params,
                     'link_url'   : redirect_url} )
     
-    
-    
     messages.warning(request, 'Your account expires in three days.')
     messages.error(request, 'Your account expires in three days.')
     # messages.info(request, 'Your account expires in three days.')
     # messages.debug(request, 'Your account expires in three days.')
 
-    paginator = Paginator(User.objects.all(), 2)
+    paginator = Paginator(User.objects.all(), 20)
     
-    context.update( {'page': paginator.page(page_num)} )
+    context.update( {'page': paginator.page(int(req_params['page']))} )
     
 
 
